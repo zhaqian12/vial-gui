@@ -63,7 +63,7 @@ if __name__ == '__main__':
         appctxt = ApplicationContext()       # 1. Instantiate ApplicationContext
         init_logger()
         qt_exception_hook = UncaughtHook()
-        trans = QTranslator()
+        trans = QTranslator(appctxt)
         trans.load("zh.qm",appctxt.app.applicationDirPath())
         appctxt.app.installTranslator(trans)
         window = MainWindow(appctxt)
