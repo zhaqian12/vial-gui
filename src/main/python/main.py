@@ -11,7 +11,7 @@ import traceback
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import pyqtSignal
 from fbs_runtime.application_context.PyQt5 import ApplicationContext
-
+from PyQt5.QtCore import QTranslator
 import sys
 
 from main_window import MainWindow
@@ -60,8 +60,11 @@ if __name__ == '__main__':
 
         linux_keystroke_recorder()
     else:
+        trans = QTranslator()
+        trans.load('zh-cn.qm')
         appctxt = ApplicationContext()       # 1. Instantiate ApplicationContext
         init_logger()
+        appctxt.installTranslator(trans)
         qt_exception_hook = UncaughtHook()
         window = MainWindow(appctxt)
         window.show()
