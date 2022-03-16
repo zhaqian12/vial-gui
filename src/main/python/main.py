@@ -64,9 +64,9 @@ if __name__ == '__main__':
         trans.load('zh.qm')
         appctxt = ApplicationContext()       # 1. Instantiate ApplicationContext
         init_logger()
-        appctxt.installTranslator(trans)
         qt_exception_hook = UncaughtHook()
         window = MainWindow(appctxt)
         window.show()
+        appctxt.app.installTranslator(trans)
         exit_code = appctxt.app.exec_()      # 2. Invoke appctxt.app.exec_()
         sys.exit(exit_code)
