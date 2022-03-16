@@ -61,7 +61,7 @@ if __name__ == '__main__':
         linux_keystroke_recorder()
     else:
         trans = QTranslator()
-        trans.load('zh-cn.qm')
+        trans.load('zh.qm')
         appctxt = ApplicationContext()       # 1. Instantiate ApplicationContext
         init_logger()
         appctxt.installTranslator(trans)
