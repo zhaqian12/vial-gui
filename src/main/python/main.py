@@ -67,6 +67,7 @@ if __name__ == '__main__':
         qt_exception_hook = UncaughtHook()
         appctxt.app.installTranslator(trans)
         window = MainWindow(appctxt)
+        
         window.show()
         exit_code = appctxt.app.exec_()      # 2. Invoke appctxt.app.exec_()
         sys.exit(exit_code)
