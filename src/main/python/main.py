@@ -63,11 +63,11 @@ if __name__ == '__main__':
         appctxt = ApplicationContext()       # 1. Instantiate ApplicationContext
         init_logger()
         qt_exception_hook = UncaughtHook()
-        trans = QTranslator(appctxt)
-        trans.load("zh.qm",appctxt.app.applicationDirPath())
+        trans = QTranslator()
+        trans.load("zh")
         appctxt.app.installTranslator(trans)
         window = MainWindow(appctxt)
-
+        appctxt.app.retranslateUi(appctxt.app)
         window.show()
         exit_code = appctxt.app.exec_()      # 2. Invoke appctxt.app.exec_()
         sys.exit(exit_code)
