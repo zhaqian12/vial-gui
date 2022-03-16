@@ -60,14 +60,14 @@ if __name__ == '__main__':
 
         linux_keystroke_recorder()
     else:
-        trans = QTranslator()
-        trans.load('zh.qm')
         appctxt = ApplicationContext()       # 1. Instantiate ApplicationContext
         init_logger()
         qt_exception_hook = UncaughtHook()
+        trans = QTranslator()
+        trans.load("zh.qm")
         appctxt.app.installTranslator(trans)
         window = MainWindow(appctxt)
-        
+
         window.show()
         exit_code = appctxt.app.exec_()      # 2. Invoke appctxt.app.exec_()
         sys.exit(exit_code)
