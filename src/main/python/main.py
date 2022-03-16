@@ -64,7 +64,7 @@ if __name__ == '__main__':
         init_logger()
         qt_exception_hook = UncaughtHook()
         trans = QTranslator()
-        trans.load(appctxt.get_resource("zh.qm"))
+        trans.load("zh.qm",appctxt.app.applicationDirPath())
         appctxt.app.installTranslator(trans)
         window = MainWindow(appctxt)
 
