@@ -52,7 +52,7 @@ class MainWindow(QMainWindow):
 
         self.btn_refresh_devices = QToolButton()
         self.btn_refresh_devices.setToolButtonStyle(Qt.ToolButtonTextOnly)
-        self.btn_refresh_devices.setText(tr("MainWindow", "Refresh"))
+        self.btn_refresh_devices.setText(self.tr("MainWindow", "Refresh"))
         self.btn_refresh_devices.clicked.connect(self.on_click_refresh)
 
         layout_combobox = QHBoxLayout()
@@ -129,7 +129,7 @@ class MainWindow(QMainWindow):
         self.on_click_refresh()
 
     def init_menu(self):
-        layout_load_act = QAction(tr("MenuFile", "Load saved layout..."), self)
+        layout_load_act = QAction(self.tr("MenuFile", "Load saved layout..."), self)
         layout_load_act.setShortcut("Ctrl+O")
         layout_load_act.triggered.connect(self.on_layout_load)
 
@@ -185,13 +185,13 @@ class MainWindow(QMainWindow):
         if keymap_group.checkedAction() is None:
             keymap_group.actions()[0].setChecked(True)
 
-        self.security_menu = self.menuBar().addMenu(tr("Menu", "Security"))
+        self.security_menu = self.menuBar().addMenu(self.tr("Menu", "Security"))
         self.security_menu.addAction(keyboard_unlock_act)
         self.security_menu.addAction(keyboard_lock_act)
         self.security_menu.addSeparator()
         self.security_menu.addAction(keyboard_reset_act)
 
-        self.theme_menu = self.menuBar().addMenu(tr("Menu", "Theme"))
+        self.theme_menu = self.menuBar().addMenu(self.tr("Menu", "Theme"))
         theme_group = QActionGroup(self)
         selected_theme = self.get_theme()
         for name, _ in [("System", None)] + themes.themes:
