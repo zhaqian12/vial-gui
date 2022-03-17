@@ -37,7 +37,6 @@ class UncaughtHook(QtCore.QObject):
         # this registers the exception_hook() function as hook with the Python interpreter
         sys._excepthook = sys.excepthook
         sys.excepthook = self.exception_hook
-
         # connect signal to execute the message box function always on main thread
         self._exception_caught.connect(show_exception_box)
 
@@ -64,7 +63,7 @@ if __name__ == '__main__':
         init_logger()
         qt_exception_hook = UncaughtHook()
         trans = QTranslator()
-        trans.load("zh")
+        trans.load('zh')
         appctxt.app.installTranslator(trans)
         window = MainWindow(appctxt)
         # appctxt.app.retranslateUi(appctxt.app)
