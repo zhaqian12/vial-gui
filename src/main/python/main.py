@@ -66,6 +66,7 @@ if __name__ == '__main__':
         trans.load('zh')
         appctxt.app.installTranslator(trans)
         window = MainWindow(appctxt)
+        window.retranslateUi(window)
         # appctxt.app.retranslateUi(appctxt.app)
         window.show()
         exit_code = appctxt.app.exec_()      # 2. Invoke appctxt.app.exec_()

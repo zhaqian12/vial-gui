@@ -389,3 +389,6 @@ class MainWindow(QMainWindow):
         self.settings.setValue("pos", self.pos())
 
         e.accept()
+
+    def retranslateUi(self):
+        self.btn_refresh_devices.setText(tr("MainWindow", "Refresh"))
