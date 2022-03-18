@@ -446,7 +446,8 @@ class Keyboard:
                         self.rgb_supported_effects.add(value)
                     max_effect = max(max_effect, value)
             
-            if self.underglow_rgb_matrix == "adavanced":
+
+            if self.underglow_rgb_matrix == "advanced":
                 data = self.usb_send(self.dev, struct.pack("BB", CMD_VIA_LIGHTING_GET_VALUE, VIALRGB_GET_UNDERGLOW_INFO),
                                  retries=20)[2:]
                 self.ug_rgb_maximum_brightness = data[2]
@@ -487,7 +488,7 @@ class Keyboard:
             self.rgb_mode = int.from_bytes(data[0:2], byteorder="little")
             self.rgb_speed = data[2]
             self.rgb_hsv = (data[3], data[4], data[5])
-            if self.underglow_rgb_matrix == "adavanced":
+            if self.underglow_rgb_matrix == "advanced":
                 data = self.usb_send(self.dev, struct.pack("BB", CMD_VIA_LIGHTING_GET_VALUE, VIALRGB_GET_UNDERGLOW_MODE),
                                  retries=20)[2:]
                 self.ug_rgb_mode = int.from_bytes(data[0:2], byteorder="little")
