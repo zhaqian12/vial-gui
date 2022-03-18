@@ -307,44 +307,8 @@ class VialRGBHandler(BasicHandler):
         self.rgb_speed.valueChanged.connect(self.on_rgb_speed_changed)
         container.addWidget(self.rgb_speed, row + 3, 1)
 
-        # if self.device.keyboard.underglow_rgb_matrix == "advanced" or self.device.keyboard.underglow_rgb_matrix == "base":
-        self.lbl_ug_rgb_effect = QLabel(tr("RGBConfigurator", "底灯效果"))
-        container.addWidget(self.lbl_ug_rgb_effect, row + 4, 0)
-        self.ug_rgb_effect = QComboBox()
-        self.ug_rgb_effect.addItem("0")
-        self.ug_rgb_effect.addItem("1")
-        self.ug_rgb_effect.addItem("2")
-        self.ug_rgb_effect.addItem("3")
-        self.ug_rgb_effect.currentIndexChanged.connect(self.on_rgb_effect_changed)
-        container.addWidget(self.ug_rgb_effect, row + 4, 1)
-
-        self.lbl_ug_rgb_color = QLabel(tr("RGBConfigurator", "底灯颜色"))
-        container.addWidget(self.lbl_ug_rgb_color, row + 5, 0)
-        self.ug_rgb_color = ClickableLabel(" ")
-        self.ug_rgb_color.clicked.connect(self.on_rgb_color)
-        container.addWidget(self.ug_rgb_color, row + 5, 1)
-
-        self.lbl_ug_rgb_brightness = QLabel(tr("RGBConfigurator", "底灯亮度"))
-        container.addWidget(self.lbl_ug_rgb_brightness, row + 6, 0)
-        self.ug_rgb_brightness = QSlider(QtCore.Qt.Horizontal)
-        self.ug_rgb_brightness.setMinimum(0)
-        self.ug_rgb_brightness.setMaximum(255)
-        self.ug_rgb_brightness.valueChanged.connect(self.on_rgb_brightness_changed)
-        container.addWidget(self.ug_rgb_brightness, row + 6, 1)
-
-        self.lbl_ug_rgb_speed = QLabel(tr("RGBConfigurator", "底灯速度"))
-        container.addWidget(self.lbl_ug_rgb_speed, row + 7, 0)
-        self.ug_rgb_speed = QSlider(QtCore.Qt.Horizontal)
-        self.ug_rgb_speed.setMinimum(0)
-        self.ug_rgb_speed.setMaximum(255)
-        self.ug_rgb_speed.valueChanged.connect(self.on_rgb_speed_changed)
-        container.addWidget(self.ug_rgb_speed, row + 7, 1)
-
-
         self.widgets = [self.lbl_rgb_effect, self.rgb_effect, self.lbl_rgb_brightness, self.rgb_brightness,
-                        self.lbl_rgb_color, self.rgb_color, self.lbl_rgb_speed, self.rgb_speed,
-                        self.lbl_ug_rgb_effect, self.ug_rgb_effect, self.lbl_ug_rgb_brightness, self.ug_rgb_brightness,
-                        self.lbl_ug_rgb_color, self.ug_rgb_color, self.lbl_ug_rgb_speed, self.ug_rgb_speed]
+                        self.lbl_rgb_color, self.rgb_color, self.lbl_rgb_speed, self.rgb_speed]
 
         self.effects = []
 
@@ -401,6 +365,104 @@ class VialRGBHandler(BasicHandler):
         return isinstance(self.device, VialKeyboard) and self.device.keyboard.lighting_vialrgb
 
 
+class UnderglowRGBHandler(BasicHandler):
+
+    def __init__(self, container):
+        super().__init__(container)
+
+        row = container.rowCount()
+
+        self.lbl_ug_rgb_effect = QLabel(tr("RGBConfigurator", "底灯效果"))
+        container.addWidget(self.lbl_ug_rgb_effect, row + 1, 0)
+        self.ug_rgb_effect = QComboBox()
+        self.ug_rgb_effect.addItem("0")
+        self.ug_rgb_effect.addItem("1")
+        self.ug_rgb_effect.addItem("2")
+        self.ug_rgb_effect.addItem("3")
+        self.ug_rgb_effect.currentIndexChanged.connect(self.on_rgb_effect_changed)
+        container.addWidget(self.ug_rgb_effect, row + 1, 1)
+
+        self.lbl_ug_rgb_color = QLabel(tr("RGBConfigurator", "底灯颜色"))
+        container.addWidget(self.lbl_ug_rgb_color, row + 2, 0)
+        self.ug_rgb_color = ClickableLabel(" ")
+        self.ug_rgb_color.clicked.connect(self.on_rgb_color)
+        container.addWidget(self.ug_rgb_color, row + 2, 1)
+
+        self.lbl_ug_rgb_brightness = QLabel(tr("RGBConfigurator", "底灯亮度"))
+        container.addWidget(self.lbl_ug_rgb_brightness, row + 3, 0)
+        self.ug_rgb_brightness = QSlider(QtCore.Qt.Horizontal)
+        self.ug_rgb_brightness.setMinimum(0)
+        self.ug_rgb_brightness.setMaximum(255)
+        self.ug_rgb_brightness.valueChanged.connect(self.on_rgb_brightness_changed)
+        container.addWidget(self.ug_rgb_brightness, row + 3, 1)
+
+        self.lbl_ug_rgb_speed = QLabel(tr("RGBConfigurator", "底灯速度"))
+        container.addWidget(self.lbl_ug_rgb_speed, row + 4, 0)
+        self.ug_rgb_speed = QSlider(QtCore.Qt.Horizontal)
+        self.ug_rgb_speed.setMinimum(0)
+        self.ug_rgb_speed.setMaximum(255)
+        self.ug_rgb_speed.valueChanged.connect(self.on_rgb_speed_changed)
+        container.addWidget(self.ug_rgb_speed, row + 4, 1)
+
+
+        self.widgets = [self.lbl_ug_rgb_effect, self.ug_rgb_effect, self.lbl_ug_rgb_brightness, self.ug_rgb_brightness,
+                        self.lbl_ug_rgb_color, self.ug_rgb_color, self.lbl_ug_rgb_speed, self.ug_rgb_speed]
+
+        self.effects = []
+
+    def on_rgb_brightness_changed(self, value):
+        self.keyboard.set_vialrgb_brightness(value)
+
+    def on_rgb_speed_changed(self, value):
+        self.keyboard.set_vialrgb_speed(value)
+
+    def on_rgb_effect_changed(self, index):
+        self.keyboard.set_vialrgb_mode(self.effects[index].idx)
+
+    def on_rgb_color(self):
+        color = QColorDialog.getColor(self.current_color())
+        if not color.isValid():
+            return
+        self.rgb_color.setStyleSheet("QWidget { background-color: %s}" % color.name())
+        h, s, v, a = color.getHsvF()
+        if h < 0:
+            h = 0
+        self.keyboard.set_vialrgb_color(int(255 * h), int(255 * s), self.keyboard.rgb_hsv[2])
+        self.update.emit()
+
+    def current_color(self):
+        return QColor.fromHsvF(self.keyboard.rgb_hsv[0] / 255.0,
+                               self.keyboard.rgb_hsv[1] / 255.0,
+                               1.0)
+
+    def rebuild_effects(self):
+        self.effects = []
+        for effect in VIALRGB_EFFECTS:
+            if effect.idx in self.keyboard.rgb_supported_effects:
+                self.effects.append(effect)
+
+        self.rgb_effect.clear()
+        for effect in self.effects:
+            self.rgb_effect.addItem(effect.name)
+
+    def update_from_keyboard(self):
+        if not self.valid():
+            return
+
+        self.rebuild_effects()
+        for x, effect in enumerate(self.effects):
+            if effect.idx == self.keyboard.rgb_mode:
+                self.rgb_effect.setCurrentIndex(x)
+                break
+        self.rgb_brightness.setMaximum(self.keyboard.rgb_maximum_brightness)
+        self.rgb_brightness.setValue(self.keyboard.rgb_hsv[2])
+        self.rgb_speed.setValue(self.keyboard.rgb_speed)
+        self.rgb_color.setStyleSheet("QWidget { background-color: %s}" % self.current_color().name())
+
+    def valid(self):
+        return isinstance(self.device, VialKeyboard) and self.device.keyboard.underglow_rgb_matrix == "advanced"
+
+
 class RGBConfigurator(BasicEditor):
 
     def __init__(self):
@@ -421,7 +483,9 @@ class RGBConfigurator(BasicEditor):
         self.handler_rgblight.update.connect(self.update_from_keyboard)
         self.handler_vialrgb = VialRGBHandler(self.container)
         self.handler_vialrgb.update.connect(self.update_from_keyboard)
-        self.handlers = [self.handler_backlight, self.handler_rgblight, self.handler_vialrgb]
+        self.handler_underglowlrgb = UnderglowRGBHandler(self.container)
+        self.handler_underglowlrgb.update.connect(self.update_from_keyboard)
+        self.handlers = [self.handler_backlight, self.handler_rgblight, self.handler_vialrgb, self.handler_underglowlrgb]
 
         self.addStretch()
         buttons = QHBoxLayout()
@@ -437,7 +501,7 @@ class RGBConfigurator(BasicEditor):
     def valid(self):
         return isinstance(self.device, VialKeyboard) and \
                (self.device.keyboard.lighting_qmk_rgblight or self.device.keyboard.lighting_qmk_backlight
-                or self.device.keyboard.lighting_vialrgb)
+                or self.device.keyboard.lighting_vialrgb or self.device.keyboard.underglow_rgb_matrix == "advanced")
 
     def block_signals(self):
         for h in self.handlers:
