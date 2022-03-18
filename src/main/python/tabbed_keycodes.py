@@ -6,9 +6,11 @@ from PyQt5.QtGui import QPalette
 
 from constants import KEYCODE_BTN_RATIO
 from flowlayout import FlowLayout
-from keycodes import KEYCODES_BASIC, KEYCODES_ISO, KEYCODES_MACRO, KEYCODES_LAYERS, KEYCODES_QUANTUM, \
-    KEYCODES_BACKLIGHT, KEYCODES_MEDIA, KEYCODES_SPECIAL, KEYCODES_SHIFTED, KEYCODES_USER, Keycode, \
-    KEYCODES_TAP_DANCE, KEYCODES_MIDI
+from keycodes import KEYCODES_SPECIAL, KEYCODES_BASIC, KEYCODES_MODIFIERS, KEYCODES_NUMPAD, KEYCODES_SHIFTED, \
+    KEYCODES_ISO, KEYCODES_COMBOMOD, KEYCODES_QUANTUM, KEYCODES_MACRO, KEYCODES_LAYERS, \
+    KEYCODES_MOUSE, KEYCODES_MEDIA, \
+    KEYCODES_USER, Keycode, \
+    KEYCODES_TAP_DANCE, KEYCODES_MIDI, KEYCODES_DIAL, KEYCODES_LIGHTS
 from square_button import SquareButton
 from util import tr, KeycodeDisplay
 
@@ -90,16 +92,21 @@ class TabbedKeycodes(QTabWidget):
         any_btn.clicked.connect(lambda: self.anykey.emit())
 
         self.tabs = [
-            Tab(self, "Basic", KEYCODES_SPECIAL + KEYCODES_BASIC + KEYCODES_SHIFTED, prefix_buttons=[any_btn]),
-            Tab(self, "ISO/JIS", KEYCODES_ISO),
-            Tab(self, "Layers", KEYCODES_LAYERS),
-            Tab(self, "Quantum", KEYCODES_QUANTUM),
-            Tab(self, "Backlight", KEYCODES_BACKLIGHT),
-            Tab(self, "App, Media and Mouse", KEYCODES_MEDIA),
+            Tab(self, "基础键", KEYCODES_SPECIAL + KEYCODES_BASIC, prefix_buttons=[any_btn]),
+            Tab(self, "修饰键", KEYCODES_MODIFIERS),
+            Tab(self, "数字键", KEYCODES_NUMPAD),
+            Tab(self, "符号键", KEYCODES_SHIFTED + KEYCODES_ISO),
+            Tab(self, "鼠标键", KEYCODES_MOUSE),
+            Tab(self, "媒体键", KEYCODES_MEDIA),
+            Tab(self, "组合键", KEYCODES_COMBOMOD),
+            Tab(self, "切层键", KEYCODES_LAYERS),
+            Tab(self, "QMK功能", KEYCODES_QUANTUM),
+            Tab(self, "灯光键", KEYCODES_LIGHTS),
             Tab(self, "MIDI", KEYCODES_MIDI),
-            Tab(self, "Tap Dance", KEYCODES_TAP_DANCE),
-            Tab(self, "User", KEYCODES_USER),
-            Tab(self, "Macro", KEYCODES_MACRO),
+            Tab(self, "滚轮功能", KEYCODES_DIAL),
+            Tab(self, "宏功能", KEYCODES_MACRO),
+            Tab(self, "按键复用", KEYCODES_TAP_DANCE),
+            Tab(self, "自定义", KEYCODES_USER),
         ]
 
         for tab in self.tabs:

@@ -21,8 +21,8 @@ class MatrixTest(BasicEditor):
         self.keyboardWidget = KeyboardWidget(layout_editor)
         self.keyboardWidget.set_enabled(False)
 
-        self.unlock_btn = QPushButton("Unlock")
-        self.reset_btn = QPushButton("Reset")
+        self.unlock_btn = QPushButton("解锁")
+        self.reset_btn = QPushButton("重置")
 
         layout = QVBoxLayout()
         layout.addWidget(self.keyboardWidget)
@@ -32,7 +32,7 @@ class MatrixTest(BasicEditor):
 
         btn_layout = QHBoxLayout()
         btn_layout.addStretch()
-        self.unlock_lbl = QLabel(tr("MatrixTest", "Unlock the keyboard before testing:"))
+        self.unlock_lbl = QLabel(tr("MatrixTest", "请在测试前解锁键盘:"))
         btn_layout.addWidget(self.unlock_lbl)
         btn_layout.addWidget(self.unlock_btn)
         btn_layout.addWidget(self.reset_btn)

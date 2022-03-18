@@ -217,6 +217,10 @@ class Keyboard:
         self.vibl = False
         self.custom_keycodes = None
         self.midi = None
+        self.dial = False
+        self.rgb_matrix_control = None
+        self.underglow_rgb_matrix = None
+        self.rgb_indicators = False
 
         self.lighting_qmk_rgblight = self.lighting_qmk_backlight = self.lighting_vialrgb = False
 
@@ -300,6 +304,10 @@ class Keyboard:
             vial = payload["vial"]
             self.vibl = vial.get("vibl", False)
             self.midi = vial.get("midi", None)
+            self.dial = vial.get("dial", False)
+            self.rgb_matrix_control = vial.get("rgb_matrix_control", None)
+            self.underglow_rgb_matrix = vial.get("underglow_rgb_matrix", None)
+            self.rgb_indicators = vial.get("rgb_indicators", False)
 
         self.layout_labels = payload["layouts"].get("labels")
 

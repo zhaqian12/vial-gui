@@ -43,7 +43,6 @@ class Autorefresh(QObject):
     def update(self, check_protocol=False):
         if self.locked:
             return
-
         new_devices = find_vial_devices(self.via_stack_json, self.sideload_vid, self.sideload_pid,
                                         quiet=True, check_protocol=check_protocol)
 

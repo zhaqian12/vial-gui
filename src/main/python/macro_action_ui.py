@@ -82,7 +82,7 @@ class ActionSequenceUI(BasicActionUI):
             w = QComboBox()
             w.view().setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
             w.setStyleSheet("QComboBox { combobox-popup: 0; }")
-            w.addItem(tr("MacroEditor", "Remove"))
+            w.addItem(tr("MacroEditor", "移除"))
             w.insertSeparator(1)
             for k in MACRO_SEQUENCE_KEYCODES:
                 w.addItem(k.label.replace("\n", ""))

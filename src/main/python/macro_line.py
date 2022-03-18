@@ -10,7 +10,7 @@ class MacroLine(QObject):
 
     changed = pyqtSignal()
 
-    types = ["Text", "Down", "Up", "Tap"]
+    types = ["文本", "按下", "释放", "单击"]
     type_to_cls = [ActionTextUI, ActionDownUI, ActionUpUI, ActionTapUI]
 
     def __init__(self, parent, action):
@@ -20,7 +20,7 @@ class MacroLine(QObject):
         self.container = parent.container
 
         if self.parent.parent.keyboard.vial_protocol >= 2:
-            self.types = self.types[:] + ["Delay (ms)"]
+            self.types = self.types[:] + ["延迟(毫秒)"]
             self.type_to_cls = self.type_to_cls[:] + [ActionDelayUI]
 
         self.arrows = QHBoxLayout()

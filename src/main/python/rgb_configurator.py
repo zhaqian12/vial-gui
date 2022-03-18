@@ -20,43 +20,43 @@ class QmkRgblightEffect:
 
 
 QMK_RGBLIGHT_EFFECTS = [
-    QmkRgblightEffect(0, "All Off", False),
-    QmkRgblightEffect(1, "Solid Color", True),
-    QmkRgblightEffect(2, "Breathing 1", True),
-    QmkRgblightEffect(3, "Breathing 2", True),
-    QmkRgblightEffect(4, "Breathing 3", True),
-    QmkRgblightEffect(5, "Breathing 4", True),
-    QmkRgblightEffect(6, "Rainbow Mood 1", False),
-    QmkRgblightEffect(7, "Rainbow Mood 2", False),
-    QmkRgblightEffect(8, "Rainbow Mood 3", False),
-    QmkRgblightEffect(9, "Rainbow Swirl 1", False),
-    QmkRgblightEffect(10, "Rainbow Swirl 2", False),
-    QmkRgblightEffect(11, "Rainbow Swirl 3", False),
-    QmkRgblightEffect(12, "Rainbow Swirl 4", False),
-    QmkRgblightEffect(13, "Rainbow Swirl 5", False),
-    QmkRgblightEffect(14, "Rainbow Swirl 6", False),
-    QmkRgblightEffect(15, "Snake 1", True),
-    QmkRgblightEffect(16, "Snake 2", True),
-    QmkRgblightEffect(17, "Snake 3", True),
-    QmkRgblightEffect(18, "Snake 4", True),
-    QmkRgblightEffect(19, "Snake 5", True),
-    QmkRgblightEffect(20, "Snake 6", True),
-    QmkRgblightEffect(21, "Knight 1", True),
-    QmkRgblightEffect(22, "Knight 2", True),
-    QmkRgblightEffect(23, "Knight 3", True),
-    QmkRgblightEffect(24, "Christmas", True),
-    QmkRgblightEffect(25, "Gradient 1", True),
-    QmkRgblightEffect(26, "Gradient 2", True),
-    QmkRgblightEffect(27, "Gradient 3", True),
-    QmkRgblightEffect(28, "Gradient 4", True),
-    QmkRgblightEffect(29, "Gradient 5", True),
-    QmkRgblightEffect(30, "Gradient 6", True),
-    QmkRgblightEffect(31, "Gradient 7", True),
-    QmkRgblightEffect(32, "Gradient 8", True),
-    QmkRgblightEffect(33, "Gradient 9", True),
-    QmkRgblightEffect(34, "Gradient 10", True),
-    QmkRgblightEffect(35, "RGB Test", True),
-    QmkRgblightEffect(36, "Alternating", True),
+    QmkRgblightEffect(0, "关闭", False),
+    QmkRgblightEffect(1, "静态单色", True),
+    QmkRgblightEffect(2, "单色呼吸 1", True),
+    QmkRgblightEffect(3, "单色呼吸 2", True),
+    QmkRgblightEffect(4, "单色呼吸 3", True),
+    QmkRgblightEffect(5, "单色呼吸 4", True),
+    QmkRgblightEffect(6, "彩虹循环 1", False),
+    QmkRgblightEffect(7, "彩虹循环 2", False),
+    QmkRgblightEffect(8, "彩虹循环 3", False),
+    QmkRgblightEffect(9, "彩虹漩涡 1", False),
+    QmkRgblightEffect(10, "彩虹漩涡 2", False),
+    QmkRgblightEffect(11, "彩虹漩涡 3", False),
+    QmkRgblightEffect(12, "彩虹漩涡 4", False),
+    QmkRgblightEffect(13, "彩虹漩涡 5", False),
+    QmkRgblightEffect(14, "彩虹漩涡 6", False),
+    QmkRgblightEffect(15, "蛇形灯效 1", True),
+    QmkRgblightEffect(16, "蛇形灯效 2", True),
+    QmkRgblightEffect(17, "蛇形灯效 3", True),
+    QmkRgblightEffect(18, "蛇形灯效 4", True),
+    QmkRgblightEffect(19, "蛇形灯效 5", True),
+    QmkRgblightEffect(20, "蛇形灯效 6", True),
+    QmkRgblightEffect(21, "霹雳游侠 1", True),
+    QmkRgblightEffect(22, "霹雳游侠 2", True),
+    QmkRgblightEffect(23, "霹雳游侠 3", True),
+    QmkRgblightEffect(24, "圣诞灯效", True),
+    QmkRgblightEffect(25, "静态渐变 1", True),
+    QmkRgblightEffect(26, "静态渐变 2", True),
+    QmkRgblightEffect(27, "静态渐变 3", True),
+    QmkRgblightEffect(28, "静态渐变 4", True),
+    QmkRgblightEffect(29, "静态渐变 5", True),
+    QmkRgblightEffect(30, "静态渐变 6", True),
+    QmkRgblightEffect(31, "静态渐变 7", True),
+    QmkRgblightEffect(32, "静态渐变 8", True),
+    QmkRgblightEffect(33, "静态渐变 9", True),
+    QmkRgblightEffect(34, "静态渐变 10", True),
+    QmkRgblightEffect(35, "灯光测试", True),
+    QmkRgblightEffect(36, "交替灯效", True),
 ]
 
 
@@ -68,51 +68,51 @@ class VialRGBEffect:
 
 
 VIALRGB_EFFECTS = [
-    VialRGBEffect(0, "Disable"),
-    VialRGBEffect(1, "Direct Control"),
-    VialRGBEffect(2, "Solid Color"),
-    VialRGBEffect(3, "Alphas Mods"),
-    VialRGBEffect(4, "Gradient Up Down"),
-    VialRGBEffect(5, "Gradient Left Right"),
-    VialRGBEffect(6, "Breathing"),
-    VialRGBEffect(7, "Band Sat"),
-    VialRGBEffect(8, "Band Val"),
-    VialRGBEffect(9, "Band Pinwheel Sat"),
-    VialRGBEffect(10, "Band Pinwheel Val"),
-    VialRGBEffect(11, "Band Spiral Sat"),
-    VialRGBEffect(12, "Band Spiral Val"),
-    VialRGBEffect(13, "Cycle All"),
-    VialRGBEffect(14, "Cycle Left Right"),
-    VialRGBEffect(15, "Cycle Up Down"),
-    VialRGBEffect(16, "Rainbow Moving Chevron"),
-    VialRGBEffect(17, "Cycle Out In"),
-    VialRGBEffect(18, "Cycle Out In Dual"),
-    VialRGBEffect(19, "Cycle Pinwheel"),
-    VialRGBEffect(20, "Cycle Spiral"),
-    VialRGBEffect(21, "Dual Beacon"),
-    VialRGBEffect(22, "Rainbow Beacon"),
-    VialRGBEffect(23, "Rainbow Pinwheels"),
-    VialRGBEffect(24, "Raindrops"),
-    VialRGBEffect(25, "Jellybean Raindrops"),
-    VialRGBEffect(26, "Hue Breathing"),
-    VialRGBEffect(27, "Hue Pendulum"),
-    VialRGBEffect(28, "Hue Wave"),
-    VialRGBEffect(29, "Typing Heatmap"),
-    VialRGBEffect(30, "Digital Rain"),
-    VialRGBEffect(31, "Solid Reactive Simple"),
-    VialRGBEffect(32, "Solid Reactive"),
-    VialRGBEffect(33, "Solid Reactive Wide"),
-    VialRGBEffect(34, "Solid Reactive Multiwide"),
-    VialRGBEffect(35, "Solid Reactive Cross"),
-    VialRGBEffect(36, "Solid Reactive Multicross"),
-    VialRGBEffect(37, "Solid Reactive Nexus"),
-    VialRGBEffect(38, "Solid Reactive Multinexus"),
-    VialRGBEffect(39, "Splash"),
-    VialRGBEffect(40, "Multisplash"),
-    VialRGBEffect(41, "Solid Splash"),
-    VialRGBEffect(42, "Solid Multisplash"),
-    VialRGBEffect(43, "Pixel Rain"),
-    VialRGBEffect(44, "Pixel Fractal"),
+    VialRGBEffect(0, "关闭"),
+    VialRGBEffect(1, "Vial控制"),
+    VialRGBEffect(2, "静态单色"),
+    VialRGBEffect(3, "静态双色"),
+    VialRGBEffect(4, "静态纵向渐变"),
+    VialRGBEffect(5, "静态横向渐变"),
+    VialRGBEffect(6, "单色呼吸"),
+    VialRGBEffect(7, "背光横向滚动"),
+    VialRGBEffect(8, "单色横向滚动"),
+    VialRGBEffect(9, "背光风车"),
+    VialRGBEffect(10, "单色风车"),
+    VialRGBEffect(11, "背光螺旋"),
+    VialRGBEffect(12, "单色螺旋"),
+    VialRGBEffect(13, "彩虹循环"),
+    VialRGBEffect(14, "横向彩虹"),
+    VialRGBEffect(15, "纵向彩虹"),
+    VialRGBEffect(16, "V型彩虹"),
+    VialRGBEffect(17, "彩虹漩涡"),
+    VialRGBEffect(18, "双重彩虹漩涡"),
+    VialRGBEffect(19, "彩虹风车"),
+    VialRGBEffect(20, "彩虹螺旋"),
+    VialRGBEffect(21, "彩虹旋转 1"),
+    VialRGBEffect(22, "彩虹旋转 2"),
+    VialRGBEffect(23, "双重彩虹风车"),
+    VialRGBEffect(24, "雨滴 1"),
+    VialRGBEffect(25, "雨滴 2"),
+    VialRGBEffect(26, "色相呼吸"),
+    VialRGBEffect(27, "色相摇摆"),
+    VialRGBEffect(28, "色相波浪"),
+    VialRGBEffect(29, "按键热图"),
+    VialRGBEffect(30, "雨滴下坠"),
+    VialRGBEffect(31, "单色按键响应"),
+    VialRGBEffect(32, "背光单色按键响应"),
+    VialRGBEffect(33, "单色范围响应 1"),
+    VialRGBEffect(34, "单色范围响应 2"),
+    VialRGBEffect(35, "单色交叉响应 1"),
+    VialRGBEffect(36, "单色交叉响应 2"),
+    VialRGBEffect(37, "单色十字响应 1"),
+    VialRGBEffect(38, "单色十字响应 2"),
+    VialRGBEffect(39, "单色涟漪 1"),
+    VialRGBEffect(40, "单色涟漪 2"),
+    VialRGBEffect(41, "彩虹涟漪 1"),
+    VialRGBEffect(42, "彩虹涟漪 2"),
+    VialRGBEffect(43, "像素雨"),
+    VialRGBEffect(44, "像素随机"),
 ]
 
 
@@ -163,14 +163,14 @@ class QmkRgblightHandler(BasicHandler):
 
         row = container.rowCount()
 
-        self.lbl_underglow_effect = QLabel(tr("RGBConfigurator", "Underglow Effect"))
+        self.lbl_underglow_effect = QLabel(tr("RGBConfigurator", "底灯灯效"))
         container.addWidget(self.lbl_underglow_effect, row, 0)
         self.underglow_effect = QComboBox()
         for ef in QMK_RGBLIGHT_EFFECTS:
             self.underglow_effect.addItem(ef.name)
         container.addWidget(self.underglow_effect, row, 1)
 
-        self.lbl_underglow_brightness = QLabel(tr("RGBConfigurator", "Underglow Brightness"))
+        self.lbl_underglow_brightness = QLabel(tr("RGBConfigurator", "底灯亮度"))
         container.addWidget(self.lbl_underglow_brightness, row + 1, 0)
         self.underglow_brightness = QSlider(QtCore.Qt.Horizontal)
         self.underglow_brightness.setMinimum(0)
@@ -178,7 +178,7 @@ class QmkRgblightHandler(BasicHandler):
         self.underglow_brightness.valueChanged.connect(self.on_underglow_brightness_changed)
         container.addWidget(self.underglow_brightness, row + 1, 1)
 
-        self.lbl_underglow_color = QLabel(tr("RGBConfigurator", "Underglow Color"))
+        self.lbl_underglow_color = QLabel(tr("RGBConfigurator", "底灯颜色"))
         container.addWidget(self.lbl_underglow_color, row + 2, 0)
         self.underglow_color = ClickableLabel(" ")
         self.underglow_color.clicked.connect(self.on_underglow_color)
@@ -234,7 +234,7 @@ class QmkBacklightHandler(BasicHandler):
 
         row = container.rowCount()
 
-        self.lbl_backlight_brightness = QLabel(tr("RGBConfigurator", "Backlight Brightness"))
+        self.lbl_backlight_brightness = QLabel(tr("RGBConfigurator", "背光亮度"))
         container.addWidget(self.lbl_backlight_brightness, row, 0)
         self.backlight_brightness = QSlider(QtCore.Qt.Horizontal)
         self.backlight_brightness.setMinimum(0)
@@ -242,7 +242,7 @@ class QmkBacklightHandler(BasicHandler):
         self.backlight_brightness.valueChanged.connect(self.on_backlight_brightness_changed)
         container.addWidget(self.backlight_brightness, row, 1)
 
-        self.lbl_backlight_breathing = QLabel(tr("RGBConfigurator", "Backlight Breathing"))
+        self.lbl_backlight_breathing = QLabel(tr("RGBConfigurator", "背光呼吸"))
         container.addWidget(self.lbl_backlight_breathing, row + 1, 0)
         self.backlight_breathing = QCheckBox()
         self.backlight_breathing.stateChanged.connect(self.on_backlight_breathing_changed)
@@ -275,7 +275,7 @@ class VialRGBHandler(BasicHandler):
 
         row = container.rowCount()
 
-        self.lbl_rgb_effect = QLabel(tr("RGBConfigurator", "RGB Effect"))
+        self.lbl_rgb_effect = QLabel(tr("RGBConfigurator", "灯光效果"))
         container.addWidget(self.lbl_rgb_effect, row, 0)
         self.rgb_effect = QComboBox()
         self.rgb_effect.addItem("0")
@@ -285,13 +285,13 @@ class VialRGBHandler(BasicHandler):
         self.rgb_effect.currentIndexChanged.connect(self.on_rgb_effect_changed)
         container.addWidget(self.rgb_effect, row, 1)
 
-        self.lbl_rgb_color = QLabel(tr("RGBConfigurator", "RGB Color"))
+        self.lbl_rgb_color = QLabel(tr("RGBConfigurator", "灯光颜色"))
         container.addWidget(self.lbl_rgb_color, row + 1, 0)
         self.rgb_color = ClickableLabel(" ")
         self.rgb_color.clicked.connect(self.on_rgb_color)
         container.addWidget(self.rgb_color, row + 1, 1)
 
-        self.lbl_rgb_brightness = QLabel(tr("RGBConfigurator", "RGB Brightness"))
+        self.lbl_rgb_brightness = QLabel(tr("RGBConfigurator", "灯光亮度"))
         container.addWidget(self.lbl_rgb_brightness, row + 2, 0)
         self.rgb_brightness = QSlider(QtCore.Qt.Horizontal)
         self.rgb_brightness.setMinimum(0)
@@ -299,7 +299,7 @@ class VialRGBHandler(BasicHandler):
         self.rgb_brightness.valueChanged.connect(self.on_rgb_brightness_changed)
         container.addWidget(self.rgb_brightness, row + 2, 1)
 
-        self.lbl_rgb_speed = QLabel(tr("RGBConfigurator", "RGB Speed"))
+        self.lbl_rgb_speed = QLabel(tr("RGBConfigurator", "灯光速度"))
         container.addWidget(self.lbl_rgb_speed, row + 3, 0)
         self.rgb_speed = QSlider(QtCore.Qt.Horizontal)
         self.rgb_speed.setMinimum(0)
@@ -307,8 +307,44 @@ class VialRGBHandler(BasicHandler):
         self.rgb_speed.valueChanged.connect(self.on_rgb_speed_changed)
         container.addWidget(self.rgb_speed, row + 3, 1)
 
+        if self.device.keyboard.underglow_rgb_matrix == "advanced" or self.device.keyboard.underglow_rgb_matrix == "base":
+            self.lbl_ug_rgb_effect = QLabel(tr("RGBConfigurator", "底灯效果"))
+            container.addWidget(self.lbl_ug_rgb_effect, row + 4, 0)
+            self.ug_rgb_effect = QComboBox()
+            self.ug_rgb_effect.addItem("0")
+            self.ug_rgb_effect.addItem("1")
+            self.ug_rgb_effect.addItem("2")
+            self.ug_rgb_effect.addItem("3")
+            self.ug_rgb_effect.currentIndexChanged.connect(self.on_rgb_effect_changed)
+            container.addWidget(self.ug_rgb_effect, row + 4, 1)
+
+            self.lbl_ug_rgb_color = QLabel(tr("RGBConfigurator", "底灯颜色"))
+            container.addWidget(self.lbl_ug_rgb_color, row + 5, 0)
+            self.ug_rgb_color = ClickableLabel(" ")
+            self.ug_rgb_color.clicked.connect(self.on_rgb_color)
+            container.addWidget(self.ug_rgb_color, row + 5, 1)
+
+            self.lbl_ug_rgb_brightness = QLabel(tr("RGBConfigurator", "底灯亮度"))
+            container.addWidget(self.lbl_ug_rgb_brightness, row + 6, 0)
+            self.ug_rgb_brightness = QSlider(QtCore.Qt.Horizontal)
+            self.ug_rgb_brightness.setMinimum(0)
+            self.ug_rgb_brightness.setMaximum(255)
+            self.ug_rgb_brightness.valueChanged.connect(self.on_rgb_brightness_changed)
+            container.addWidget(self.ug_rgb_brightness, row + 6, 1)
+
+            self.lbl_ug_rgb_speed = QLabel(tr("RGBConfigurator", "底灯速度"))
+            container.addWidget(self.lbl_ug_rgb_speed, row + 7, 0)
+            self.ug_rgb_speed = QSlider(QtCore.Qt.Horizontal)
+            self.ug_rgb_speed.setMinimum(0)
+            self.ug_rgb_speed.setMaximum(255)
+            self.ug_rgb_speed.valueChanged.connect(self.on_rgb_speed_changed)
+            container.addWidget(self.ug_rgb_speed, row + 7, 1)
+
+
         self.widgets = [self.lbl_rgb_effect, self.rgb_effect, self.lbl_rgb_brightness, self.rgb_brightness,
-                        self.lbl_rgb_color, self.rgb_color, self.lbl_rgb_speed, self.rgb_speed]
+                        self.lbl_rgb_color, self.rgb_color, self.lbl_rgb_speed, self.rgb_speed,
+                        self.lbl_ug_rgb_effect, self.ug_rgb_effect, self.lbl_ug_rgb_brightness, self.ug_rgb_brightness,
+                        self.lbl_ug_rgb_color, self.ug_rgb_color, self.lbl_ug_rgb_speed, self.ug_rgb_speed]
 
         self.effects = []
 
@@ -390,7 +426,7 @@ class RGBConfigurator(BasicEditor):
         self.addStretch()
         buttons = QHBoxLayout()
         buttons.addStretch()
-        save_btn = QPushButton(tr("RGBConfigurator", "Save"))
+        save_btn = QPushButton(tr("RGBConfigurator", "保存"))
         buttons.addWidget(save_btn)
         save_btn.clicked.connect(self.on_save)
         self.addLayout(buttons)

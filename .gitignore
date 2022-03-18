@@ -1,6 +1,5 @@
 venv
-target
 __pycache__
 *.pyc
 .idea
-.history
+.history/
