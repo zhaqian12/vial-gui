@@ -442,7 +442,7 @@ class UnderglowRGBHandler(BasicHandler):
                 self.ug_effects.append(effect)
 
         self.ug_rgb_effect.clear()
-        for effect in self.effects:
+        for effect in self.ug_effects:
             self.ug_rgb_effect.addItem(effect.name)
 
     def update_from_keyboard(self):
