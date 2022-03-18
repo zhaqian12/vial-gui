@@ -408,7 +408,7 @@ class UnderglowRGBHandler(BasicHandler):
         self.widgets = [self.lbl_ug_rgb_effect, self.ug_rgb_effect, self.lbl_ug_rgb_brightness, self.ug_rgb_brightness,
                         self.lbl_ug_rgb_color, self.ug_rgb_color, self.lbl_ug_rgb_speed, self.ug_rgb_speed]
 
-        self.effects = []
+        self.ug_effects = []
 
     def on_rgb_brightness_changed(self, value):
         self.keyboard.set_vialrgb_brightness(value)
@@ -423,7 +423,7 @@ class UnderglowRGBHandler(BasicHandler):
         color = QColorDialog.getColor(self.current_color())
         if not color.isValid():
             return
-        self.rgb_color.setStyleSheet("QWidget { background-color: %s}" % color.name())
+        self.ug_rgb_color.setStyleSheet("QWidget { background-color: %s}" % color.name())
         h, s, v, a = color.getHsvF()
         if h < 0:
             h = 0
@@ -436,14 +436,14 @@ class UnderglowRGBHandler(BasicHandler):
                                1.0)
 
     def rebuild_effects(self):
-        self.effects = []
+        self.ug_effects = []
         for effect in VIALRGB_EFFECTS:
             if effect.idx in self.keyboard.rgb_supported_effects:
-                self.effects.append(effect)
+                self.ug_effects.append(effect)
 
-        self.rgb_effect.clear()
+        self.ug_rgb_effect.clear()
         for effect in self.effects:
-            self.rgb_effect.addItem(effect.name)
+            self.ug_rgb_effect.addItem(effect.name)
 
     def update_from_keyboard(self):
         if not self.valid():
@@ -452,12 +452,12 @@ class UnderglowRGBHandler(BasicHandler):
         self.rebuild_effects()
         for x, effect in enumerate(self.effects):
             if effect.idx == self.keyboard.rgb_mode:
-                self.rgb_effect.setCurrentIndex(x)
+                self.ug_rgb_effect.setCurrentIndex(x)
                 break
-        self.rgb_brightness.setMaximum(self.keyboard.rgb_maximum_brightness)
-        self.rgb_brightness.setValue(self.keyboard.rgb_hsv[2])
-        self.rgb_speed.setValue(self.keyboard.rgb_speed)
-        self.rgb_color.setStyleSheet("QWidget { background-color: %s}" % self.current_color().name())
+        self.ug_rgb_brightness.setMaximum(self.keyboard.rgb_maximum_brightness)
+        self.ug_rgb_brightness.setValue(self.keyboard.rgb_hsv[2])
+        self.ug_rgb_speed.setValue(self.keyboard.rgb_speed)
+        self.ug_rgb_color.setStyleSheet("QWidget { background-color: %s}" % self.current_color().name())
 
     def valid(self):
         return isinstance(self.device, VialKeyboard) and self.device.keyboard.underglow_rgb_matrix == "advanced"
