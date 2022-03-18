@@ -446,7 +446,6 @@ class Keyboard:
                         self.rgb_supported_effects.add(value)
                     max_effect = max(max_effect, value)
             
-
             if self.underglow_rgb_matrix == "advanced":
                 data = self.usb_send(self.dev, struct.pack("BB", CMD_VIA_LIGHTING_GET_VALUE, VIALRGB_GET_UNDERGLOW_INFO),
                                  retries=20)[2:]
