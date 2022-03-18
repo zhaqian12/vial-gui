@@ -107,12 +107,36 @@ VIALRGB_EFFECTS = [
     VialRGBEffect(36, "单色交叉响应 2"),
     VialRGBEffect(37, "单色十字响应 1"),
     VialRGBEffect(38, "单色十字响应 2"),
-    VialRGBEffect(39, "单色涟漪 1"),
-    VialRGBEffect(40, "单色涟漪 2"),
-    VialRGBEffect(41, "彩虹涟漪 1"),
-    VialRGBEffect(42, "彩虹涟漪 2"),
+    VialRGBEffect(39, "单色涟漪响应 1"),
+    VialRGBEffect(40, "单色涟漪响应 2"),
+    VialRGBEffect(41, "彩虹涟漪响应 1"),
+    VialRGBEffect(42, "彩虹涟漪响应 2"),
     VialRGBEffect(43, "像素雨"),
     VialRGBEffect(44, "像素随机"),
+    VialRGBEffect(45, "像素流"),
+    VialRGBEffect(46, "彩虹按键响应"),
+    VialRGBEffect(47, "循环背光风车"),
+    VialRGBEffect(48, "循环风车"),
+    VialRGBEffect(49, "循环背光螺旋"),
+    VialRGBEffect(50, "循环螺旋"),
+    VialRGBEffect(51, "循环横向滚动"),
+    VialRGBEffect(52, "循环呼吸"),
+    VialRGBEffect(53, "反向横向彩虹"),
+    VialRGBEffect(54, "反向纵向彩虹"),
+    VialRGBEffect(55, "彩虹涟漪"),
+    VialRGBEffect(56, "双重彩虹涟漪"),
+    VialRGBEffect(57, "循环涟漪响应"),
+    VialRGBEffect(58, "循环交叉响应"),
+    VialRGBEffect(59, "循环十字响应"),
+    VialRGBEffect(60, "循环范围响应"),
+    VialRGBEffect(61, "彩虹交叉响应"),
+    VialRGBEffect(62, "彩虹十字响应"),
+    VialRGBEffect(63, "彩虹范围响应"),
+    VialRGBEffect(64, "彩虹像素随机"),
+    VialRGBEffect(65, "循环蛇形灯效"),
+    VialRGBEffect(66, "循环波形"),
+    VialRGBEffect(67, "彩虹波形"),
+    VialRGBEffect(68, "反向彩虹波形"),
 ]
 
 
@@ -133,8 +157,8 @@ UNDERGLOWRGB_EFFECTS = [
     UnderglowRGBEffect(6, "彩虹循环"),
     UnderglowRGBEffect(7, "横向彩虹"),
     UnderglowRGBEffect(8, "纵向彩虹"),
-    UnderglowRGBEffect(9, "彩虹涟漪 1"),
-    UnderglowRGBEffect(10, "彩虹涟漪 2"),
+    UnderglowRGBEffect(9, "彩虹漩涡"),
+    UnderglowRGBEffect(10, "彩虹涟漪"),
     UnderglowRGBEffect(11, "彩虹风车"),
     UnderglowRGBEffect(12, "彩虹螺旋"),
     UnderglowRGBEffect(13, "变速横向彩虹"),
@@ -191,7 +215,7 @@ class QmkRgblightHandler(BasicHandler):
         super().__init__(container)
 
         row = container.rowCount()
-
+        
         self.lbl_underglow_effect = QLabel(tr("RGBConfigurator", "底灯灯效"))
         container.addWidget(self.lbl_underglow_effect, row, 0)
         self.underglow_effect = QComboBox()
