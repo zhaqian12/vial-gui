@@ -716,8 +716,8 @@ KEYCODES_BACKLIGHT = [
 
 KEYCODES_RGBLIGHT = [
     K(23746, "RGB_TOG", "RGB\n开关", "切换RGB灯光开关"),
-    K(23747, "RGB_MOD", "RGB\n灯效 +", "下一个RGB灯效"),
-    K(23748, "RGB_RMOD", "RGB\n灯效 -", "上一个RGB灯效"),
+    K(23747, "RGB_MOD", "RGB\n灯效+", "下一个RGB灯效"),
+    K(23748, "RGB_RMOD", "RGB\n灯效-", "上一个RGB灯效"),
     K(23749, "RGB_HUI", "RGB\n色相+", "增加RGB色相"),
     K(23750, "RGB_HUD", "RGB\n色相-", "降低RGB色相"),
     K(23751, "RGB_SAI", "RGB\n饱和+", "增加RGB饱和度"),

@@ -205,9 +205,9 @@ class MainWindow(QMainWindow):
         if theme_group.checkedAction() is None:
             theme_group.actions()[0].setChecked(True)
 
-        about_vial_act = QAction(tr("MenuAbout", "About Vial-CN..."), self)
+        about_vial_act = QAction(tr("MenuAbout", "关于 Vial-CN..."), self)
         about_vial_act.triggered.connect(self.about_vial)
-        self.about_menu = self.menuBar().addMenu(tr("Menu", "About"))
+        self.about_menu = self.menuBar().addMenu(tr("Menu", "关于"))
         self.about_menu.addAction(about_vial_act)
 
     def on_layout_load(self):

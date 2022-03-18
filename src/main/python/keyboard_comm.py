@@ -46,7 +46,13 @@ VIALRGB_GET_INFO = 0x40
 VIALRGB_GET_MODE = 0x41
 VIALRGB_GET_SUPPORTED = 0x42
 
+VIALRGB_GET_UNDERGLOW_INFO = 0x45
+VIALRGB_GET_UNDERGLOW_MODE = 0x46
+VIALRGB_GET_UNDERGLOW_SUPPORTED = 0x47
+
 VIALRGB_SET_MODE = 0x41
+
+VIALRGB_SET_UNDERGLOW_MODE = 0x43
 
 CMD_VIAL_GET_KEYBOARD_ID = 0x00
 CMD_VIAL_GET_SIZE = 0x01
@@ -233,6 +239,10 @@ class Keyboard:
         self.rgb_mode = self.rgb_speed = self.rgb_version = self.rgb_maximum_brightness = -1
         self.rgb_hsv = (0, 0, 0)
         self.rgb_supported_effects = set()
+        # vialugrgb
+        self.ug_rgb_mode = self.ug_rgb_speed = self.ug_rgb_maximum_brightness = -1
+        self.ug_rgb_hsv = (0, 0, 0)
+        self.ug_rgb_supported_effects = set()
 
         self.via_protocol = self.vial_protocol = self.keyboard_id = -1
 
@@ -435,6 +445,22 @@ class Keyboard:
                     if value != 0xFFFF:
                         self.rgb_supported_effects.add(value)
                     max_effect = max(max_effect, value)
+            
+            if self.underglow_rgb_matrix == "adavanced":
+                data = self.usb_send(self.dev, struct.pack("BB", CMD_VIA_LIGHTING_GET_VALUE, VIALRGB_GET_UNDERGLOW_INFO),
+                                 retries=20)[2:]
+                self.ug_rgb_maximum_brightness = data[2]
+                self.ug_rgb_supported_effects = {0}
+                max_effect = 0
+                while max_effect < 0xFFFF:
+                    data = self.usb_send(self.dev, struct.pack("<BBH", CMD_VIA_LIGHTING_GET_VALUE, VIALRGB_GET_UNDERGLOW_SUPPORTED,
+                                                            max_effect))[2:]
+                    for x in range(0, len(data), 2):
+                        value = int.from_bytes(data[x:x+2], byteorder="little")
+                        if value != 0xFFFF:
+                            self.ug_rgb_supported_effects.add(value)
+                        max_effect = max(max_effect, value)
+
 
     def reload_rgb(self):
         if self.lighting_qmk_rgblight:
@@ -461,6 +487,12 @@ class Keyboard:
             self.rgb_mode = int.from_bytes(data[0:2], byteorder="little")
             self.rgb_speed = data[2]
             self.rgb_hsv = (data[3], data[4], data[5])
+            if self.underglow_rgb_matrix == "adavanced":
+                data = self.usb_send(self.dev, struct.pack("BB", CMD_VIA_LIGHTING_GET_VALUE, VIALRGB_GET_UNDERGLOW_MODE),
+                                 retries=20)[2:]
+                self.ug_rgb_mode = int.from_bytes(data[0:2], byteorder="little")
+                self.ug_rgb_speed = data[2]
+                self.ug_rgb_hsv = (data[3], data[4], data[5])
 
     def reload_settings(self):
         self.settings = dict()
@@ -876,6 +908,28 @@ class Keyboard:
     def set_vialrgb_color(self, h, s, v):
         self.rgb_hsv = (h, s, v)
         self._vialrgb_set_mode()
+
+    def _ugrgb_set_mode(self):
+        self.usb_send(self.dev, struct.pack("BBHBBBB", CMD_VIA_LIGHTING_SET_VALUE, VIALRGB_SET_UNDERGLOW_MODE,
+                                            self.ug_rgb_mode, self.ug_rgb_speed,
+                                            self.ug_rgb_hsv[0], self.ug_rgb_hsv[1], self.ug_rgb_hsv[2]))
+
+    def set_ugrgb_brightness(self, value):
+        self.ug_rgb_hsv = (self.ug_rgb_hsv[0], self.ug_rgb_hsv[1], value)
+        self._ugrgb_set_mode()
+
+    def set_ugrgb_speed(self, value):
+        self.ug_rgb_speed = value
+        self._ugrgb_set_mode()
+
+    def set_ugrgb_mode(self, value):
+        self.ug_rgb_mode = value
+        self._ugrgb_set_mode()
+
+    def set_ugrgb_color(self, h, s, v):
+        self.ug_rgb_hsv = (h, s, v)
+        self._ugrgb_set_mode()
+
 
 
 class DummyKeyboard(Keyboard):
