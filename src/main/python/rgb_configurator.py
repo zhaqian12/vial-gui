@@ -450,7 +450,7 @@ class UnderglowRGBHandler(BasicHandler):
             return
 
         self.rebuild_effects()
-        for x, effect in enumerate(self.effects):
+        for x, effect in enumerate(self.ug_effects):
             if effect.idx == self.keyboard.rgb_mode:
                 self.ug_rgb_effect.setCurrentIndex(x)
                 break
