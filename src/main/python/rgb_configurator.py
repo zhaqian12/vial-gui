@@ -439,7 +439,7 @@ class VialRGBHandler(BasicHandler):
 
 class ControllerRGBHandler(BasicHandler):
 
-    def __init__(self, container, device):
+    def __init__(self, container):
         super().__init__(container)
 
         row = container.rowCount()
@@ -459,16 +459,7 @@ class ControllerRGBHandler(BasicHandler):
         self.ug_rgb_enable.stateChanged.connect(self.on_ug_rgb_changed)
         container.addWidget(self.ug_rgb_enable, row + 2, 1)
 
-        if device.keyboard.logo_rgb == True:
-            self.lbl_ctrl_rgb_logo = QLabel(tr("RGBConfigurator", "LOGO灯开关"))
-            container.addWidget(self.lbl_ctrl_rgb_logo, row + 3, 0)
-            self.logo_rgb_enable = QCheckBox()
-            self.logo_rgb_enable.stateChanged.connect(self.on_logo_rgb_changed)
-            container.addWidget(self.logo_rgb_enable, row + 3, 1)
-            self.widgets = [self.lbl_ctrl_rgb_title, self.lbl_ctrl_rgb_key, self.key_rgb_enable, self.lbl_ctrl_rgb_underglow,
-                         self.ug_rgb_enable, self.lbl_ctrl_rgb_logo, self.logo_rgb_enable]
-        else:
-            self.widgets = [self.lbl_ctrl_rgb_title, self.lbl_ctrl_rgb_key, self.key_rgb_enable, self.lbl_ctrl_rgb_underglow,
+        self.widgets = [self.lbl_ctrl_rgb_title, self.lbl_ctrl_rgb_key, self.key_rgb_enable, self.lbl_ctrl_rgb_underglow,
                          self.ug_rgb_enable]
 
 
@@ -493,6 +484,32 @@ class ControllerRGBHandler(BasicHandler):
     def valid(self):
         return isinstance(self.device, VialKeyboard) and self.device.keyboard.rgb_matrix_control == "advanced"
 
+
+class LogoRGBHandler(BasicHandler):
+    
+    def __init__(self, container):
+        super().__init__(container)
+
+        row = container.rowCount()
+
+        self.lbl_ctrl_rgb_logo = QLabel(tr("RGBConfigurator", "LOGO灯开关"))
+        container.addWidget(self.lbl_ctrl_rgb_logo, row + 3, 0)
+        self.logo_rgb_enable = QCheckBox()
+        self.logo_rgb_enable.stateChanged.connect(self.on_logo_rgb_changed)
+        container.addWidget(self.logo_rgb_enable, row + 3, 1)
+        self.widgets = [self.lbl_ctrl_rgb_logo, self.logo_rgb_enable]
+
+    def on_logo_rgb_changed(self, checked):
+        self.device.keyboard.set_logo_rgb(int(checked))
+
+    def update_from_keyboard(self):
+        if not self.valid():
+            return
+
+        self.logo_rgb_enable.setChecked(self.device.device.logo_rgb_enable == True)
+
+    def valid(self):
+        return isinstance(self.device, VialKeyboard) and self.device.keyboard.rgb_matrix_control == "advanced" and self.device.keyboard.logo_rgb == True
 
 class UnderglowRGBHandler(BasicHandler):
 
@@ -617,10 +634,12 @@ class RGBConfigurator(BasicEditor):
         self.handler_vialrgb.update.connect(self.update_from_keyboard)
         self.handler_rgb_controller = ControllerRGBHandler(self.container)
         self.handler_rgb_controller.update.connect(self.update_from_keyboard)
+        self.handler_logo_rgb = LogoRGBHandler(self.container)
+        self.handler_logo_rgb.update.connect(self.update_from_keyboard)
         self.handler_underglowlrgb = UnderglowRGBHandler(self.container)
         self.handler_underglowlrgb.update.connect(self.update_from_keyboard)
         
-        self.handlers = [self.handler_backlight, self.handler_rgblight, self.handler_vialrgb, self.handler_rgb_controller, self.handler_underglowlrgb]
+        self.handlers = [self.handler_backlight, self.handler_rgblight, self.handler_vialrgb, self.handler_rgb_controller, self.handler_logo_rgb, self.handler_underglowlrgb]
 
         self.addStretch()
         buttons = QHBoxLayout()
