@@ -626,7 +626,7 @@ class IndicatorsRGBHandler(BasicHandler):
         super().__init__(container)
 
         self.lbl_blank = QLabel(tr("RGBConfigurator", "    "))
-        container.addWidget(self.lbl_blank, 0, 2)
+        container.addWidget(self.lbl_blank, row, 2)
 
         self.lbl_ind_rgb_title = QLabel(tr("RGBConfigurator", "指示灯灯光设置"))
         container.addWidget(self.lbl_ind_rgb_title, row, 3)
