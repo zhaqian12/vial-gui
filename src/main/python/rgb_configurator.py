@@ -478,7 +478,7 @@ class ControllerRGBHandler(BasicHandler):
             return
 
         self.cb_key_rgb_enable.setChecked(self.device.keyboard.key_rgb_enable == 1)
-        self.cb_ug_rgb_enable.setChecked(self.device.keyboard.underglow_rgb_enable == 1)
+        # self.cb_ug_rgb_enable.setChecked(self.device.keyboard.underglow_rgb_enable == 1)
 
     def valid(self):
         return isinstance(self.device, VialKeyboard) and self.device.keyboard.rgb_matrix_control == "advanced"
