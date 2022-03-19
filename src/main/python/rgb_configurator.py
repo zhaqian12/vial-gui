@@ -169,6 +169,22 @@ UNDERGLOWRGB_EFFECTS = [
 ]
 
 
+Class IndicatorRGBEffect:
+
+        def __init__(self, idx, name):
+        self.idx = idx
+        self.name = name
+
+
+INDICATORS_EFFECT = [
+    IndicatorRGBEffect(0, "关闭"),
+    IndicatorRGBEffect(1, "静态单色"),
+    IndicatorRGBEffect(2, "单色呼吸"),
+    IndicatorRGBEffect(3, "循环呼吸"),
+    IndicatorRGBEffect(4, "彩虹循环"),
+]
+
+
 class BasicHandler(QObject):
 
     update = pyqtSignal()
@@ -328,39 +344,42 @@ class VialRGBHandler(BasicHandler):
 
         row = container.rowCount()
 
+        self.lbl_rgb_title = QLabel(tr("RGBConfigurator", "全局灯光设置"))
+        container.addWidget(self.lbl_rgb_title, row, 0)
+
         self.lbl_rgb_effect = QLabel(tr("RGBConfigurator", "灯光效果"))
-        container.addWidget(self.lbl_rgb_effect, row, 0)
+        container.addWidget(self.lbl_rgb_effect, row + 1, 0)
         self.rgb_effect = QComboBox()
         self.rgb_effect.addItem("0")
         self.rgb_effect.addItem("1")
         self.rgb_effect.addItem("2")
         self.rgb_effect.addItem("3")
         self.rgb_effect.currentIndexChanged.connect(self.on_rgb_effect_changed)
-        container.addWidget(self.rgb_effect, row, 1)
+        container.addWidget(self.rgb_effect, row + 1, 1)
 
         self.lbl_rgb_color = QLabel(tr("RGBConfigurator", "灯光颜色"))
-        container.addWidget(self.lbl_rgb_color, row + 1, 0)
+        container.addWidget(self.lbl_rgb_color, row + 2, 0)
         self.rgb_color = ClickableLabel(" ")
         self.rgb_color.clicked.connect(self.on_rgb_color)
-        container.addWidget(self.rgb_color, row + 1, 1)
+        container.addWidget(self.rgb_color, row + 2, 1)
 
         self.lbl_rgb_brightness = QLabel(tr("RGBConfigurator", "灯光亮度"))
-        container.addWidget(self.lbl_rgb_brightness, row + 2, 0)
+        container.addWidget(self.lbl_rgb_brightness, row + 3, 0)
         self.rgb_brightness = QSlider(QtCore.Qt.Horizontal)
         self.rgb_brightness.setMinimum(0)
         self.rgb_brightness.setMaximum(255)
         self.rgb_brightness.valueChanged.connect(self.on_rgb_brightness_changed)
-        container.addWidget(self.rgb_brightness, row + 2, 1)
+        container.addWidget(self.rgb_brightness, row + 3, 1)
 
         self.lbl_rgb_speed = QLabel(tr("RGBConfigurator", "灯光速度"))
-        container.addWidget(self.lbl_rgb_speed, row + 3, 0)
+        container.addWidget(self.lbl_rgb_speed, row + 4, 0)
         self.rgb_speed = QSlider(QtCore.Qt.Horizontal)
         self.rgb_speed.setMinimum(0)
         self.rgb_speed.setMaximum(255)
         self.rgb_speed.valueChanged.connect(self.on_rgb_speed_changed)
-        container.addWidget(self.rgb_speed, row + 3, 1)
+        container.addWidget(self.rgb_speed, row + 4, 1)
 
-        self.widgets = [self.lbl_rgb_effect, self.rgb_effect, self.lbl_rgb_brightness, self.rgb_brightness,
+        self.widgets = [self.lbl_rgb_title, self.lbl_rgb_effect, self.rgb_effect, self.lbl_rgb_brightness, self.rgb_brightness,
                         self.lbl_rgb_color, self.rgb_color, self.lbl_rgb_speed, self.rgb_speed]
 
         self.effects = []
@@ -418,12 +437,72 @@ class VialRGBHandler(BasicHandler):
         return isinstance(self.device, VialKeyboard) and self.device.keyboard.lighting_vialrgb
 
 
+class ControllerRGBHandler(BasicHandler):
+
+    def __init__(self, container, device):
+        super().__init__(container)
+
+        row = container.rowCount()
+
+        self.lbl_ctrl_rgb_title = QLabel(tr("RGBConfigurator", "灯光开关设置"))
+        container.addWidget(self.lbl_ctrl_rgb_title, row, 0)
+
+        self.lbl_ctrl_rgb_key = QLabel(tr("RGBConfigurator", "轴灯开关"))
+        container.addWidget(self.lbl_ctrl_rgb_key, row + 1, 0)
+        self.key_rgb_enable = QCheckBox()
+        self.key_rgb_enable.stateChanged.connect(self.on_key_rgb_changed)
+        container.addWidget(self.key_rgb_enable, row + 1, 1)
+
+        self.lbl_ctrl_rgb_underglow = QLabel(tr("RGBConfigurator", "底灯开关"))
+        container.addWidget(self.lbl_ctrl_rgb_underglow, row + 2, 0)
+        self.ug_rgb_enable = QCheckBox()
+        self.ug_rgb_enable.stateChanged.connect(self.on_ug_rgb_changed)
+        container.addWidget(self.ug_rgb_enable, row + 2, 1)
+
+        if device.keyboard.logo_rgb == True:
+            self.lbl_ctrl_rgb_logo = QLabel(tr("RGBConfigurator", "LOGO灯开关"))
+            container.addWidget(self.lbl_ctrl_rgb_logo, row + 3, 0)
+            self.logo_rgb_enable = QCheckBox()
+            self.logo_rgb_enable.stateChanged.connect(self.on_logo_rgb_changed)
+            container.addWidget(self.logo_rgb_enable, row + 3, 1)
+            self.widgets = [self.lbl_ctrl_rgb_title, self.lbl_ctrl_rgb_key, self.key_rgb_enable, self.lbl_ctrl_rgb_underglow,
+                         self.ug_rgb_enable, self.lbl_ctrl_rgb_logo, self.logo_rgb_enable]
+        else:
+            self.widgets = [self.lbl_ctrl_rgb_title, self.lbl_ctrl_rgb_key, self.key_rgb_enable, self.lbl_ctrl_rgb_underglow,
+                         self.ug_rgb_enable]
+
+
+    def on_key_rgb_changed(self, checked):
+        self.device.keyboard.set_key_rgb(int(checked))
+
+    def on_ug_rgb_changed(self, checked):
+        self.device.keyboard.set_underglow_rgb(int(checked))
+
+    def on_logo_rgb_changed(self, checked):
+        self.device.keyboard.set_logo_rgb(int(checked))
+
+    def update_from_keyboard(self):
+        if not self.valid():
+            return
+
+        self.key_rgb_enable.setChecked(self.device.keyboard.key_rgb_enable == True)
+        self.ug_rgb_enable.setChecked(self.device.keyboard.underglow_rgb_enable == True)
+        if self.device.keyboard.logo_rgb == True:
+            self.logo_rgb_enable.setChecked(self.device.device.logo_rgb_enable == True)
+
+    def valid(self):
+        return isinstance(self.device, VialKeyboard) and self.device.keyboard.rgb_matrix_control == "advanced"
+
+
 class UnderglowRGBHandler(BasicHandler):
 
     def __init__(self, container):
         super().__init__(container)
 
         row = container.rowCount()
+
+        self.lbl_ug_rgb_title = QLabel(tr("RGBConfigurator", "底灯灯光设置"))
+        container.addWidget(self.lbl_ug_rgb_title, row, 0)
 
         self.lbl_ug_rgb_effect = QLabel(tr("RGBConfigurator", "底灯效果"))
         container.addWidget(self.lbl_ug_rgb_effect, row + 1, 0)
@@ -458,7 +537,7 @@ class UnderglowRGBHandler(BasicHandler):
         container.addWidget(self.ug_rgb_speed, row + 4, 1)
 
 
-        self.widgets = [self.lbl_ug_rgb_effect, self.ug_rgb_effect, self.lbl_ug_rgb_brightness, self.ug_rgb_brightness,
+        self.widgets = [self.lbl_ug_rgb_title, self.lbl_ug_rgb_effect, self.ug_rgb_effect, self.lbl_ug_rgb_brightness, self.ug_rgb_brightness,
                         self.lbl_ug_rgb_color, self.ug_rgb_color, self.lbl_ug_rgb_speed, self.ug_rgb_speed]
 
         self.ug_effects = []
@@ -536,9 +615,12 @@ class RGBConfigurator(BasicEditor):
         self.handler_rgblight.update.connect(self.update_from_keyboard)
         self.handler_vialrgb = VialRGBHandler(self.container)
         self.handler_vialrgb.update.connect(self.update_from_keyboard)
+        self.handler_rgb_controller = ControllerRGBHandler(self.container)
+        self.handler_rgb_controller.update.connect(self.update_from_keyboard)
         self.handler_underglowlrgb = UnderglowRGBHandler(self.container)
         self.handler_underglowlrgb.update.connect(self.update_from_keyboard)
-        self.handlers = [self.handler_backlight, self.handler_rgblight, self.handler_vialrgb, self.handler_underglowlrgb]
+        
+        self.handlers = [self.handler_backlight, self.handler_rgblight, self.handler_vialrgb, self.handler_rgb_controller, self.handler_underglowlrgb]
 
         self.addStretch()
         buttons = QHBoxLayout()
@@ -554,7 +636,8 @@ class RGBConfigurator(BasicEditor):
     def valid(self):
         return isinstance(self.device, VialKeyboard) and \
                (self.device.keyboard.lighting_qmk_rgblight or self.device.keyboard.lighting_qmk_backlight
-                or self.device.keyboard.lighting_vialrgb or self.device.keyboard.underglow_rgb_matrix == "advanced")
+                or self.device.keyboard.lighting_vialrgb or self.device.keyboard.underglow_rgb_matrix == "advanced"
+                or self.device.keyboard.rgb_matrix_control == "advanced")
 
     def block_signals(self):
         for h in self.handlers:

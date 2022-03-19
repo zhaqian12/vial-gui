@@ -51,8 +51,8 @@ VIALRGB_GET_UNDERGLOW_MODE = 0x46
 VIALRGB_GET_UNDERGLOW_SUPPORTED = 0x47
 
 VIALRGB_SET_MODE = 0x41
-
-VIALRGB_SET_UNDERGLOW_MODE = 0x43
+VIALRGB_SET_CONTROLLER_MODE = 0x43
+VIALRGB_SET_UNDERGLOW_MODE = 0x44
 
 CMD_VIAL_GET_KEYBOARD_ID = 0x00
 CMD_VIAL_GET_SIZE = 0x01
@@ -227,7 +227,8 @@ class Keyboard:
         self.rgb_matrix_control = None
         self.underglow_rgb_matrix = None
         self.rgb_indicators = False
-
+        self.logo_rgb = False
+        self.logo_rgb_enable = self.key_rgb_enable = self.underglow_rgb_enable = False
         self.lighting_qmk_rgblight = self.lighting_qmk_backlight = self.lighting_vialrgb = False
 
         # underglow
@@ -434,7 +435,8 @@ class Keyboard:
                 raise RuntimeError("Unsupported VialRGB protocol ({}), update your Vial version to latest"
                                    .format(self.rgb_version))
             self.rgb_maximum_brightness = data[2]
-
+            if data[3] == 0x11:
+                self.logo_rgb = True
             self.rgb_supported_effects = {0}
             max_effect = 0
             while max_effect < 0xFFFF:
@@ -487,12 +489,28 @@ class Keyboard:
             self.rgb_mode = int.from_bytes(data[0:2], byteorder="little")
             self.rgb_speed = data[2]
             self.rgb_hsv = (data[3], data[4], data[5])
+            if self.rgb_matrix_control == "advanced":
+                if data[6] == 1:
+                    self.underglow_rgb_enable = False
+                else:
+                    self.underglow_rgb_enable = True
+                if data[7] == 1:
+                    self.key_rgb_enable = False
+                else:
+                    self.key_rgb_enable = True
+                if self.logo_rgb == True:
+                    if data[8] == 1:    
+                        self.logo_rgb_enable = False
+                    else:
+                        self.logo_rgb_enable = True
+
             if self.underglow_rgb_matrix == "advanced":
                 data = self.usb_send(self.dev, struct.pack("BB", CMD_VIA_LIGHTING_GET_VALUE, VIALRGB_GET_UNDERGLOW_MODE),
                                  retries=20)[2:]
                 self.ug_rgb_mode = int.from_bytes(data[0:2], byteorder="little")
                 self.ug_rgb_speed = data[2]
                 self.ug_rgb_hsv = (data[3], data[4], data[5])
+
 
     def reload_settings(self):
         self.settings = dict()
@@ -930,6 +948,21 @@ class Keyboard:
         self.ug_rgb_hsv = (h, s, v)
         self._ugrgb_set_mode()
 
+    def _rgb_control_set_mode(self):
+        self.usb_send(self.dev, struct.pack("BBBBB", CMD_VIA_LIGHTING_SET_VALUE, VIALRGB_SET_CONTROLLER_MODE,
+                                            self.underglow_rgb_enable, self.key_rgb_enable, self.logo_rgb_enable))
+    
+    def set_key_rgb(self, value):
+        self.key_rgb_enable = value
+        self._rgb_control_set_mode()
+    
+    def set_underglow_rgb(self, value):
+        self.underglow_rgb_enable = value
+        self._rgb_control_set_mode()
+    
+    def set_logo_rgb(self, value):
+        self.logo_rgb_enable = value
+        self._rgb_control_set_mode()
 
 
 class DummyKeyboard(Keyboard):

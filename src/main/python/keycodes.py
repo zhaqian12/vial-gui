@@ -746,6 +746,9 @@ KEYCODES_RGB_MATRIX = []
 KEYCODES_RGB_MATRIX_CONTROL_ADV = [
     K(23975, "UG_RGB_TOG", "底灯\n开关", "切换底灯开关状态", alias=["UNDERGLOW_RGB_TOG"]),
     K(23976, "K_RGB_TOG", "轴灯\n开关", "切换轴灯开关状态", alias=["KEY_RGB_TOG"]),
+]
+
+KEYCODES_RGB_MATRIX_CONTROL_ADV_LOGO = [
     K(23977, "L_RGB_TOG", "Logo灯\n开关", "切换Logo灯开关状态", alias=["LOGO_RGB_TOG"]),
 ]
 
@@ -909,6 +912,9 @@ def recreate_keyboard_keycodes(keyboard):
 
     if keyboard.rgb_matrix_control == "advanced":
         KEYCODES_RGB_MATRIX.extend(KEYCODES_RGB_MATRIX_CONTROL_ADV)
+
+    if keyboard.logo_rgb == True and keyboard.rgb_matrix_control == "advanced":
+        KEYCODES_RGB_MATRIX.extend(KEYCODES_RGB_MATRIX_CONTROL_ADV_LOGO)
 
     if keyboard.rgb_matrix_control == "basic" or keyboard.underglow_rgb_matrix == "advanced":
         KEYCODES_RGB_MATRIX.extend(KEYCODES_UG_RGB_MATRIX_BASE)
