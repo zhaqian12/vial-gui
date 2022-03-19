@@ -627,8 +627,8 @@ class IndicatorsRGBHandler(BasicHandler):
 
         self.lbl_blank = QLabel(tr("RGBConfigurator", "      "))
         # container.addWidget(self.lbl_blank, row, 2)
-        self.spacerItem = QSpacerItem(40, 20, QSizePolicy.Fixed, QSizePolicy.Fixed)
-        container.addWidget(self.lbl_blank, row, 2)
+        spacerItem = QSpacerItem(40, 20, QSizePolicy.Fixed, QSizePolicy.Fixed)
+        container.addWidget(self.spacerItem, row, 2)
 
         self.lbl_ind_rgb_title = QLabel(tr("RGBConfigurator", "指示灯灯光设置"))
         container.addWidget(self.lbl_ind_rgb_title, row, 3)
@@ -723,7 +723,7 @@ class IndicatorsRGBHandler(BasicHandler):
         # self.scroll_effect.currentIndexChanged.connect(self.on_scroll_effect_changed)
         container.addWidget(self.scroll_effect, row + 14, 4)
 
-        self.widgets = [self.lbl_blank, self.spacerItem, self.lbl_ind_rgb_title, self.lbl_caps_lock, self.lbl_caps_led, self.caps_led, 
+        self.widgets = [self.lbl_blank, self.lbl_ind_rgb_title, self.lbl_caps_lock, self.lbl_caps_led, self.caps_led, 
                         self.lbl_caps_color, self.caps_color, self.lbl_caps_effect, self.caps_effect, self.lbl_num_lock, 
                         self.lbl_num_led, self.num_led, self.lbl_num_color, self.num_color, self.lbl_num_effect, 
                         self.num_effect, self.lbl_scroll_lock, self.lbl_scroll_led, self.scroll_led, self.lbl_scroll_color, 
