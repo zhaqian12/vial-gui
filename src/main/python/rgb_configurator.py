@@ -475,10 +475,8 @@ class ControllerRGBHandler(BasicHandler):
         if not self.valid():
             return
 
-        self.key_rgb_enable.setChecked(self.device.keyboard.key_rgb_enable == True)
-        self.ug_rgb_enable.setChecked(self.device.keyboard.underglow_rgb_enable == True)
-        if self.device.keyboard.logo_rgb == True:
-            self.logo_rgb_enable.setChecked(self.device.device.logo_rgb_enable == True)
+        self.key_rgb_enable.setChecked(self.device.keyboard.key_rgb_enable == 1)
+        self.ug_rgb_enable.setChecked(self.device.keyboard.underglow_rgb_enable == 1)
 
     def valid(self):
         return isinstance(self.device, VialKeyboard) and self.device.keyboard.rgb_matrix_control == "advanced"
@@ -505,7 +503,7 @@ class LogoRGBHandler(BasicHandler):
         if not self.valid():
             return
 
-        self.logo_rgb_enable.setChecked(self.device.device.logo_rgb_enable == True)
+        self.logo_rgb_enable.setChecked(self.device.device.logo_rgb_enable == 1)
 
     def valid(self):
         return isinstance(self.device, VialKeyboard) and self.device.keyboard.rgb_matrix_control == "advanced" and self.device.keyboard.logo_rgb == True
