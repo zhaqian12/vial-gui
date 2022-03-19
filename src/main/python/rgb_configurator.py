@@ -716,7 +716,7 @@ class IndicatorsRGBHandler(BasicHandler):
         self.scroll_effect.addItem("2")
         self.scroll_effect.addItem("3")
         # self.scroll_effect.currentIndexChanged.connect(self.on_scroll_effect_changed)
-        container.addWidget(self.scroll_effect, 9, 4)
+        container.addWidget(self.scroll_effect, 13, 4)
 
         self.widgets = [self.lbl_blank, self.lbl_ind_rgb_title, self.lbl_caps_lock, self.lbl_caps_led, self.caps_led, 
                         self.lbl_caps_color, self.caps_color, self.lbl_caps_effect, self.caps_effect, self.lbl_num_lock, 
@@ -768,9 +768,9 @@ class RGBConfigurator(BasicEditor):
         self.handler_logo_rgb.update.connect(self.update_from_keyboard)
         self.handler_underglowlrgb = UnderglowRGBHandler(self.container)
         self.handler_underglowlrgb.update.connect(self.update_from_keyboard)
-        self.handler_rgb_indicator = IndicatorsRGBHandler(self.container)
-        self.handler_rgb_indicator.update.connect(self.update_from_keyboard)
-        self.handlers = [self.handler_backlight, self.handler_rgblight, self.handler_vialrgb, self.handler_rgb_controller, self.handler_logo_rgb, self.handler_underglowlrgb,self.handler_rgb_indicator]
+        # self.handler_rgb_indicator = IndicatorsRGBHandler(self.container)
+        # self.handler_rgb_indicator.update.connect(self.update_from_keyboard)
+        self.handlers = [self.handler_backlight, self.handler_rgblight, self.handler_vialrgb, self.handler_rgb_controller, self.handler_logo_rgb, self.handler_underglowlrgb]
 
         self.addStretch()
         buttons = QHBoxLayout()
