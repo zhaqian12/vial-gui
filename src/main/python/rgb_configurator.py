@@ -453,11 +453,11 @@ class ControllerRGBHandler(BasicHandler):
         self.cb_key_rgb_enable.stateChanged.connect(self.on_key_rgb_changed)
         container.addWidget(self.cb_key_rgb_enable, row + 1, 1)
 
-        # self.lbl_ctrl_rgb_underglow = QLabel(tr("RGBConfigurator", "底灯开关"))
-        # container.addWidget(self.lbl_ctrl_rgb_underglow, row + 2, 0)
-        # self.cb_ug_rgb_enable = QCheckBox()
-        # self.cb_ug_rgb_enable.stateChanged.connect(self.on_ug_rgb_changed)
-        # container.addWidget(self.cb_ug_rgb_enable, row + 2, 1)
+        self.lbl_ctrl_rgb_underglow = QLabel(tr("RGBConfigurator", "底灯开关"))
+        container.addWidget(self.lbl_ctrl_rgb_underglow, row + 2, 0)
+        self.cb_ug_rgb_enable = QCheckBox()
+        self.cb_ug_rgb_enable.stateChanged.connect(self.on_ug_rgb_changed)
+        container.addWidget(self.cb_ug_rgb_enable, row + 2, 1)
 
         self.widgets = [self.lbl_ctrl_rgb_title, self.lbl_ctrl_rgb_key, self.cb_key_rgb_enable]
 
@@ -473,12 +473,13 @@ class ControllerRGBHandler(BasicHandler):
         else:
             self.device.keyboard.set_underglow_rgb(0) 
 
+
     def update_from_keyboard(self):
         if not self.valid():
             return
 
         self.cb_key_rgb_enable.setChecked(self.device.keyboard.key_rgb_enable == 1)
-        # self.cb_ug_rgb_enable.setChecked(self.device.keyboard.underglow_rgb_enable == 1)
+        self.cb_ug_rgb_enable.setChecked(self.device.keyboard.underglow_rgb_enable == 1)
 
     def valid(self):
         return isinstance(self.device, VialKeyboard) and self.device.keyboard.rgb_matrix_control == "advanced"
@@ -498,31 +499,18 @@ class LogoRGBHandler(BasicHandler):
         container.addWidget(self.logo_rgb_enable, row, 1)
         self.widgets = [self.lbl_ctrl_rgb_logo, self.logo_rgb_enable]
 
-        self.lbl_ctrl_rgb_underglow = QLabel(tr("RGBConfigurator", "底灯开关"))
-        container.addWidget(self.lbl_ctrl_rgb_underglow, row + 1, 0)
-        self.cb_ug_rgb_enable = QCheckBox()
-        self.cb_ug_rgb_enable.stateChanged.connect(self.on_ug_rgb_changed)
-        container.addWidget(self.cb_ug_rgb_enable, row + 1, 1)
-
     def on_logo_rgb_changed(self, checked):
         if (checked):
             self.device.keyboard.set_logo_rgb(1) 
         else:
             self.device.keyboard.set_logo_rgb(0) 
 
-    def on_ug_rgb_changed(self, checked):
-        if (checked):
-            self.device.keyboard.set_underglow_rgb(1) 
-        else:
-            self.device.keyboard.set_underglow_rgb(0) 
-
     def update_from_keyboard(self):
         if not self.valid():
             return
 
         self.logo_rgb_enable.setChecked(self.device.keyboard.logo_rgb_enable == 1)
-        self.cb_ug_rgb_enable.setChecked(self.device.keyboard.underglow_rgb_enable == 1)
-        
+
     def valid(self):
         return isinstance(self.device, VialKeyboard) and self.device.keyboard.rgb_matrix_control == "advanced" and self.device.keyboard.logo_rgb == True
 
@@ -567,7 +555,6 @@ class UnderglowRGBHandler(BasicHandler):
         self.ug_rgb_speed.setMaximum(255)
         self.ug_rgb_speed.valueChanged.connect(self.on_ug_rgb_speed_changed)
         container.addWidget(self.ug_rgb_speed, row + 4, 1)
-
 
         self.widgets = [self.lbl_ug_rgb_title, self.lbl_ug_rgb_effect, self.ug_rgb_effect, self.lbl_ug_rgb_brightness, self.ug_rgb_brightness,
                         self.lbl_ug_rgb_color, self.ug_rgb_color, self.lbl_ug_rgb_speed, self.ug_rgb_speed]
