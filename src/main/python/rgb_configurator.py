@@ -503,7 +503,7 @@ class LogoRGBHandler(BasicHandler):
         if not self.valid():
             return
 
-        self.logo_rgb_enable.setChecked(self.device.device.logo_rgb_enable == 1)
+        self.logo_rgb_enable.setChecked(self.device.keyboard.logo_rgb_enable == 1)
 
     def valid(self):
         return isinstance(self.device, VialKeyboard) and self.device.keyboard.rgb_matrix_control == "advanced" and self.device.keyboard.logo_rgb == True
