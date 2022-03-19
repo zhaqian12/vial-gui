@@ -489,11 +489,13 @@ class Keyboard:
             self.rgb_mode = int.from_bytes(data[0:2], byteorder="little")
             self.rgb_speed = data[2]
             self.rgb_hsv = (data[3], data[4], data[5])
-            if self.rgb_matrix_control == "advanced":
-                self.underglow_rgb_enable = data[6]
-                self.key_rgb_enable = data[7]
-                if self.logo_rgb == True: 
-                        self.logo_rgb_enable = data[8]
+        if self.rgb_matrix_control == "advanced":
+            self.underglow_rgb_enable = data[6]
+            self.key_rgb_enable = data[7]
+            if self.logo_rgb == True: 
+                self.logo_rgb_enable = data[8]
+            else:
+                self.logo_rgb_enable = 0
 
         if self.underglow_rgb_matrix == "advanced":
             data = self.usb_send(self.dev, struct.pack("BB", CMD_VIA_LIGHTING_GET_VALUE, VIALRGB_GET_UNDERGLOW_MODE),
