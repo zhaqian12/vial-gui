@@ -634,7 +634,7 @@ class IndicatorsRGBHandler(BasicHandler):
         self.lbl_caps_lock = QLabel(tr("RGBConfigurator", "Caps Lock 指示灯"))
         container.addWidget(self.lbl_caps_lock, row + 1, 3)
 
-        self.lbl_caps_led = QLabel(tr("RGBConfigurator", "Caps LED"))
+        self.lbl_caps_led = QLabel(tr("RGBConfigurator", "Caps Lock LED"))
         container.addWidget(self.lbl_caps_led, row + 2, 3)
         self.caps_led = QComboBox()
         self.caps_led.addItem("LED0")
@@ -644,13 +644,13 @@ class IndicatorsRGBHandler(BasicHandler):
         # self.caps_led.currentIndexChanged.connect(self.on_caps_led_changed)
         container.addWidget(self.caps_led, row + 2, 4)
 
-        self.lbl_caps_color = QLabel(tr("RGBConfigurator", "Caps 颜色"))
+        self.lbl_caps_color = QLabel(tr("RGBConfigurator", "Caps Lock 颜色"))
         container.addWidget(self.lbl_caps_color, row + 3, 3)
         self.caps_color = ClickableLabel(" ")
         # self.caps_color.clicked.connect(self.on_caps_color)
         container.addWidget(self.caps_color, row + 3, 4)
 
-        self.lbl_caps_effect = QLabel(tr("RGBConfigurator", "Caps 灯效"))
+        self.lbl_caps_effect = QLabel(tr("RGBConfigurator", "Caps Lock 灯效"))
         container.addWidget(self.lbl_caps_effect, row + 4, 3)
         self.caps_effect = QComboBox()
         self.caps_effect.addItem("0")
@@ -665,7 +665,7 @@ class IndicatorsRGBHandler(BasicHandler):
         self.lbl_num_lock = QLabel(tr("RGBConfigurator", "Num Lock 指示灯"))
         container.addWidget(self.lbl_num_lock, row + 6, 3)
 
-        self.lbl_num_led = QLabel(tr("RGBConfigurator", "Num LED"))
+        self.lbl_num_led = QLabel(tr("RGBConfigurator", "Num Lock LED"))
         container.addWidget(self.lbl_num_led, row + 7, 3)
         self.num_led = QComboBox()
         self.num_led.addItem("LED0")
@@ -675,13 +675,13 @@ class IndicatorsRGBHandler(BasicHandler):
         # self.num_led.currentIndexChanged.connect(self.on_num_led_changed)
         container.addWidget(self.num_led, row + 7, 4)
 
-        self.lbl_num_color = QLabel(tr("RGBConfigurator", "Num 颜色"))
+        self.lbl_num_color = QLabel(tr("RGBConfigurator", "Num Lock 颜色"))
         container.addWidget(self.lbl_num_color, row + 8, 3)
         self.num_color = ClickableLabel(" ")
         # self.num_color.clicked.connect(self.on_num_color)
         container.addWidget(self.num_color, row + 8, 4)
 
-        self.lbl_num_effect = QLabel(tr("RGBConfigurator", "Num 灯效"))
+        self.lbl_num_effect = QLabel(tr("RGBConfigurator", "Num Lock 灯效"))
         container.addWidget(self.lbl_num_effect, row + 9, 3)
         self.num_effect = QComboBox()
         self.num_effect.addItem("0")
@@ -695,7 +695,7 @@ class IndicatorsRGBHandler(BasicHandler):
         self.lbl_scroll_lock = QLabel(tr("RGBConfigurator", "Scroll Lock 指示灯"))
         container.addWidget(self.lbl_scroll_lock, row + 11, 3)
         
-        self.lbl_scroll_led = QLabel(tr("RGBConfigurator", "Scroll LED"))
+        self.lbl_scroll_led = QLabel(tr("RGBConfigurator", "Scroll Lock LED"))
         container.addWidget(self.lbl_scroll_led, row + 12, 3)
         self.scroll_led = QComboBox()
         self.scroll_led.addItem("LED0")
@@ -705,13 +705,13 @@ class IndicatorsRGBHandler(BasicHandler):
         # self.scroll_led.currentIndexChanged.connect(self.on_scroll_led_changed)
         container.addWidget(self.scroll_led, row + 12, 4)
 
-        self.lbl_scroll_color = QLabel(tr("RGBConfigurator", "Scroll 颜色"))
+        self.lbl_scroll_color = QLabel(tr("RGBConfigurator", "Scroll Lock 颜色"))
         container.addWidget(self.lbl_scroll_color, row + 13, 3)
         self.scroll_color = ClickableLabel(" ")
         # self.scroll_color.clicked.connect(self.on_scroll_color)
         container.addWidget(self.scroll_color, row + 13, 4)
 
-        self.lbl_scroll_effect = QLabel(tr("RGBConfigurator", "Scroll 灯效"))
+        self.lbl_scroll_effect = QLabel(tr("RGBConfigurator", "Scroll Lock 灯效"))
         container.addWidget(self.lbl_scroll_effect, row + 14, 3)
         self.scroll_effect = QComboBox()
         self.scroll_effect.addItem("0")
