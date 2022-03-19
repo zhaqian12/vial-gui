@@ -228,7 +228,7 @@ class Keyboard:
         self.underglow_rgb_matrix = None
         self.rgb_indicators = False
         self.logo_rgb = False
-        self.logo_rgb_enable = self.key_rgb_enable = self.underglow_rgb_enable = False
+        self.logo_rgb_enable = self.key_rgb_enable = self.underglow_rgb_enable = -1
         self.lighting_qmk_rgblight = self.lighting_qmk_backlight = self.lighting_vialrgb = False
 
         # underglow
@@ -435,7 +435,7 @@ class Keyboard:
                 raise RuntimeError("Unsupported VialRGB protocol ({}), update your Vial version to latest"
                                    .format(self.rgb_version))
             self.rgb_maximum_brightness = data[2]
-            if data[3] == 0x11:
+            if data[3] == 17:
                 self.logo_rgb = True
             self.rgb_supported_effects = {0}
             max_effect = 0
@@ -490,19 +490,10 @@ class Keyboard:
             self.rgb_speed = data[2]
             self.rgb_hsv = (data[3], data[4], data[5])
             if self.rgb_matrix_control == "advanced":
-                if data[6] == 1:
-                    self.underglow_rgb_enable = False
-                else:
-                    self.underglow_rgb_enable = True
-                if data[7] == 1:
-                    self.key_rgb_enable = False
-                else:
-                    self.key_rgb_enable = True
-                if self.logo_rgb == True:
-                    if data[8] == 1:    
-                        self.logo_rgb_enable = False
-                    else:
-                        self.logo_rgb_enable = True
+                self.underglow_rgb_enable = data[6]
+                self.key_rgb_enable = data[7]
+                if self.logo_rgb == True: 
+                        self.logo_rgb_enable = data[8]
 
             if self.underglow_rgb_matrix == "advanced":
                 data = self.usb_send(self.dev, struct.pack("BB", CMD_VIA_LIGHTING_GET_VALUE, VIALRGB_GET_UNDERGLOW_MODE),

@@ -169,9 +169,9 @@ UNDERGLOWRGB_EFFECTS = [
 ]
 
 
-Class IndicatorRGBEffect:
-
-        def __init__(self, idx, name):
+class IndicatorRGBEffect:
+    
+    def __init__(self, idx, name):
         self.idx = idx
         self.name = name
 
@@ -462,7 +462,6 @@ class ControllerRGBHandler(BasicHandler):
         self.widgets = [self.lbl_ctrl_rgb_title, self.lbl_ctrl_rgb_key, self.key_rgb_enable, self.lbl_ctrl_rgb_underglow,
                          self.ug_rgb_enable]
 
-
     def on_key_rgb_changed(self, checked):
         self.device.keyboard.set_key_rgb(int(checked))
 
@@ -493,10 +492,10 @@ class LogoRGBHandler(BasicHandler):
         row = container.rowCount()
 
         self.lbl_ctrl_rgb_logo = QLabel(tr("RGBConfigurator", "LOGO灯开关"))
-        container.addWidget(self.lbl_ctrl_rgb_logo, row + 3, 0)
+        container.addWidget(self.lbl_ctrl_rgb_logo, row, 0)
         self.logo_rgb_enable = QCheckBox()
         self.logo_rgb_enable.stateChanged.connect(self.on_logo_rgb_changed)
-        container.addWidget(self.logo_rgb_enable, row + 3, 1)
+        container.addWidget(self.logo_rgb_enable, row, 1)
         self.widgets = [self.lbl_ctrl_rgb_logo, self.logo_rgb_enable]
 
     def on_logo_rgb_changed(self, checked):
