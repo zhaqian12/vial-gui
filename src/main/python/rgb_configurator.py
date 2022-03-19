@@ -690,7 +690,7 @@ class RGBConfigurator(BasicEditor):
         self.handler_logo_rgb.update.connect(self.update_from_keyboard)
         self.handler_underglowlrgb = UnderglowRGBHandler(self.container)
         self.handler_underglowlrgb.update.connect(self.update_from_keyboard)
-        self.handler_rgb_indicator = IndicatorsRGBHandler(self.continer)
+        self.handler_rgb_indicator = IndicatorsRGBHandler(self.container)
         self.handler_rgb_indicator.update.connect(self.update_from_keyboard)
         self.handlers = [self.handler_backlight, self.handler_rgblight, self.handler_vialrgb, self.handler_rgb_controller, self.handler_logo_rgb, self.handler_underglowlrgb,self.handler_rgb_indicator]
 
