@@ -644,7 +644,7 @@ class IndicatorsRGBHandler(BasicHandler):
         self.lbl_caps_led = QLabel(tr("RGBConfigurator", "选择LED灯"))
         container.addWidget(self.lbl_caps_led, row + 3, 0)
 
-        self.widgets = [self.lbl_blank, self.lbl_ind_rgb_title, self.lbl_caps_lock, self.lbl_num_lock, self.lbl_scroll_lock，self.lbl_caps_led]
+        self.widgets = [self.lbl_blank, self.lbl_ind_rgb_title, self.lbl_caps_lock, self.lbl_num_lock, self.lbl_scroll_lock, self.lbl_caps_led]
 
         self.ug_effects = []
 
