@@ -453,13 +453,13 @@ class ControllerRGBHandler(BasicHandler):
         container.addWidget(self.lbl_ctrl_rgb_key, row + 2, 0)
         self.cb_key_rgb_enable = QCheckBox()
         self.cb_key_rgb_enable.stateChanged.connect(self.on_key_rgb_changed)
-        container.addWidget(self.cb_key_rgb_enable, row + 2, 1)
+        container.addWidget(self.cb_key_rgb_enable, row + 2, 1, QtCore.Qt.AlignHCenter)
 
         self.lbl_ctrl_rgb_underglow = QLabel(tr("RGBConfigurator", "底灯开关"))
         container.addWidget(self.lbl_ctrl_rgb_underglow, row + 3, 0)
         self.cb_ug_rgb_enable = QCheckBox()
         self.cb_ug_rgb_enable.stateChanged.connect(self.on_ug_rgb_changed)
-        container.addWidget(self.cb_ug_rgb_enable, row + 3, 1)
+        container.addWidget(self.cb_ug_rgb_enable, row + 3, 1, QtCore.Qt.AlignHCenter)
 
         self.widgets = [self.lbl_blank, self.lbl_ctrl_rgb_title, self.lbl_ctrl_rgb_key, self.cb_key_rgb_enable,
                         self.lbl_ctrl_rgb_underglow, self.cb_ug_rgb_enable]
@@ -499,7 +499,7 @@ class LogoRGBHandler(BasicHandler):
         container.addWidget(self.lbl_ctrl_rgb_logo, row, 0)
         self.logo_rgb_enable = QCheckBox()
         self.logo_rgb_enable.stateChanged.connect(self.on_logo_rgb_changed)
-        container.addWidget(self.logo_rgb_enable, row, 1)
+        container.addWidget(self.logo_rgb_enable, row, 1, QtCore.Qt.AlignHCenter)
         self.widgets = [self.lbl_ctrl_rgb_logo, self.logo_rgb_enable]
 
     def on_logo_rgb_changed(self, checked):
