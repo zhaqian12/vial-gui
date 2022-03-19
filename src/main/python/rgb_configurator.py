@@ -463,13 +463,16 @@ class ControllerRGBHandler(BasicHandler):
                          self.ug_rgb_enable]
 
     def on_key_rgb_changed(self, checked):
-        self.device.keyboard.set_key_rgb(int(checked))
+        if (checked):
+            self.device.keyboard.set_key_rgb(1) 
+        else:
+            self.device.keyboard.set_key_rgb(0) 
 
     def on_ug_rgb_changed(self, checked):
-        self.device.keyboard.set_underglow_rgb(int(checked))
-
-    def on_logo_rgb_changed(self, checked):
-        self.device.keyboard.set_logo_rgb(int(checked))
+        if (checked):
+            self.device.keyboard.set_underglow_rgb(1) 
+        else:
+            self.device.keyboard.set_underglow_rgb(0) 
 
     def update_from_keyboard(self):
         if not self.valid():
@@ -497,7 +500,10 @@ class LogoRGBHandler(BasicHandler):
         self.widgets = [self.lbl_ctrl_rgb_logo, self.logo_rgb_enable]
 
     def on_logo_rgb_changed(self, checked):
-        self.device.keyboard.set_logo_rgb(int(checked))
+        if (checked):
+            self.device.keyboard.set_logo_rgb(1) 
+        else:
+            self.device.keyboard.set_logo_rgb(0) 
 
     def update_from_keyboard(self):
         if not self.valid():
