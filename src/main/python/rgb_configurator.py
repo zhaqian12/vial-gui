@@ -449,18 +449,17 @@ class ControllerRGBHandler(BasicHandler):
 
         self.lbl_ctrl_rgb_key = QLabel(tr("RGBConfigurator", "轴灯开关"))
         container.addWidget(self.lbl_ctrl_rgb_key, row + 1, 0)
-        self.key_rgb_enable = QCheckBox()
-        self.key_rgb_enable.stateChanged.connect(self.on_key_rgb_changed)
-        container.addWidget(self.key_rgb_enable, row + 1, 1)
+        self.cb_key_rgb_enable = QCheckBox()
+        self.cb_key_rgb_enable.stateChanged.connect(self.on_key_rgb_changed)
+        container.addWidget(self.cb_key_rgb_enable, row + 1, 1)
 
-        self.lbl_ctrl_rgb_underglow = QLabel(tr("RGBConfigurator", "底灯开关"))
-        container.addWidget(self.lbl_ctrl_rgb_underglow, row + 2, 0)
-        self.ug_rgb_enable = QCheckBox()
-        self.ug_rgb_enable.stateChanged.connect(self.on_ug_rgb_changed)
-        container.addWidget(self.ug_rgb_enable, row + 2, 1)
+        # self.lbl_ctrl_rgb_underglow = QLabel(tr("RGBConfigurator", "底灯开关"))
+        # container.addWidget(self.lbl_ctrl_rgb_underglow, row + 2, 0)
+        # self.cb_ug_rgb_enable = QCheckBox()
+        # self.cb_ug_rgb_enable.stateChanged.connect(self.on_ug_rgb_changed)
+        # container.addWidget(self.cb_ug_rgb_enable, row + 2, 1)
 
-        self.widgets = [self.lbl_ctrl_rgb_title, self.lbl_ctrl_rgb_key, self.key_rgb_enable, self.lbl_ctrl_rgb_underglow,
-                         self.ug_rgb_enable]
+        self.widgets = [self.lbl_ctrl_rgb_title, self.lbl_ctrl_rgb_key, self.cb_key_rgb_enable]
 
     def on_key_rgb_changed(self, checked):
         if (checked):
@@ -478,8 +477,8 @@ class ControllerRGBHandler(BasicHandler):
         if not self.valid():
             return
 
-        self.key_rgb_enable.setChecked(self.device.keyboard.key_rgb_enable == 1)
-        self.ug_rgb_enable.setChecked(self.device.keyboard.underglow_rgb_enable == 1)
+        self.cb_key_rgb_enable.setChecked(self.device.keyboard.key_rgb_enable == 1)
+        self.cb_ug_rgb_enable.setChecked(self.device.keyboard.underglow_rgb_enable == 1)
 
     def valid(self):
         return isinstance(self.device, VialKeyboard) and self.device.keyboard.rgb_matrix_control == "advanced"

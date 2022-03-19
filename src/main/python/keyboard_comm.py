@@ -495,12 +495,12 @@ class Keyboard:
                 if self.logo_rgb == True: 
                         self.logo_rgb_enable = data[8]
 
-            if self.underglow_rgb_matrix == "advanced":
-                data = self.usb_send(self.dev, struct.pack("BB", CMD_VIA_LIGHTING_GET_VALUE, VIALRGB_GET_UNDERGLOW_MODE),
+        if self.underglow_rgb_matrix == "advanced":
+            data = self.usb_send(self.dev, struct.pack("BB", CMD_VIA_LIGHTING_GET_VALUE, VIALRGB_GET_UNDERGLOW_MODE),
                                  retries=20)[2:]
-                self.ug_rgb_mode = int.from_bytes(data[0:2], byteorder="little")
-                self.ug_rgb_speed = data[2]
-                self.ug_rgb_hsv = (data[3], data[4], data[5])
+            self.ug_rgb_mode = int.from_bytes(data[0:2], byteorder="little")
+            self.ug_rgb_speed = data[2]
+            self.ug_rgb_hsv = (data[3], data[4], data[5])
 
 
     def reload_settings(self):
