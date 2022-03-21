@@ -1025,7 +1025,7 @@ class IndicatorConfigurator(BasicEditor):
         self.addLayout(buttons)
 
     def on_save(self):
-        self.device.keyboard.save_rgb_indicator()
+        self.device.keyboard.save_rgb_indicators()
 
     def valid(self):
         return isinstance(self.device, VialKeyboard) and self.device.keyboard.rgb_indicators == "advanced"
