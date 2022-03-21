@@ -780,13 +780,13 @@ KEYCODES_RGB_MATRIX_IND = [
 ]
 
 KEYCODES_RGB_MATRIX_IND_ADV= [
-    K(23998, "RGB_NUMTOG", "Num\nLock\n灯开关", "Num Lock指示灯开关", alias=["RGB_IND_NUM_LOCK_TOGGLE"]),
+    K(23998, "RGB_NUMTOG", "Num\nLock\n开关", "Num Lock指示灯开关", alias=["RGB_IND_NUM_LOCK_TOGGLE"]),
     K(23999, "RGB_NUMMF", "Num\nLock\n灯效+", "下一个Num Lock指示灯灯效", alias=["RGB_IND_NUM_LOCK_MODE_FORWARD"]),
     K(24000, "RGB_NUMMR", "Num\nLock\n灯效-", "上一个Num Lock指示灯灯效", alias=["RGB_IND_NUM_LOCK_MODE_REVERSE"]),
-    K(24001, "RGB_CAPSTOG", "Caps\nLock\n灯开关", "Caps Lock指示灯开关", alias=["RGB_IND_CAPS_LOCK_TOGGLE"]),
+    K(24001, "RGB_CAPSTOG", "Caps\nLock\n开关", "Caps Lock指示灯开关", alias=["RGB_IND_CAPS_LOCK_TOGGLE"]),
     K(24002, "RGB_CAPSMF", "Caps\nLock\n灯效+", "下一个Caps Lock指示灯灯效", alias=["RGB_IND_CAPS_LOCK_MODE_FORWARD"]),
     K(24003, "RGB_CAPSMR", "Caps\nLock\n灯效-", "上一个Caps Lock指示灯灯效", alias=["RGB_IND_CAPS_LOCK_MODE_REVERSE"]),
-    K(24004, "RGB_SCROLLTOG", "Scroll\nLock\n灯开关", "Scroll Lock指示灯开关", alias=["RGB_IND_SCROLL_LOCK_TOGGLE"]),
+    K(24004, "RGB_SCROLLTOG", "Scroll\nLock\n开关", "Scroll Lock指示灯开关", alias=["RGB_IND_SCROLL_LOCK_TOGGLE"]),
     K(24005, "RGB_SCROLLMF", "Scroll\nLock\n灯效+", "下一个Scroll Lock指示灯灯效", alias=["RGB_IND_SCROLL_LOCK_MODE_FORWARD"]),
     K(24006, "RGB_SCROLLMR", "Scroll\nLock\n灯效-", "上一个Scroll Lock指示灯灯效", alias=["RGB_IND_SCROLL_LOCK_MODE_REVERSE"]),
 ]

@@ -281,7 +281,7 @@ class MainWindow(QMainWindow):
             self.autorefresh.current_device.keyboard.reload()
 
         for e in [self.layout_editor, self.keymap_editor, self.firmware_flasher, self.macro_recorder,
-                  self.tap_dance, self.combos, self.qmk_settings, self.matrix_tester, self.rgb_configurator]:
+                  self.tap_dance, self.combos, self.qmk_settings, self.matrix_tester, self.rgb_configurator, self.indicator_configurator]:
             e.rebuild(self.autorefresh.current_device)
 
     def refresh_tabs(self):
