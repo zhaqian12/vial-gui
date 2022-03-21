@@ -244,6 +244,9 @@ class Keyboard:
         self.scroll_lock_led = self.scroll_lock_mode = 0
         self.num_lock_hsv = self.caps_lock_hsv = self.scroll_lock_hsv = (0, 0, 0)
         self.num_lock_all_led = self.caps_lock_all_led = self.scroll_lock_all_led = 0
+        self.num_lock_key_led = self.caps_lock_key_led = self.scroll_lock_key_led = 0
+        self.num_lock_underglow_led = self.caps_lock_underglow_led = self.scroll_lock_underglow_led = 0
+        self.num_lock_logo_led = self.caps_lock_logo_led = self.scroll_lock_logo_led = 0
         self.indicator_led_num = 0
         self.ind_supported_effects = set()
 
@@ -489,6 +492,16 @@ class Keyboard:
             self.caps_lock_led = data[4]
             self.scroll_lock_led = data[5]
             self.indicator_led_num = data[6]
+            self.num_lock_key_led = data[7]
+            self.caps_lock_key_led = data[8]
+            self.scroll_lock_key_led = data[9]
+            self.num_lock_underglow_led = data[10]
+            self.caps_lock_underglow_led = data[11]
+            self.scroll_lock_underglow_led = data[12]
+            if self.logo_rgb == True:
+                self.num_lock_logo_led = data[13]
+                self.caps_lock_logo_led = data[14]
+                self.scroll_lock_logo_led = data[15]
             self.ind_supported_effects = {0}
             max_effect = 0
             while max_effect < 0xFFFF:
@@ -1015,9 +1028,12 @@ class Keyboard:
                                             self.scroll_lock_hsv[0], self.scroll_lock_hsv[1], self.scroll_lock_hsv[2]))
 
     def _rgb_indicators_set_led(self):
-        self.usb_send(self.dev, struct.pack("BBBBBBBB", CMD_VIA_LIGHTING_SET_VALUE, VIALRGB_SET_IND_LED,
+        self.usb_send(self.dev, struct.pack("BBBBBBBBBBBBBBBBB", CMD_VIA_LIGHTING_SET_VALUE, VIALRGB_SET_IND_LED,
                                             self.num_lock_all_led, self.caps_lock_all_led, self.scroll_lock_all_led,
-                                            self.num_lock_led, self.caps_lock_led, self.scroll_lock_led))
+                                            self.num_lock_led, self.caps_lock_led, self.scroll_lock_led, 
+                                            self.num_lock_key_led, self.caps_lock_key_led, self.scroll_lock_key_led,
+                                            self.num_lock_underglow_led, self.caps_lock_underglow_led, self.scroll_lock_underglow_led,
+                                            self.num_lock_logo_led, self.caps_lock_logo_led, self.scroll_lock_logo_led,))
     
     def set_num_lock_brightness(self, value):
         self.num_lock_hsv = (self.num_lock_hsv[0], self.num_lock_hsv[1], value)
@@ -1033,6 +1049,18 @@ class Keyboard:
 
     def set_num_lock_all_led(self, value):
         self.num_lock_all_led = value
+        self._rgb_indicators_set_led()
+
+    def set_num_lock_key_led(self, value):
+        self.num_lock_key_led = value
+        self._rgb_indicators_set_led()
+
+    def set_num_lock_underglow_led(self, value):
+        self.num_lock_underglow_led = value
+        self._rgb_indicators_set_led()
+
+    def set_num_lock_logo_led(self, value):
+        self.num_lock_logo_led = value
         self._rgb_indicators_set_led()
     
     def set_num_lock_led(self, value):
@@ -1054,6 +1082,18 @@ class Keyboard:
     def set_caps_lock_all_led(self, value):
         self.caps_lock_all_led = value
         self._rgb_indicators_set_led()
+
+    def set_caps_lock_key_led(self, value):
+        self.caps_lock_key_led = value
+        self._rgb_indicators_set_led()
+
+    def set_caps_lock_underglow_led(self, value):
+        self.caps_lock_underglow_led = value
+        self._rgb_indicators_set_led()
+
+    def set_caps_lock_logo_led(self, value):
+        self.caps_lock_logo_led = value
+        self._rgb_indicators_set_led()
     
     def set_caps_lock_led(self, value):
         self.caps_lock_led = value
@@ -1073,6 +1113,18 @@ class Keyboard:
 
     def set_scroll_lock_all_led(self, value):
         self.scroll_lock_all_led = value
+        self._rgb_indicators_set_led()
+
+    def set_scroll_lock_key_led(self, value):
+        self.scroll_lock_key_led = value
+        self._rgb_indicators_set_led()
+
+    def set_scroll_lock_underglow_led(self, value):
+        self.scroll_lock_underglow_led = value
+        self._rgb_indicators_set_led()
+
+    def set_scroll_lock_logo_led(self, value):
+        self.scroll_lock_logo_led = value
         self._rgb_indicators_set_led()
     
     def set_scroll_lock_led(self, value):
