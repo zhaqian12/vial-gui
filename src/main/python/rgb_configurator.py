@@ -870,10 +870,10 @@ class IndicatorsRGBHandler(BasicHandler):
         self.num_led.addItem("全部LED")
         self.caps_led.addItem("全部LED")
         self.scroll_led.addItem("全部LED")
-        for i in self.ind_led:
-            self.num_led.addItem(str("LED" + str(i)))
-            self.caps_led.addItem(str("LED" + str(i)))
-            self.scroll_led.addItem(str("LED" + str(i)))
+        for i in enumerate(self.ind_led):
+            self.num_led.addItem("LED")
+            self.caps_led.addItem("LED")
+            self.scroll_led.addItem("LED")
         
 
     def update_from_keyboard(self):
