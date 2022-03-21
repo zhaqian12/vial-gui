@@ -627,128 +627,127 @@ class IndicatorsRGBHandler(BasicHandler):
         super().__init__(container)
         row = container.rowCount()
         self.lbl_blank = QLabel(tr("IndicatorConfigurator", "    "))
-
+        
         self.lbl_ind_rgb_title = QLabel(tr("IndicatorConfigurator", "指示灯灯光设置"))
         container.addWidget(self.lbl_ind_rgb_title, row, 0)
+        container.addWidget(self.lbl_blank, row + 1, 0)
 
         self.lbl_num_lock = QLabel(tr("IndicatorConfigurator", "Num Lock 指示灯"))
-        container.addWidget(self.lbl_num_lock, row + 1, 0)
+        container.addWidget(self.lbl_num_lock, row + 2, 0)
 
         self.lbl_num_effect = QLabel(tr("IndicatorConfigurator", "Num Lock 灯效"))
-        container.addWidget(self.lbl_num_effect, row + 2, 0)
+        container.addWidget(self.lbl_num_effect, row + 3, 0)
         self.num_effect = QComboBox()
         self.num_effect.addItem("0")
         self.num_effect.addItem("1")
         self.num_effect.addItem("2")
         self.num_effect.addItem("3")
         self.num_effect.currentIndexChanged.connect(self.on_num_effect_changed)
-        container.addWidget(self.num_effect, row + 2, 1)
+        container.addWidget(self.num_effect, row + 3, 1)
 
         self.lbl_num_led = QLabel(tr("IndicatorConfigurator", "Num Lock LED"))
-        container.addWidget(self.lbl_num_led, row + 3, 0)
+        container.addWidget(self.lbl_num_led, row + 4, 0)
         self.num_led = QComboBox()
         self.num_led.addItem("LED0")
         self.num_led.addItem("LED1")
         self.num_led.addItem("LED2")
         self.num_led.addItem("LED3")
         self.num_led.currentIndexChanged.connect(self.on_num_led_changed)
-        container.addWidget(self.num_led, row + 3, 1)
+        container.addWidget(self.num_led, row + 4, 1)
 
         self.lbl_num_color = QLabel(tr("IndicatorConfigurator", "Num Lock 颜色"))
-        container.addWidget(self.lbl_num_color, row + 4, 0)
+        container.addWidget(self.lbl_num_color, row + 5, 0)
         self.num_color = ClickableLabel(" ")
         self.num_color.clicked.connect(self.on_num_color)
-        container.addWidget(self.num_color, row + 4, 1)
+        container.addWidget(self.num_color, row + 5, 1)
 
         self.lbl_num_brightness = QLabel(tr("IndicatorConfigurator", "Num Lock 亮度"))
-        container.addWidget(self.lbl_num_brightness, row + 5, 0)
+        container.addWidget(self.lbl_num_brightness, row + 6, 0)
         self.num_brightness = QSlider(QtCore.Qt.Horizontal)
         self.num_brightness.setMinimum(0)
         self.num_brightness.setMaximum(255)
         self.num_brightness.valueChanged.connect(self.on_num_brightness_changed)
-        container.addWidget(self.num_brightness, row + 5, 1)
+        container.addWidget(self.num_brightness, row + 6, 1)
 
-        container.addWidget(self.lbl_blank, row + 6, 0)
+        container.addWidget(self.lbl_blank, row + 7, 0)
 
         self.lbl_caps_lock = QLabel(tr("IndicatorConfigurator", "Caps Lock 指示灯"))
-        container.addWidget(self.lbl_caps_lock, row + 7, 0)
+        container.addWidget(self.lbl_caps_lock, row + 8, 0)
 
         self.lbl_caps_effect = QLabel(tr("IndicatorConfigurator", "Caps Lock 灯效"))
-        container.addWidget(self.lbl_caps_effect, row + 8, 0)
+        container.addWidget(self.lbl_caps_effect, row + 9, 0)
         self.caps_effect = QComboBox()
         self.caps_effect.addItem("0")
         self.caps_effect.addItem("1")
         self.caps_effect.addItem("2")
         self.caps_effect.addItem("3")
         self.caps_effect.currentIndexChanged.connect(self.on_caps_effect_changed)
-        container.addWidget(self.caps_effect, row + 8, 1)
+        container.addWidget(self.caps_effect, row + 9, 1)
 
         self.lbl_caps_led = QLabel(tr("IndicatorConfigurator", "Caps Lock LED"))
-        container.addWidget(self.lbl_caps_led, row + 9, 0)
+        container.addWidget(self.lbl_caps_led, row + 10, 0)
         self.caps_led = QComboBox()
         self.caps_led.addItem("LED0")
         self.caps_led.addItem("LED1")
         self.caps_led.addItem("LED2")
         self.caps_led.addItem("LED3")
         self.caps_led.currentIndexChanged.connect(self.on_caps_led_changed)
-        container.addWidget(self.caps_led, row + 9, 1)
+        container.addWidget(self.caps_led, row + 10, 1)
 
         self.lbl_caps_color = QLabel(tr("IndicatorConfigurator", "Caps Lock 颜色"))
-        container.addWidget(self.lbl_caps_color, row + 10, 0)
+        container.addWidget(self.lbl_caps_color, row + 11, 0)
         self.caps_color = ClickableLabel(" ")
         self.caps_color.clicked.connect(self.on_caps_color)
-        container.addWidget(self.caps_color, row + 10, 1)
+        container.addWidget(self.caps_color, row + 11, 1)
 
         self.lbl_caps_brightness = QLabel(tr("IndicatorConfigurator", "Caps Lock 亮度"))
-        container.addWidget(self.lbl_caps_brightness, row + 11, 0)
+        container.addWidget(self.lbl_caps_brightness, row + 12, 0)
         self.caps_brightness = QSlider(QtCore.Qt.Horizontal)
         self.caps_brightness.setMinimum(0)
         self.caps_brightness.setMaximum(255)
         self.caps_brightness.valueChanged.connect(self.on_caps_brightness_changed)
-        container.addWidget(self.caps_brightness, row + 11, 1)
+        container.addWidget(self.caps_brightness, row + 12, 1)
 
-        container.addWidget(self.lbl_blank, row + 12, 0)
+        container.addWidget(self.lbl_blank, row + 13, 0)
 
         self.lbl_scroll_lock = QLabel(tr("IndicatorConfigurator", "Scroll Lock 指示灯"))
-        container.addWidget(self.lbl_scroll_lock, row + 13, 0)
+        container.addWidget(self.lbl_scroll_lock, row + 14, 0)
         
         self.lbl_scroll_effect = QLabel(tr("IndicatorConfigurator", "Scroll Lock 灯效"))
-        container.addWidget(self.lbl_scroll_effect, row + 14, 0)
+        container.addWidget(self.lbl_scroll_effect, row + 15, 0)
         self.scroll_effect = QComboBox()
         self.scroll_effect.addItem("0")
         self.scroll_effect.addItem("1")
         self.scroll_effect.addItem("2")
         self.scroll_effect.addItem("3")
         self.scroll_effect.currentIndexChanged.connect(self.on_scroll_effect_changed)
-        container.addWidget(self.scroll_effect, row + 14, 1)
+        container.addWidget(self.scroll_effect, row + 15, 1)
 
         self.lbl_scroll_led = QLabel(tr("IndicatorConfigurator", "Scroll Lock LED"))
-        container.addWidget(self.lbl_scroll_led, row + 15, 0)
+        container.addWidget(self.lbl_scroll_led, row + 16, 0)
         self.scroll_led = QComboBox()
         self.scroll_led.addItem("LED0")
         self.scroll_led.addItem("LED1")
         self.scroll_led.addItem("LED2")
         self.scroll_led.addItem("LED3")
         self.scroll_led.currentIndexChanged.connect(self.on_scroll_led_changed)
-        container.addWidget(self.scroll_led, row + 15, 1)
+        container.addWidget(self.scroll_led, row + 16, 1)
 
         self.lbl_scroll_color = QLabel(tr("IndicatorConfigurator", "Scroll Lock 颜色"))
-        container.addWidget(self.lbl_scroll_color, row + 16, 0)
+        container.addWidget(self.lbl_scroll_color, row + 17, 0)
         self.scroll_color = ClickableLabel(" ")
         self.scroll_color.clicked.connect(self.on_scroll_color)
-        container.addWidget(self.scroll_color, row + 16, 1)
+        container.addWidget(self.scroll_color, row + 17, 1)
 
         self.lbl_scroll_brightness = QLabel(tr("IndicatorConfigurator", "Scroll Lock 亮度"))
-        container.addWidget(self.lbl_scroll_brightness, row + 17, 0)
+        container.addWidget(self.lbl_scroll_brightness, row + 18, 0)
         self.scroll_brightness = QSlider(QtCore.Qt.Horizontal)
         self.scroll_brightness.setMinimum(0)
         self.scroll_brightness.setMaximum(255)
         self.scroll_brightness.valueChanged.connect(self.on_scroll_brightness_changed)
-        container.addWidget(self.scroll_brightness, row + 17, 1)
+        container.addWidget(self.scroll_brightness, row + 18, 1)
 
-
-
-        self.widgets = [self.lbl_blank, self.lbl_ind_rgb_title, self.lbl_caps_lock, self.lbl_caps_led, self.caps_led, 
+        self.widgets = [self.lbl_ind_rgb_title, self.lbl_caps_lock, self.lbl_caps_led, self.caps_led, 
                         self.lbl_caps_color, self.caps_color, self.lbl_caps_effect, self.caps_effect, self.lbl_num_lock, 
                         self.lbl_num_led, self.num_led, self.lbl_num_color, self.num_color, self.lbl_num_effect, 
                         self.num_effect, self.lbl_scroll_lock, self.lbl_scroll_led, self.scroll_led, self.lbl_scroll_color, 
@@ -854,7 +853,7 @@ class IndicatorsRGBHandler(BasicHandler):
 
         self.num_effect.clear()
         self.caps_effect.clear()
-        self.scroll_color.clear()
+        self.scroll_effect.clear()
         for effect in self.ind_effects:
             self.num_effect.addItem(effect.name)
             self.caps_effect.addItem(effect.name)
@@ -862,7 +861,7 @@ class IndicatorsRGBHandler(BasicHandler):
 
     def rebuild_leds(self):
         self.ind_led = []
-        for i in range(0, self.keyboard.indicator_led_num):
+        for i in range(self.keyboard.indicator_led_num):
             self.ind_led.append(i)
 
         self.num_led.clear()
