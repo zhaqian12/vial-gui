@@ -182,7 +182,8 @@ INDICATORS_EFFECT = [
     IndicatorRGBEffect(2, "单色呼吸"),
     IndicatorRGBEffect(3, "循环呼吸"),
     IndicatorRGBEffect(4, "彩虹循环"),
-    IndicatorRGBEffect(5, "随机颜色"),
+    IndicatorRGBEffect(5, "随机变换"),
+    IndicatorRGBEffect(6, "随机颜色"),
 ]
 
 
