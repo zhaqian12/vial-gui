@@ -943,18 +943,15 @@ class RGBConfigurator(BasicEditor):
         self.handler_backlight.update.connect(self.update_from_keyboard)
         self.handler_rgblight = QmkRgblightHandler(self.container)
         self.handler_rgblight.update.connect(self.update_from_keyboard)
-        row = self.container.rowCount()
         self.handler_vialrgb = VialRGBHandler(self.container)
         self.handler_vialrgb.update.connect(self.update_from_keyboard)
         self.handler_rgb_controller = ControllerRGBHandler(self.container)
         self.handler_rgb_controller.update.connect(self.update_from_keyboard)
         self.handler_logo_rgb = LogoRGBHandler(self.container)
         self.handler_logo_rgb.update.connect(self.update_from_keyboard)
-        self.handler_underglowlrgb = UnderglowRGBHandler(self.container)
-        self.handler_underglowlrgb.update.connect(self.update_from_keyboard)
-        self.handler_rgb_indicator = IndicatorsRGBHandler(self.container, row)
+        self.handler_rgb_indicator = IndicatorsRGBHandler(self.container)
         self.handler_rgb_indicator.update.connect(self.update_from_keyboard)
-        self.handlers = [self.handler_backlight, self.handler_rgblight, self.handler_vialrgb, self.handler_rgb_controller, self.handler_logo_rgb, self.handler_underglowlrgb, self.handler_rgb_indicator]
+        self.handlers = [self.handler_backlight, self.handler_rgblight, self.handler_vialrgb, self.handler_rgb_controller, self.handler_logo_rgb, self.handler_underglowlrgb]
 
         self.addStretch()
         buttons = QHBoxLayout()
