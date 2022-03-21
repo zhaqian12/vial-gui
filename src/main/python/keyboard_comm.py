@@ -489,7 +489,7 @@ class Keyboard:
             self.caps_lock_led = data[4]
             self.scroll_lock_led = data[5]
             self.indicator_led_num = data[6]
-            self.ind_rgb_supported_effects = {0}
+            self.ind_supported_effects = {0}
             max_effect = 0
             while max_effect < 0xFFFF:
                 data = self.usb_send(self.dev, struct.pack("<BBH", CMD_VIA_LIGHTING_GET_VALUE, VIALRGB_GET_IND_SUPPORTED,
