@@ -749,7 +749,7 @@ class IndicatorsRGBHandler(BasicHandler):
         self.scroll_brightness.setMaximum(255)
         self.scroll_brightness.valueChanged.connect(self.on_scroll_brightness_changed)
         container.addWidget(self.scroll_brightness, row + 18, 1)
-
+        self.tmp = 1
         self.widgets = [self.lbl_ind_rgb_title, self.lbl_caps_lock, self.lbl_caps_led, self.caps_led, 
                         self.lbl_caps_color, self.caps_color, self.lbl_caps_effect, self.caps_effect, self.lbl_num_lock, 
                         self.lbl_num_led, self.num_led, self.lbl_num_color, self.num_color, self.lbl_num_effect, 
@@ -769,18 +769,18 @@ class IndicatorsRGBHandler(BasicHandler):
         if self.keyboard.logo_rgb == True:
             tmp = 4
 
-        if (index == 4 and tmp == 4):
+        if index == 4 and tmp == 4:
             self.keyboard.set_num_lock_all_led(0)
             self.keyboard.set_num_lock_key_led(0)
             self.keyboard.set_num_lock_underglow_led(0)
             self.keyboard.set_num_lock_logo_led(1)
-        elif (index == 1 and tmp == 3):
+        elif index == 1 and (self.tmp == 3 or self.tmp == 4):
             self.keyboard.set_num_lock_all_led(0)
             self.keyboard.set_num_lock_underglow_led(0)
             if self.keyboard.logo_rgb == True: 
                 self.keyboard.set_num_lock_logo_led(0)
             self.keyboard.set_num_lock_key_led(1)
-        elif (index == 2 and tmp == 3):
+        elif index == 2 and (self.tmp == 3 or self.tmp == 4):
             self.keyboard.set_num_lock_all_led(0)
             self.keyboard.set_num_lock_key_led(0)
             if self.keyboard.logo_rgb == True:
@@ -824,18 +824,18 @@ class IndicatorsRGBHandler(BasicHandler):
         if self.keyboard.logo_rgb == True:
             tmp = 4
 
-        if (index == 4 and tmp == 4):
+        if index == 4 and tmp == 4:
             self.keyboard.set_caps_lock_all_led(0)
             self.keyboard.set_caps_lock_key_led(0)
             self.keyboard.set_caps_lock_underglow_led(0)
             self.keyboard.set_caps_lock_logo_led(1)
-        elif (index == 1 and tmp == 3):
+        elif index == 1 and (self.tmp == 3 or self.tmp == 4):
             self.keyboard.set_caps_lock_all_led(0)
             self.keyboard.set_caps_lock_underglow_led(0)
             if self.keyboard.logo_rgb == True: 
                 self.keyboard.set_caps_lock_logo_led(0)
             self.keyboard.set_caps_lock_key_led(1)
-        elif (index == 2 and tmp == 3):
+        elif index == 2 and (self.tmp == 3 or self.tmp == 4):
             self.keyboard.set_caps_lock_all_led(0)
             self.keyboard.set_caps_lock_key_led(0)
             if self.keyboard.logo_rgb == True:
@@ -873,24 +873,18 @@ class IndicatorsRGBHandler(BasicHandler):
         self.keyboard.set_scroll_lock_mode(self.ind_effects[index].idx)
 
     def on_scroll_led_changed(self, index):
-        tmp = 1
-        if self.keyboard.rgb_matrix_control == "advanced" or self.keyboard.rgb_matrix_control == "base":
-            tmp = 3
-        if self.keyboard.logo_rgb == True:
-            tmp = 4
-
-        if (index == 4 and tmp == 4):
+        if index == 4 and self.tmp == 4:
             self.keyboard.set_scroll_lock_all_led(0)
             self.keyboard.set_scroll_lock_key_led(0)
             self.keyboard.set_scroll_lock_underglow_led(0)
             self.keyboard.set_scroll_lock_logo_led(1)
-        elif (index == 1 and tmp == 3):
+        elif index == 1 and (self.tmp == 3 or self.tmp == 4):
             self.keyboard.set_scroll_lock_all_led(0)
             self.keyboard.set_scroll_lock_underglow_led(0)
             if self.keyboard.logo_rgb == True: 
                 self.keyboard.set_scroll_lock_logo_led(0)
             self.keyboard.set_scroll_lock_key_led(1)
-        elif (index == 2 and tmp == 3):
+        elif index == 2 and (self.tmp == 3 or self.tmp == 4):
             self.keyboard.set_scroll_lock_all_led(0)
             self.keyboard.set_scroll_lock_key_led(0)
             if self.keyboard.logo_rgb == True:
@@ -908,7 +902,7 @@ class IndicatorsRGBHandler(BasicHandler):
             self.keyboard.set_scroll_lock_underglow_led(0)
             if self.keyboard.logo_rgb == True: 
                 self.keyboard.set_scroll_lock_logo_led(0)
-            self.keyboard.set_scroll_lock_led(index - tmp)
+            self.keyboard.set_scroll_lock_led(index - self.tmp)
 
     def on_scroll_color(self):
         color = QColorDialog.getColor(self.current_scroll_color())
@@ -997,12 +991,11 @@ class IndicatorsRGBHandler(BasicHandler):
             if effect.idx == self.keyboard.scroll_lock_mode:
                 self.scroll_effect.setCurrentIndex(x)
                 break
-        
-        tmp = 1
+    
         if self.keyboard.rgb_matrix_control == "advanced" or self.keyboard.rgb_matrix_control == "base":
-            tmp = 3
+            self.tmp = 3
         if self.keyboard.logo_rgb == True:
-            tmp = 4
+            self.tmp = 4
 
         if self.keyboard.num_lock_all_led == 1:
             self.num_led.setCurrentIndex(0)
@@ -1013,7 +1006,7 @@ class IndicatorsRGBHandler(BasicHandler):
         elif self.keyboard.num_lock_logo_led == 1:
             self.num_led.setCurrentIndex(3)
         else:
-            self.num_led.setCurrentIndex(self.keyboard.num_lock_led + tmp)
+            self.num_led.setCurrentIndex(self.keyboard.num_lock_led + self.tmp)
 
         if self.keyboard.caps_lock_all_led == 1:
             self.caps_led.setCurrentIndex(0)
@@ -1024,7 +1017,7 @@ class IndicatorsRGBHandler(BasicHandler):
         elif self.keyboard.caps_lock_logo_led == 1:
             self.caps_led.setCurrentIndex(3)
         else:
-            self.caps_led.setCurrentIndex(self.keyboard.caps_lock_led + tmp)
+            self.caps_led.setCurrentIndex(self.keyboard.caps_lock_led + self.tmp)
 
         if self.keyboard.scroll_lock_all_led == 1:
             self.scroll_led.setCurrentIndex(0)
@@ -1035,7 +1028,7 @@ class IndicatorsRGBHandler(BasicHandler):
         elif self.keyboard.scroll_lock_logo_led == 1:
             self.scroll_led.setCurrentIndex(3)
         else:
-            self.scroll_led.setCurrentIndex(self.keyboard.scroll_lock_led + tmp)
+            self.scroll_led.setCurrentIndex(self.keyboard.scroll_lock_led + self.tmp)
 
         self.num_brightness.setMaximum(self.keyboard.rgb_maximum_brightness)
         self.caps_brightness.setMaximum(self.keyboard.rgb_maximum_brightness)
