@@ -855,26 +855,26 @@ class IndicatorsRGBHandler(BasicHandler):
         self.num_effect.clear()
         self.caps_effect.clear()
         self.scroll_color.clear()
-        for effect in self.effects:
+        for effect in self.ind_effects:
             self.num_effect.addItem(effect.name)
             self.caps_effect.addItem(effect.name)
             self.scroll_effect.addItem(effect.name)
 
     def rebuild_leds(self):
         self.ind_led = []
-        for i in range(self.self.keyboard.indicator_led_num):
+        for i in range(0, self.self.keyboard.indicator_led_num):
             self.ind_led.append(i)
 
         self.num_led.clear()
         self.caps_led.clear()
         self.scroll_led.clear()
-        self.num_led.append("全部LED")
-        self.caps_led.append("全部LED")
-        self.scroll_led.append("全部LED")
+        self.num_led.addItem("全部LED")
+        self.caps_led.addItem("全部LED")
+        self.scroll_led.addItem("全部LED")
         for i in self.ind_led:
-            self.num_led.append("LED" + i)
-            self.caps_led.append("LED" + i)
-            self.scroll_led.append("LED" + i)
+            self.num_led.addItem("LED" + str(i))
+            self.caps_led.addItem("LED" + str(i))
+            self.scroll_led.addItem("LED" + str(i))
         
 
     def update_from_keyboard(self):
