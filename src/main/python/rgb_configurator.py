@@ -862,7 +862,7 @@ class IndicatorsRGBHandler(BasicHandler):
 
     def rebuild_leds(self):
         self.ind_led = []
-        for i in range(0, self.self.keyboard.indicator_led_num):
+        for i in range(0, self.keyboard.indicator_led_num):
             self.ind_led.append(i)
 
         self.num_led.clear()
