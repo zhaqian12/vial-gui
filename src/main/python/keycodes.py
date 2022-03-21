@@ -463,9 +463,9 @@ KEYCODES_MOUSE = [
     K(250, "KC_WH_D", "鼠标\n滚轮\n↓", alias=["KC_MS_WH_DOWN"]),
     K(251, "KC_WH_L", "鼠标\n滚轮\n←", alias=["KC_MS_WH_LEFT"]),
     K(252, "KC_WH_R", "鼠标\n滚轮\n→", alias=["KC_MS_WH_RIGHT"]),
-    K(253, "KC_ACL0", "鼠标\n速度0", "Set mouse acceleration to 0", alias=["KC_MS_ACCEL0"]),
-    K(254, "KC_ACL1", "鼠标\n速度1", "Set mouse acceleration to 1", alias=["KC_MS_ACCEL1"]),
-    K(255, "KC_ACL2", "鼠标\n速度2", "Set mouse acceleration to 2", alias=["KC_MS_ACCEL2"]),
+    K(253, "KC_ACL0", "鼠标\n速度0", "设置鼠标加速为0", alias=["KC_MS_ACCEL0"]),
+    K(254, "KC_ACL1", "鼠标\n速度1", "设置鼠标加速为1", alias=["KC_MS_ACCEL1"]),
+    K(255, "KC_ACL2", "鼠标\n速度2", "设置鼠标加速为2", alias=["KC_MS_ACCEL2"]),
 ]
 
 KEYCODES_MEDIA = [
@@ -779,6 +779,18 @@ KEYCODES_RGB_MATRIX_IND = [
     K(23997, "RGB_INDMR", "指示灯\n灯效-", "上一个指示灯灯效", alias=["RGB_IND_MODE_REVERSE"]),
 ]
 
+KEYCODES_RGB_MATRIX_IND_ADV= [
+    K(23998, "RGB_NUMTOG", "Num\nLock\n灯开关", "Num Lock指示灯开关", alias=["RGB_IND_NUM_LOCK_TOGGLE"]),
+    K(23999, "RGB_NUMMF", "Num\nLock\n灯效+", "下一个Num Lock指示灯灯效", alias=["RGB_IND_NUM_LOCK_MODE_FORWARD"]),
+    K(24000, "RGB_NUMMR", "Num\nLock\n灯效-", "上一个Num Lock指示灯灯效", alias=["RGB_IND_NUM_LOCK_MODE_REVERSE"]),
+    K(24001, "RGB_CAPSTOG", "Caps\nLock\n灯开关", "Caps Lock指示灯开关", alias=["RGB_IND_CAPS_LOCK_TOGGLE"]),
+    K(24002, "RGB_CAPSMF", "Caps\nLock\n灯效+", "下一个Caps Lock指示灯灯效", alias=["RGB_IND_CAPS_LOCK_MODE_FORWARD"]),
+    K(24003, "RGB_CAPSMR", "Caps\nLock\n灯效-", "上一个Caps Lock指示灯灯效", alias=["RGB_IND_CAPS_LOCK_MODE_REVERSE"]),
+    K(24004, "RGB_SCROLLTOG", "Scroll\nLock\n灯开关", "Scroll Lock指示灯开关", alias=["RGB_IND_SCROLL_LOCK_TOGGLE"]),
+    K(24005, "RGB_SCROLLMF", "Scroll\nLock\n灯效+", "下一个Scroll Lock指示灯灯效", alias=["RGB_IND_SCROLL_LOCK_MODE_FORWARD"]),
+    K(24006, "RGB_SCROLLMR", "Scroll\nLock\n灯效-", "上一个Scroll Lock指示灯灯效", alias=["RGB_IND_SCROLL_LOCK_MODE_REVERSE"]),
+]
+
 KEYCODES_DIAL = []
 
 KEYCODES_DIAL_BASE = [
@@ -922,8 +934,11 @@ def recreate_keyboard_keycodes(keyboard):
     if keyboard.underglow_rgb_matrix == "advanced":
         KEYCODES_RGB_MATRIX.extend(KEYCODES_UG_RGB_MATRIX_ADV)
 
-    if keyboard.rgb_indicators == True:
+    if keyboard.rgb_indicators == "base":
         KEYCODES_RGB_MATRIX.extend(KEYCODES_RGB_MATRIX_IND)
+    
+    if keyboard.rgb_indicators == "advanced":
+        KEYCODES_RGB_MATRIX.extend(KEYCODES_RGB_MATRIX_IND_ADV)
 
     create_midi_keycodes(keyboard.midi)
     KEYCODES_LIGHTS.clear()
