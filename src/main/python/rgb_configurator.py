@@ -627,7 +627,9 @@ class IndicatorsRGBHandler(BasicHandler):
         super().__init__(container)
         row = container.rowCount()
         self.lbl_blank = QLabel(tr("IndicatorConfigurator", "    "))
-        
+        self.lbl_blank1 = QLabel(tr("IndicatorConfigurator", "    "))
+        self.lbl_blank2 = QLabel(tr("IndicatorConfigurator", "    "))
+
         self.lbl_ind_rgb_title = QLabel(tr("IndicatorConfigurator", "指示灯灯光设置"))
         container.addWidget(self.lbl_ind_rgb_title, row, 0)
         container.addWidget(self.lbl_blank, row + 1, 0)
@@ -669,7 +671,7 @@ class IndicatorsRGBHandler(BasicHandler):
         self.num_brightness.valueChanged.connect(self.on_num_brightness_changed)
         container.addWidget(self.num_brightness, row + 6, 1)
 
-        container.addWidget(self.lbl_blank, row + 7, 0)
+        container.addWidget(self.lbl_blank1, row + 7, 0)
 
         self.lbl_caps_lock = QLabel(tr("IndicatorConfigurator", "Caps Lock 指示灯"))
         container.addWidget(self.lbl_caps_lock, row + 8, 0)
@@ -708,7 +710,7 @@ class IndicatorsRGBHandler(BasicHandler):
         self.caps_brightness.valueChanged.connect(self.on_caps_brightness_changed)
         container.addWidget(self.caps_brightness, row + 12, 1)
 
-        container.addWidget(self.lbl_blank, row + 13, 0)
+        container.addWidget(self.lbl_blank2, row + 13, 0)
 
         self.lbl_scroll_lock = QLabel(tr("IndicatorConfigurator", "Scroll Lock 指示灯"))
         container.addWidget(self.lbl_scroll_lock, row + 14, 0)
@@ -755,7 +757,6 @@ class IndicatorsRGBHandler(BasicHandler):
                         self.lbl_caps_brightness, self.caps_brightness, self.lbl_scroll_brightness, self.scroll_brightness]
 
         self.ind_effects = []
-        self.ind_led = []
 
     def on_num_effect_changed(self, index):
         self.keyboard.set_num_lock_mode(self.ind_effects[index].idx)
@@ -765,7 +766,7 @@ class IndicatorsRGBHandler(BasicHandler):
             self.keyboard.set_num_lock_all_led(1)
         else:
             self.keyboard.set_num_lock_all_led(0)
-            self.keyboard.set_num_lock_led(self.ind_led[index - 1])
+            self.keyboard.set_num_lock_led(index - 1)
 
     def on_num_color(self):
         color = QColorDialog.getColor(self.current_num_color())
@@ -789,7 +790,7 @@ class IndicatorsRGBHandler(BasicHandler):
             self.keyboard.set_caps_lock_all_led(1)
         else:
             self.keyboard.set_caps_lock_all_led(0)
-            self.keyboard.set_caps_lock_led(self.ind_led[index - 1])
+            self.keyboard.set_caps_lock_led(index - 1)
 
     def on_caps_color(self):
         color = QColorDialog.getColor(self.current_caps_color())
@@ -813,7 +814,7 @@ class IndicatorsRGBHandler(BasicHandler):
             self.keyboard.set_scroll_lock_all_led(1)
         else:
             self.keyboard.set_scroll_lock_all_led(0)
-            self.keyboard.set_scroll_lock_led(self.ind_led[index - 1])
+            self.keyboard.set_scroll_lock_led(index - 1)
 
     def on_scroll_color(self):
         color = QColorDialog.getColor(self.current_scroll_color())
@@ -854,26 +855,23 @@ class IndicatorsRGBHandler(BasicHandler):
         self.num_effect.clear()
         self.caps_effect.clear()
         self.scroll_effect.clear()
+
         for effect in self.ind_effects:
             self.num_effect.addItem(effect.name)
             self.caps_effect.addItem(effect.name)
             self.scroll_effect.addItem(effect.name)
 
     def rebuild_leds(self):
-        self.ind_led = []
-        for i in range(self.keyboard.indicator_led_num):
-            self.ind_led.append(i)
-
         self.num_led.clear()
         self.caps_led.clear()
         self.scroll_led.clear()
         self.num_led.addItem("全部LED")
         self.caps_led.addItem("全部LED")
         self.scroll_led.addItem("全部LED")
-        for i in enumerate(self.ind_led):
-            self.num_led.addItem("LED")
-            self.caps_led.addItem("LED")
-            self.scroll_led.addItem("LED")
+        for i in range(self.keyboard.indicator_led_num):
+            self.num_led.addItem("LED" + str(i))
+            self.caps_led.addItem("LED" + str(i))
+            self.scroll_led.addItem("LED" + str(i))
         
 
     def update_from_keyboard(self):
