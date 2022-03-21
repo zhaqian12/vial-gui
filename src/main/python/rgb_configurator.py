@@ -763,13 +763,7 @@ class IndicatorsRGBHandler(BasicHandler):
         self.keyboard.set_num_lock_mode(self.ind_effects[index].idx)
 
     def on_num_led_changed(self, index):
-        tmp = 1
-        if self.keyboard.rgb_matrix_control == "advanced" or self.keyboard.rgb_matrix_control == "base":
-            tmp = 3
-        if self.keyboard.logo_rgb == True:
-            tmp = 4
-
-        if index == 4 and tmp == 4:
+        if index == 4 and self.tmp == 4:
             self.keyboard.set_num_lock_all_led(0)
             self.keyboard.set_num_lock_key_led(0)
             self.keyboard.set_num_lock_underglow_led(0)
@@ -798,7 +792,7 @@ class IndicatorsRGBHandler(BasicHandler):
             self.keyboard.set_num_lock_underglow_led(0)
             if self.keyboard.logo_rgb == True: 
                 self.keyboard.set_num_lock_logo_led(0)
-            self.keyboard.set_num_lock_led(index - tmp)
+            self.keyboard.set_num_lock_led(index - self.tmp)
 
     def on_num_color(self):
         color = QColorDialog.getColor(self.current_num_color())
@@ -818,13 +812,7 @@ class IndicatorsRGBHandler(BasicHandler):
         self.keyboard.set_caps_lock_mode(self.ind_effects[index].idx)
 
     def on_caps_led_changed(self, index):
-        tmp = 1
-        if self.keyboard.rgb_matrix_control == "advanced" or self.keyboard.rgb_matrix_control == "base":
-            tmp = 3
-        if self.keyboard.logo_rgb == True:
-            tmp = 4
-
-        if index == 4 and tmp == 4:
+        if index == 4 and self.tmp == 4:
             self.keyboard.set_caps_lock_all_led(0)
             self.keyboard.set_caps_lock_key_led(0)
             self.keyboard.set_caps_lock_underglow_led(0)
@@ -853,7 +841,7 @@ class IndicatorsRGBHandler(BasicHandler):
             self.keyboard.set_caps_lock_underglow_led(0)
             if self.keyboard.logo_rgb == True: 
                 self.keyboard.set_caps_lock_logo_led(0)
-            self.keyboard.set_caps_lock_led(index - tmp)
+            self.keyboard.set_caps_lock_led(index - self.tmp)
 
     def on_caps_color(self):
         color = QColorDialog.getColor(self.current_caps_color())
