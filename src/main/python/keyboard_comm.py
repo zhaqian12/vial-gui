@@ -1033,7 +1033,7 @@ class Keyboard:
                                             self.num_lock_led, self.caps_lock_led, self.scroll_lock_led, 
                                             self.num_lock_key_led, self.caps_lock_key_led, self.scroll_lock_key_led,
                                             self.num_lock_underglow_led, self.caps_lock_underglow_led, self.scroll_lock_underglow_led,
-                                            self.num_lock_logo_led, self.caps_lock_logo_led, self.scroll_lock_logo_led,))
+                                            self.num_lock_logo_led, self.caps_lock_logo_led, self.scroll_lock_logo_led))
     
     def set_num_lock_brightness(self, value):
         self.num_lock_hsv = (self.num_lock_hsv[0], self.num_lock_hsv[1], value)
