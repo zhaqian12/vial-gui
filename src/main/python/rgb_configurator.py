@@ -999,7 +999,7 @@ class IndicatorsRGBHandler(BasicHandler):
                 break
         
         tmp = 1
-        if (self.keyboard.rgb_matrix_control == "advanced" or self.keyboard.rgb_matrix_control == "base")
+        if self.keyboard.rgb_matrix_control == "advanced" or self.keyboard.rgb_matrix_control == "base":
             tmp = 3
         if self.keyboard.logo_rgb == True:
             tmp = 4
