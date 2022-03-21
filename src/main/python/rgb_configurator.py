@@ -776,7 +776,7 @@ class IndicatorsRGBHandler(BasicHandler):
         h, s, v, a = color.getHsvF()
         if h < 0:
             h = 0
-        self.keyboard.set_num_color(int(255 * h), int(255 * s), self.keyboard.num_lock_hsv[2])
+        self.keyboard.set_num_lock_color(int(255 * h), int(255 * s), self.keyboard.num_lock_hsv[2])
         self.update.emit()
 
     def on_num_brightness_changed(self, value):
@@ -800,7 +800,7 @@ class IndicatorsRGBHandler(BasicHandler):
         h, s, v, a = color.getHsvF()
         if h < 0:
             h = 0
-        self.keyboard.set_caps_color(int(255 * h), int(255 * s), self.keyboard.caps_lock_hsv[2])
+        self.keyboard.set_caps_lock_color(int(255 * h), int(255 * s), self.keyboard.caps_lock_hsv[2])
         self.update.emit()
 
     def on_caps_brightness_changed(self, value):
@@ -824,7 +824,7 @@ class IndicatorsRGBHandler(BasicHandler):
         h, s, v, a = color.getHsvF()
         if h < 0:
             h = 0
-        self.keyboard.set_scroll_color(int(255 * h), int(255 * s), self.keyboard.scroll_lock_hsv[2])
+        self.keyboard.set_scroll_lock_color(int(255 * h), int(255 * s), self.keyboard.scroll_lock_hsv[2])
         self.update.emit()
 
     def on_scroll_brightness_changed(self, value):
@@ -872,9 +872,9 @@ class IndicatorsRGBHandler(BasicHandler):
         self.caps_led.addItem("全部LED")
         self.scroll_led.addItem("全部LED")
         for i in self.ind_led:
-            self.num_led.addItem("LED" + str(i))
-            self.caps_led.addItem("LED" + str(i))
-            self.scroll_led.addItem("LED" + str(i))
+            self.num_led.addItem(str("LED" + str(i)))
+            self.caps_led.addItem(str("LED" + str(i)))
+            self.scroll_led.addItem(str("LED" + str(i)))
         
 
     def update_from_keyboard(self):
