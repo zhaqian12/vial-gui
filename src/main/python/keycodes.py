@@ -861,11 +861,11 @@ def recreate_keyboard_keycodes(keyboard):
 
     layers = keyboard.layers
 
-    def generate_keycodes_for_mask(label, mask):
+    def generate_keycodes_for_mask(label, mask, description):
         keycodes = []
         for layer in range(layers):
             lbl = "{}({})".format(label, layer)
-            keycodes.append(Keycode(mask | layer, lbl, lbl))
+            keycodes.append(Keycode(mask | layer, lbl, lbl, description.format(layer)))
         return keycodes
 
     KEYCODES_LAYERS.clear()
@@ -874,16 +874,22 @@ def recreate_keyboard_keycodes(keyboard):
         KEYCODES_LAYERS.append(Keycode(0x5F10, "FN_MO13", "Fn1\n(Fn3)"))
         KEYCODES_LAYERS.append(Keycode(0x5F11, "FN_MO23", "Fn2\n(Fn3)"))
 
-    KEYCODES_LAYERS.extend(generate_keycodes_for_mask("MO", 0x5100))
-    KEYCODES_LAYERS.extend(generate_keycodes_for_mask("DF", 0x5200))
-    KEYCODES_LAYERS.extend(generate_keycodes_for_mask("TG", 0x5300))
-    KEYCODES_LAYERS.extend(generate_keycodes_for_mask("TT", 0x5800))
-    KEYCODES_LAYERS.extend(generate_keycodes_for_mask("OSL", 0x5400))
-    KEYCODES_LAYERS.extend(generate_keycodes_for_mask("TO", 0x5000 | (1 << 4)))
+    KEYCODES_LAYERS.extend(generate_keycodes_for_mask("MO", 0x5100,
+                                    "按下时暂时切换到层 {}"))
+    KEYCODES_LAYERS.extend(generate_keycodes_for_mask("DF", 0x5200,
+                                    "设置层为 {}基础(默认)层"))
+    KEYCODES_LAYERS.extend(generate_keycodes_for_mask("TG", 0x5300,
+                                    "切换层(切换到层 {}或者切回默认层)"))
+    KEYCODES_LAYERS.extend(generate_keycodes_for_mask("TT", 0x5800,
+                                    "按下时暂时切换到层 {},连续单击5次后切换到层 {},再连续单击5次后切回默认层"))
+    KEYCODES_LAYERS.extend(generate_keycodes_for_mask("OSL", 0x5400,
+                                    "暂时切换到层 {},直到一个键被按下后切回默认层"))
+    KEYCODES_LAYERS.extend(generate_keycodes_for_mask("TO", 0x5000 | (1 << 4),
+                                    "切换到层 {}"))
 
     for x in range(layers):
         KEYCODES_LAYERS.append(Keycode(LT(x), "LT({}, kc)".format(x), "LT {}\n(kc)".format(x),
-                                       "kc on tap, switch to layer {} while held".format(x), masked=True))
+                                       "单击触发键值, 长按切换到层 {} ".format(x), masked=True))
 
     KEYCODES_MACRO.clear()
     for x in range(keyboard.macro_count):
@@ -896,7 +902,7 @@ def recreate_keyboard_keycodes(keyboard):
     KEYCODES_TAP_DANCE.clear()
     for x in range(keyboard.tap_dance_count):
         lbl = "TD({})".format(x)
-        KEYCODES_TAP_DANCE.append(Keycode(QK_TAP_DANCE | x, lbl, lbl))
+        KEYCODES_TAP_DANCE.append(Keycode(QK_TAP_DANCE | x, lbl, lbl, "按键复用 {}".format(x)))
 
     # Check if custom keycodes are defined in keyboard, and if so add them to user keycodes
     if keyboard.custom_keycodes is not None and len(keyboard.custom_keycodes) > 0:
