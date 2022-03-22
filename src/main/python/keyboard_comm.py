@@ -236,6 +236,7 @@ class Keyboard:
         self.rgb_indicators = None
         self.logo_rgb = False
         self.logo_rgb_enable = self.key_rgb_enable = self.underglow_rgb_enable = -1
+        self.indicator_override = 0
         self.lighting_qmk_rgblight = self.lighting_qmk_backlight = self.lighting_vialrgb = False
 
         #indicator
@@ -546,6 +547,7 @@ class Keyboard:
                 self.logo_rgb_enable = data[8]
             else:
                 self.logo_rgb_enable = 0
+            self.indicator_override = data[9]
 
         if self.underglow_rgb_matrix == "advanced":
             data = self.usb_send(self.dev, struct.pack("BB", CMD_VIA_LIGHTING_GET_VALUE, VIALRGB_GET_UNDERGLOW_MODE),
@@ -1005,8 +1007,8 @@ class Keyboard:
         self._ugrgb_set_mode()
 
     def _rgb_control_set_mode(self):
-        self.usb_send(self.dev, struct.pack("BBBBB", CMD_VIA_LIGHTING_SET_VALUE, VIALRGB_SET_CONTROLLER_MODE,
-                                            self.underglow_rgb_enable, self.key_rgb_enable, self.logo_rgb_enable))
+        self.usb_send(self.dev, struct.pack("BBBBBB", CMD_VIA_LIGHTING_SET_VALUE, VIALRGB_SET_CONTROLLER_MODE,
+                                            self.underglow_rgb_enable, self.key_rgb_enable, self.logo_rgb_enable, self.indicator_override))
     
     def set_key_rgb(self, value):
         self.key_rgb_enable = value
@@ -1018,6 +1020,10 @@ class Keyboard:
     
     def set_logo_rgb(self, value):
         self.logo_rgb_enable = value
+        self._rgb_control_set_mode()
+
+    def set_indicator_override(self, value):
+        self.indicator_override = value
         self._rgb_control_set_mode()
 
     def _rgb_indicators_set_mode(self):

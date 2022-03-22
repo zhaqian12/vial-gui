@@ -448,23 +448,29 @@ class ControllerRGBHandler(BasicHandler):
         self.lbl_blank =  QLabel(tr("RGBConfigurator", "  "))
         container.addWidget(self.lbl_blank, row, 0)
 
-        self.lbl_ctrl_rgb_title = QLabel(tr("RGBConfigurator", "灯光开关设置"))
+        self.lbl_ctrl_rgb_title = QLabel(tr("RGBConfigurator", "灯光设置"))
         container.addWidget(self.lbl_ctrl_rgb_title, row + 1, 0)
 
+        self.lbl_ctrl_rgb_indicator = QLabel(tr("RGBConfigurator", "指示灯常亮"))
+        container.addWidget(self.lbl_ctrl_rgb_indicator, row + 2, 0)
+        self.cb_indicator_rgb_enable = QCheckBox()
+        self.cb_indicator_rgb_enable.stateChanged.connect(self.on_indicator_rgb_changed)
+        container.addWidget(self.cb_indicator_rgb_enable, row + 2, 1, QtCore.Qt.AlignHCenter)
+
         self.lbl_ctrl_rgb_key = QLabel(tr("RGBConfigurator", "轴灯开关"))
-        container.addWidget(self.lbl_ctrl_rgb_key, row + 2, 0)
+        container.addWidget(self.lbl_ctrl_rgb_key, row + 3, 0)
         self.cb_key_rgb_enable = QCheckBox()
         self.cb_key_rgb_enable.stateChanged.connect(self.on_key_rgb_changed)
-        container.addWidget(self.cb_key_rgb_enable, row + 2, 1, QtCore.Qt.AlignHCenter)
+        container.addWidget(self.cb_key_rgb_enable, row + 3, 1, QtCore.Qt.AlignHCenter)
 
         self.lbl_ctrl_rgb_underglow = QLabel(tr("RGBConfigurator", "底灯开关"))
-        container.addWidget(self.lbl_ctrl_rgb_underglow, row + 3, 0)
+        container.addWidget(self.lbl_ctrl_rgb_underglow, row + 4, 0)
         self.cb_ug_rgb_enable = QCheckBox()
         self.cb_ug_rgb_enable.stateChanged.connect(self.on_ug_rgb_changed)
-        container.addWidget(self.cb_ug_rgb_enable, row + 3, 1, QtCore.Qt.AlignHCenter)
+        container.addWidget(self.cb_ug_rgb_enable, row + 4, 1, QtCore.Qt.AlignHCenter)
 
         self.widgets = [self.lbl_blank, self.lbl_ctrl_rgb_title, self.lbl_ctrl_rgb_key, self.cb_key_rgb_enable,
-                        self.lbl_ctrl_rgb_underglow, self.cb_ug_rgb_enable]
+                        self.lbl_ctrl_rgb_underglow, self.cb_ug_rgb_enable, self.lbl_ctrl_rgb_indicator, self.cb_indicator_rgb_enable]
 
     def on_key_rgb_changed(self, checked):
         if (checked):
@@ -478,6 +484,11 @@ class ControllerRGBHandler(BasicHandler):
         else:
             self.device.keyboard.set_underglow_rgb(0) 
 
+    def on_indicator_rgb_changed(self, checked):
+        if (checked):
+            self.device.keyboard.set_indicator_override(1) 
+        else:
+            self.device.keyboard.set_indicator_override(0) 
 
     def update_from_keyboard(self):
         if not self.valid():
