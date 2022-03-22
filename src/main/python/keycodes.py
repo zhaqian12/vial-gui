@@ -818,7 +818,8 @@ def recreate_keycodes():
     KEYCODES.clear()
     KEYCODES.extend(KEYCODES_SPECIAL + KEYCODES_BASIC + KEYCODES_MODIFIERS + KEYCODES_NUMPAD + KEYCODES_SHIFTED + KEYCODES_ISO + KEYCODES_LAYERS + KEYCODES_MEDIA +
                     KEYCODES_COMBOMOD + KEYCODES_QUANTUM + KEYCODES_LIGHTING + KEYCODES_RGB_MATRIX + KEYCODES_DIAL + KEYCODES_TAP_DANCE + KEYCODES_MACRO +
-                    KEYCODES_USER + KEYCODES_HIDDEN + KEYCODES_MIDI + KEYCODES_MOUSE + KEYCODES_RGB_MATRIX_IND)
+                    KEYCODES_USER + KEYCODES_HIDDEN + KEYCODES_MIDI + KEYCODES_MOUSE + KEYCODES_RGB_MATRIX_IND + KEYCODES_LIGHTS 
+                    + KEYCODES_RGB_MATRIX_IND_ADV)
 
 
 def create_user_keycodes():
@@ -871,8 +872,8 @@ def recreate_keyboard_keycodes(keyboard):
     KEYCODES_LAYERS.clear()
 
     if layers >= 4:
-        KEYCODES_LAYERS.append(Keycode(0x5F10, "FN_MO13", "Fn1\n(Fn3)"))
-        KEYCODES_LAYERS.append(Keycode(0x5F11, "FN_MO23", "Fn2\n(Fn3)"))
+        KEYCODES_LAYERS.append(Keycode(0x5F10, "FN_MO13", "Fn1\n(Fn3)", "单独按下时切换到层1,与FN2(FN3)一起按下时切换到层3"))
+        KEYCODES_LAYERS.append(Keycode(0x5F11, "FN_MO23", "Fn2\n(Fn3)", "单独按下时切换到层2,与FN1(FN3)一起按下时切换到层3"))
 
     KEYCODES_LAYERS.extend(generate_keycodes_for_mask("MO", 0x5100,
                                     "按下时暂时切换到层{}"))

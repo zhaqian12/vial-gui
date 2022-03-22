@@ -514,7 +514,6 @@ class LogoRGBHandler(BasicHandler):
         self.lbl_ctrl_rgb_logo = QLabel(tr("RGBConfigurator", "LOGO灯开关"))
         container.addWidget(self.lbl_ctrl_rgb_logo, row, 0)
         self.logo_rgb_enable = QCheckBox()
-        self.logo_rgb_enable.setStyleSheet("QCheckBox { padding: 0; }")
         self.logo_rgb_enable.stateChanged.connect(self.on_logo_rgb_changed)
         container.addWidget(self.logo_rgb_enable, row, 1, QtCore.Qt.AlignHCenter)
         self.widgets = [self.lbl_ctrl_rgb_logo, self.logo_rgb_enable]
