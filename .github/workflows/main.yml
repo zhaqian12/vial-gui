@@ -5,45 +5,38 @@ on: [push, pull_request]
 
 
 jobs:
-  build-win:
-    runs-on: windows-2019
+    build-mac:
+    runs-on: macos-10.15
+    env:
+      PYTHON_VERSION: 3.6.8
+      MACOSX_DEPLOYMENT_TARGET: 10.9
 
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
-      with:
-        python-version: '3.6.x'
 
+    - name: Get Python
+      run: curl https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-macosx${MACOSX_DEPLOYMENT_TARGET}.pkg -o "python.pkg"
+
+    - name: Verify download
+      run: shasum -a 256 -c <<< '4bcd53faffc98d193ef7cdccd5668de3829c702af4db45258819a84a2cab60d0 *python.pkg'
+
+    - name: Install Python
+      run: |
+        sudo installer -pkg python.pkg -target /
     - name: Setup venv
       run: |
-        python -m venv venv
-        . .\venv\Scripts\activate.ps1
+        python3 -m venv venv
+        source venv/bin/activate
         pip install -r requirements.txt
-
-    - name: Install NSIS
-      run: |
-        Invoke-WebRequest "https://github.com/vial-kb/vial-deps/releases/download/v1/nsis-3.06.1-setup.exe" -UserAgent "wget" -OutFile nsis-3.06.1-setup.exe
-        if ((Get-FileHash nsis-3.06.1-setup.exe -Algorithm sha256).Hash -ne "f60488a676308079bfdf6845dc7114cfd4bbff47b66be4db827b89bb8d7fdc52") { Write-Error 'SHA256 mismatch' }
-        Start-Process -FilePath "nsis-3.06.1-setup.exe" -ArgumentList "/S", "/D=C:\Program Files (x86)\NSIS" -NoNewWindow -Wait
-
     - name: Build
       run: |
-        . .\venv\Scripts\activate.ps1
+        source venv/bin/activate
         fbs freeze
-        Compress-Archive -Path "target\Vial-CN" -DestinationPath vial-win.zip
-
+        hdiutil create -volname Vial-CN -srcfolder "target/Vial-CN.app" -ov -format UDZO vial-mac.dmg
     - uses: actions/upload-artifact@v1
       with:
-        name: vial-CN-win
-        path: vial-win.zip
+        name: vial-mac
+        path: vial-mac.dmg
 
-    - name: Create installer
-      run: |
-        $env:Path += ";C:\Program Files (x86)\NSIS"
-        . .\venv\Scripts\activate.ps1
-        fbs installer
 
-    - uses: actions/upload-artifact@v1
-      with:
-        name: vial-win-installer
-        path: target\Vial-CNSetup.exe
+  
