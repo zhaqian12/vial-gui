@@ -1,9 +1,10 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 from PyQt5 import QtCore
-from PyQt5.QtCore import pyqtSignal, QObject
+from PyQt5.QtCore import pyqtSignal, QObject, Qt
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QSizePolicy, QGridLayout, QLabel, QSlider, \
     QComboBox, QColorDialog, QCheckBox, QSpacerItem
+
 
 from basic_editor import BasicEditor
 from clickable_label import ClickableLabel
@@ -352,6 +353,8 @@ class VialRGBHandler(BasicHandler):
         self.lbl_rgb_effect = QLabel(tr("RGBConfigurator", "灯光效果"))
         container.addWidget(self.lbl_rgb_effect, row + 1, 0)
         self.rgb_effect = QComboBox()
+        self.rgb_effect.view().setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.rgb_effect.setStyleSheet("QComboBox { combobox-popup: 0; }")
         self.rgb_effect.addItem("0")
         self.rgb_effect.addItem("1")
         self.rgb_effect.addItem("2")
@@ -511,6 +514,7 @@ class LogoRGBHandler(BasicHandler):
         self.lbl_ctrl_rgb_logo = QLabel(tr("RGBConfigurator", "LOGO灯开关"))
         container.addWidget(self.lbl_ctrl_rgb_logo, row, 0)
         self.logo_rgb_enable = QCheckBox()
+        self.logo_rgb_enable.setStyleSheet("QCheckBox { padding: 0; }")
         self.logo_rgb_enable.stateChanged.connect(self.on_logo_rgb_changed)
         container.addWidget(self.logo_rgb_enable, row, 1, QtCore.Qt.AlignHCenter)
         self.widgets = [self.lbl_ctrl_rgb_logo, self.logo_rgb_enable]
@@ -545,6 +549,8 @@ class UnderglowRGBHandler(BasicHandler):
         self.lbl_ug_rgb_effect = QLabel(tr("RGBConfigurator", "底灯效果"))
         container.addWidget(self.lbl_ug_rgb_effect, row + 2, 0)
         self.ug_rgb_effect = QComboBox()
+        self.ug_rgb_effect.view().setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.ug_rgb_effect.setStyleSheet("QComboBox { combobox-popup: 0; }")
         self.ug_rgb_effect.addItem("0")
         self.ug_rgb_effect.addItem("1")
         self.ug_rgb_effect.addItem("2")
@@ -662,6 +668,8 @@ class IndicatorsRGBHandler(BasicHandler):
         self.lbl_num_led = QLabel(tr("IndicatorConfigurator", "Num Lock LED"))
         container.addWidget(self.lbl_num_led, row + 4, 0)
         self.num_led = QComboBox()
+        self.num_led.view().setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.num_led.setStyleSheet("QComboBox { combobox-popup: 0; }")
         self.num_led.addItem("LED0")
         self.num_led.addItem("LED1")
         self.num_led.addItem("LED2")
@@ -701,6 +709,8 @@ class IndicatorsRGBHandler(BasicHandler):
         self.lbl_caps_led = QLabel(tr("IndicatorConfigurator", "Caps Lock LED"))
         container.addWidget(self.lbl_caps_led, row + 10, 0)
         self.caps_led = QComboBox()
+        self.caps_led.view().setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.caps_led.setStyleSheet("QComboBox { combobox-popup: 0; }")
         self.caps_led.addItem("LED0")
         self.caps_led.addItem("LED1")
         self.caps_led.addItem("LED2")
@@ -740,6 +750,8 @@ class IndicatorsRGBHandler(BasicHandler):
         self.lbl_scroll_led = QLabel(tr("IndicatorConfigurator", "Scroll Lock LED"))
         container.addWidget(self.lbl_scroll_led, row + 16, 0)
         self.scroll_led = QComboBox()
+        self.scroll_led.view().setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.scroll_led.setStyleSheet("QComboBox { combobox-popup: 0; }")
         self.scroll_led.addItem("LED0")
         self.scroll_led.addItem("LED1")
         self.scroll_led.addItem("LED2")
