@@ -875,21 +875,22 @@ def recreate_keyboard_keycodes(keyboard):
         KEYCODES_LAYERS.append(Keycode(0x5F11, "FN_MO23", "Fn2\n(Fn3)"))
 
     KEYCODES_LAYERS.extend(generate_keycodes_for_mask("MO", 0x5100,
-                                    "按下时暂时切换到层 {}"))
+                                    "按下时暂时切换到层{}"))
     KEYCODES_LAYERS.extend(generate_keycodes_for_mask("DF", 0x5200,
-                                    "设置层为 {}基础(默认)层"))
+                                    "设置层为{}基础(默认)层"))
     KEYCODES_LAYERS.extend(generate_keycodes_for_mask("TG", 0x5300,
-                                    "切换层(切换到层 {}或者切回默认层)"))
-    KEYCODES_LAYERS.extend(generate_keycodes_for_mask("TT", 0x5800,
-                                    "按下时暂时切换到层 {},连续单击5次后切换到层 {},再连续单击5次后切回默认层"))
+                                    "切换层(切换到层{}或者切回默认层)"))
     KEYCODES_LAYERS.extend(generate_keycodes_for_mask("OSL", 0x5400,
-                                    "暂时切换到层 {},直到一个键被按下后切回默认层"))
+                                    "暂时切换到层{},直到一个键被按下后切回默认层"))
     KEYCODES_LAYERS.extend(generate_keycodes_for_mask("TO", 0x5000 | (1 << 4),
-                                    "切换到层 {}"))
+                                    "切换到层{}"))
+    for layer in range(layers):
+        KEYCODES_LAYERS.extend(Keycode(0x5800 | layer, "TT({})".format(layer), "TT({})".format(layer),
+                                    "按下时暂时切换到层{n},连续单击5次后切换到层{m},再连续单击5次后切回默认层".format(n = layer, m = layer)))
 
     for x in range(layers):
         KEYCODES_LAYERS.append(Keycode(LT(x), "LT({}, kc)".format(x), "LT {}\n(kc)".format(x),
-                                       "单击触发键值, 长按切换到层 {} ".format(x), masked=True))
+                                       "单击触发键值, 长按切换到层{} ".format(x), masked=True))
 
     KEYCODES_MACRO.clear()
     for x in range(keyboard.macro_count):
