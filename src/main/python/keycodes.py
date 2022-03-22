@@ -884,9 +884,8 @@ def recreate_keyboard_keycodes(keyboard):
                                     "暂时切换到层{},直到一个键被按下后切回默认层"))
     KEYCODES_LAYERS.extend(generate_keycodes_for_mask("TO", 0x5000 | (1 << 4),
                                     "切换到层{}"))
-    for layer in range(layers):
-        KEYCODES_LAYERS.extend(Keycode(0x5800 | layer, "TT({})".format(layer), "TT({})".format(layer),
-                                    "按下时暂时切换到层{n},连续单击5次后切换到层{m},再连续单击5次后切回默认层".format(n = layer, m = layer)))
+    for x in range(layers):
+        KEYCODES_LAYERS.extend(Keycode(0x5800 | x, "TT({})".format(x), "TT({})".format(x),"按下时暂时切换到层{n},连续单击5次后切换到层{m},再连续单击5次后切回默认层".format(n = x, m = x)))
 
     for x in range(layers):
         KEYCODES_LAYERS.append(Keycode(LT(x), "LT({}, kc)".format(x), "LT {}\n(kc)".format(x),
