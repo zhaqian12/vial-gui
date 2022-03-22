@@ -5,7 +5,8 @@ on: [push, pull_request]
 
 
 jobs:
-    build-mac:
+
+  build-mac:
     runs-on: macos-10.15
     env:
       PYTHON_VERSION: 3.6.8
@@ -37,6 +38,5 @@ jobs:
       with:
         name: vial-mac
         path: vial-mac.dmg
-
 
   
