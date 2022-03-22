@@ -771,27 +771,23 @@ class IndicatorsRGBHandler(BasicHandler):
         elif index == 1 and (self.tmp == 3 or self.tmp == 4):
             self.keyboard.num_lock_all_led = 0
             self.keyboard.num_lock_underglow_led = 0
-            if self.tmp == 4: 
-                self.keyboard.num_lock_logo_led = 0
+            self.keyboard.num_lock_logo_led = 0
             self.keyboard.set_num_lock_key_led(1)
         elif index == 2 and (self.tmp == 3 or self.tmp == 4):
             self.keyboard.num_lock_all_led = 0
             self.keyboard.num_lock_key_led = 0
-            if self.tmp == 4:
-                self.keyboard.num_lock_logo_led = 0
+            self.keyboard.num_lock_logo_led = 0
             self.keyboard.set_num_lock_underglow_led(1)
-        elif (index == 0):
+        elif index == 0:
             self.keyboard.num_lock_key_led = 0
             self.keyboard.num_lock_underglow_led = 0
-            if self.tmp == 4: 
-                self.keyboard.num_lock_logo_led = 0
+            self.keyboard.num_lock_logo_led = 0
             self.keyboard.set_num_lock_all_led(1)
         else:
-            self.keyboard.set_num_lock_all_led = 0
-            self.keyboard.set_num_lock_key_led = 0
-            self.keyboard.set_num_lock_underglow_led = 0
-            if self.tmp == 4: 
-                self.keyboard.set_num_lock_logo_led = 0
+            self.keyboard.num_lock_all_led = 0
+            self.keyboard.num_lock_key_led = 0
+            self.keyboard.num_lock_underglow_led = 0
+            self.keyboard.num_lock_logo_led = 0
             self.keyboard.set_num_lock_led(index - self.tmp)
 
     def on_num_color(self):
@@ -820,27 +816,23 @@ class IndicatorsRGBHandler(BasicHandler):
         elif index == 1 and (self.tmp == 3 or self.tmp == 4):
             self.keyboard.caps_lock_all_led = 0
             self.keyboard.caps_lock_underglow_led = 0
-            if self.tmp == 4: 
-                self.keyboard.caps_lock_logo_led = 0
+            self.keyboard.caps_lock_logo_led = 0
             self.keyboard.set_caps_lock_key_led(1)
         elif index == 2 and (self.tmp == 3 or self.tmp == 4):
             self.keyboard.caps_lock_all_led = 0
             self.keyboard.caps_lock_key_led = 0
-            if self.tmp == 4:
-                self.keyboard.caps_lock_logo_led = 0
+            self.keyboard.caps_lock_logo_led = 0
             self.keyboard.set_caps_lock_underglow_led(1)
-        elif (index == 0):
+        elif index == 0:
             self.keyboard.caps_lock_key_led = 0
             self.keyboard.caps_lock_underglow_led = 0
-            if self.tmp == 4: 
-                self.keyboard.caps_lock_logo_led = 0
+            self.keyboard.caps_lock_logo_led = 0
             self.keyboard.set_caps_lock_all_led(1)
-        else:
-            self.keyboard.set_caps_lock_all_led = 0
-            self.keyboard.set_caps_lock_key_led = 0
-            self.keyboard.set_caps_lock_underglow_led = 0
-            if self.tmp == 4: 
-                self.keyboard.set_caps_lock_logo_led = 0
+        elif index >= self.tmp:
+            self.keyboard.caps_lock_all_led = 0
+            self.keyboard.caps_lock_key_led = 0
+            self.keyboard.caps_lock_underglow_led = 0
+            self.keyboard.caps_lock_logo_led = 0
             self.keyboard.set_caps_lock_led(index - self.tmp)
 
     def on_caps_color(self):
@@ -875,21 +867,18 @@ class IndicatorsRGBHandler(BasicHandler):
         elif index == 2 and (self.tmp == 3 or self.tmp == 4):
             self.keyboard.scroll_lock_all_led = 0
             self.keyboard.scroll_lock_key_led = 0
-            if self.tmp == 4:
-                self.keyboard.scroll_lock_logo_led = 0
+            self.keyboard.scroll_lock_logo_led = 0
             self.keyboard.set_scroll_lock_underglow_led(1)
-        elif (index == 0):
+        elif index == 0:
             self.keyboard.scroll_lock_key_led = 0
             self.keyboard.scroll_lock_underglow_led = 0
-            if self.tmp == 4: 
-                self.keyboard.scroll_lock_logo_led = 0
+            self.keyboard.scroll_lock_logo_led = 0
             self.keyboard.set_scroll_lock_all_led(1)
         else:
-            self.keyboard.set_scroll_lock_all_led = 0
-            self.keyboard.set_scroll_lock_key_led = 0
-            self.keyboard.set_scroll_lock_underglow_led = 0
-            if self.tmp == 4: 
-                self.keyboard.set_scroll_lock_logo_led = 0
+            self.keyboard.scroll_lock_all_led = 0
+            self.keyboard.scroll_lock_key_led = 0
+            self.keyboard.scroll_lock_underglow_led = 0
+            self.keyboard.scroll_lock_logo_led = 0
             self.keyboard.set_scroll_lock_led(index - self.tmp)
 
     def on_scroll_color(self):
