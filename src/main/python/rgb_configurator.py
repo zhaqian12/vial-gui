@@ -785,17 +785,17 @@ class IndicatorsRGBHandler(BasicHandler):
         self.keyboard.set_num_lock_mode(self.ind_effects[index].idx)
 
     def on_num_led_changed(self, index):
-        if self.currentText() == "LOGO灯":
+        if self.num_led.currentText() == "LOGO灯":
             self.keyboard.num_lock_all_led = 0
             self.keyboard.num_lock_key_led = 0
             self.keyboard.num_lock_underglow_led = 0
             self.keyboard.set_num_lock_logo_led(1)
-        elif self.currentText() == "轴灯":
+        elif self.num_led.currentText() == "轴灯":
             self.keyboard.num_lock_all_led = 0
             self.keyboard.num_lock_underglow_led = 0
             self.keyboard.num_lock_logo_led = 0
             self.keyboard.set_num_lock_key_led(1)
-        elif self.currentText() == "底灯":
+        elif self.num_led.currentText() == "底灯":
             self.keyboard.num_lock_all_led = 0
             self.keyboard.num_lock_key_led = 0
             self.keyboard.num_lock_logo_led = 0
@@ -830,17 +830,17 @@ class IndicatorsRGBHandler(BasicHandler):
         self.keyboard.set_caps_lock_mode(self.ind_effects[index].idx)
 
     def on_caps_led_changed(self, index):
-        if self.currentText() == "LOGO灯":
+        if self.caps_led.currentText() == "LOGO灯":
             self.keyboard.caps_lock_all_led = 0
             self.keyboard.caps_lock_key_led = 0
             self.keyboard.caps_lock_underglow_led = 0
             self.keyboard.set_caps_lock_logo_led(1)
-        elif self.currentText() == "轴灯":
+        elif self.caps_led.currentText() == "轴灯":
             self.keyboard.caps_lock_all_led = 0
             self.keyboard.caps_lock_underglow_led = 0
             self.keyboard.caps_lock_logo_led = 0
             self.keyboard.set_caps_lock_key_led(1)
-        elif self.currentText() == "底灯":
+        elif self.caps_led.currentText() == "底灯":
             self.keyboard.caps_lock_all_led = 0
             self.keyboard.caps_lock_key_led = 0
             self.keyboard.caps_lock_logo_led = 0
@@ -875,17 +875,17 @@ class IndicatorsRGBHandler(BasicHandler):
         self.keyboard.set_scroll_lock_mode(self.ind_effects[index].idx)
 
     def on_scroll_led_changed(self, index):
-        if self.currentText() == "LOGO灯":
+        if self.scroll_led.currentText() == "LOGO灯":
             self.keyboard.scroll_lock_all_led = 0
             self.keyboard.scroll_lock_key_led = 0
             self.keyboard.scroll_lock_underglow_led = 0
             self.keyboard.set_scroll_lock_logo_led(1)
-        elif self.currentText() == "轴灯":
+        elif self.scroll_led.currentText() == "轴灯":
             self.keyboard.scroll_lock_all_led = 0
             self.keyboard.scroll_lock_underglow_led = 0
             self.keyboard.scroll_lock_logo_led = 0
             self.keyboard.set_scroll_lock_key_led(1)
-        elif self.currentText() == "底灯":
+        elif self.scroll_led.currentText() == "底灯":
             self.keyboard.scroll_lock_all_led = 0
             self.keyboard.scroll_lock_key_led = 0
             self.keyboard.scroll_lock_logo_led = 0
