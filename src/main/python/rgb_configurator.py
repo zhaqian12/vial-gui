@@ -805,7 +805,7 @@ class IndicatorsRGBHandler(BasicHandler):
             self.keyboard.num_lock_underglow_led = 0
             self.keyboard.num_lock_logo_led = 0
             self.keyboard.set_num_lock_all_led(1)
-        else:
+        elif index >= self.tmp:
             self.keyboard.num_lock_all_led = 0
             self.keyboard.num_lock_key_led = 0
             self.keyboard.num_lock_underglow_led = 0
@@ -895,7 +895,7 @@ class IndicatorsRGBHandler(BasicHandler):
             self.keyboard.scroll_lock_underglow_led = 0
             self.keyboard.scroll_lock_logo_led = 0
             self.keyboard.set_scroll_lock_all_led(1)
-        else:
+        elif index >= self.tmp:
             self.keyboard.scroll_lock_all_led = 0
             self.keyboard.scroll_lock_key_led = 0
             self.keyboard.scroll_lock_underglow_led = 0
