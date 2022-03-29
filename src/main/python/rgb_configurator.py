@@ -994,9 +994,12 @@ class IndicatorsRGBHandler(BasicHandler):
         self.tmp = 1
         if self.keyboard.rgb_matrix_control == "advanced" or self.keyboard.rgb_matrix_control == "base":
             self.tmp = 3
-        if self.keyboard.logo_rgb == True:
-            self.tmp = 4
-
+            if self.keyboard.logo_rgb == True:
+                self.tmp = 4
+        else:
+            if self.keyboard.logo_rgb == True:
+                    self.tmp = 2
+                    
         if self.keyboard.num_lock_all_led == 1:
             self.num_led.setCurrentIndex(0)
         elif self.keyboard.num_lock_key_led == 1:

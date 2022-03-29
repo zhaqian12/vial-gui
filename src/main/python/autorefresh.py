@@ -36,7 +36,7 @@ class Autorefresh(QObject):
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.update)
-        # self.timer.start(1000)
+        self.timer.start(1000)
 
         Autorefresh.instance = self
 
