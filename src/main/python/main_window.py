@@ -217,7 +217,7 @@ class MainWindow(QMainWindow):
         dialog.setNameFilters(["Vial layout (*.vil)"])
         if dialog.exec_() == QDialog.Accepted:
             with open(dialog.selectedFiles()[0], "rb") as inf:
-                data = inf.read().decode("utf-8-sig")
+                data = inf.read()
             self.keymap_editor.restore_layout(data)
             self.rebuild()
 
