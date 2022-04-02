@@ -753,7 +753,7 @@ class Keyboard:
 
         data["settings"] = self.settings
 
-        return json.dumps(data).encode("utf-8")
+        return json.dumps(data).encode("utf-8-sig")
 
     def save_macro(self):
         macros = self.macros_deserialize(self.macro)

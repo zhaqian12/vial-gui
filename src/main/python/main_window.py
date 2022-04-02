@@ -217,7 +217,7 @@ class MainWindow(QMainWindow):
         dialog.setNameFilters(["Vial layout (*.vil)"])
         if dialog.exec_() == QDialog.Accepted:
             with open(dialog.selectedFiles()[0], "rb") as inf:
-                data = inf.read()
+                data = inf.read().decode("utf-8-sig")
             self.keymap_editor.restore_layout(data)
             self.rebuild()
 
@@ -227,7 +227,7 @@ class MainWindow(QMainWindow):
         dialog.setAcceptMode(QFileDialog.AcceptSave)
         dialog.setNameFilters(["Vial layout (*.vil)"])
         if dialog.exec_() == QDialog.Accepted:
-            with open(dialog.selectedFiles()[0], "wb") as outf:
+            with open(dialog.selectedFiles()[0], "wb", encoding = "utf-8-sig") as outf:
                 outf.write(self.keymap_editor.save_layout())
 
     def on_click_refresh(self):

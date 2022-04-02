@@ -124,7 +124,7 @@ class KeymapEditor(BasicEditor):
         return self.keyboard.save_layout()
 
     def restore_layout(self, data):
-        if json.loads(data.decode("utf-8")).get("uid") != self.keyboard.keyboard_id:
+        if json.loads(data.decode("utf-8-sig")).get("uid") != self.keyboard.keyboard_id:
             ret = QMessageBox.question(self.widget(), "",
                                        tr("KeymapEditor", "保存的键位属于其他键盘,"
                                                           " 确定要继续吗?"),
