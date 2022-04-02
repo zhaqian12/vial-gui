@@ -227,8 +227,8 @@ class MainWindow(QMainWindow):
         dialog.setAcceptMode(QFileDialog.AcceptSave)
         dialog.setNameFilters(["Vial layout (*.vil)"])
         if dialog.exec_() == QDialog.Accepted:
-            with open(dialog.selectedFiles()[0], "wb", encoding = "utf-8-sig") as outf:
-                outf.write(self.keymap_editor.save_layout())
+            with open(dialog.selectedFiles()[0], "wb") as outf:
+                outf.write(self.keymap_editor.save_layout().encode("utf-8-sig"))
 
     def on_click_refresh(self):
         # we don't do check_protocol here either because if the matrix test tab is active,
