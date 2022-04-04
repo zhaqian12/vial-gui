@@ -138,6 +138,23 @@ VIALRGB_EFFECTS = [
     VialRGBEffect(66, "循环波形"),
     VialRGBEffect(67, "彩虹波形"),
     VialRGBEffect(68, "反向彩虹波形"),
+
+    VialRGBEffect(69, "循环交替"),
+    VialRGBEffect(70, "彩虹交替"),
+
+    VialRGBEffect(71, "单色跳跃圆环"),
+    VialRGBEffect(72, "循环跳跃圆环"),
+    VialRGBEffect(73, "繁花绽放"),
+    VialRGBEffect(74, "彩虹彗星"),
+    VialRGBEffect(75, "彩虹旋转"),
+    VialRGBEffect(76, "横向摇摆"),
+    VialRGBEffect(77, "循环钟摆"),
+    VialRGBEffect(78, "循环指针"),
+    VialRGBEffect(79, "横向堆栈"),
+    VialRGBEffect(80, "纵向堆栈"),
+    VialRGBEffect(81, "横向全幅摇摆"),
+    VialRGBEffect(82, "单色Z变化"),
+    VialRGBEffect(83, "彩虹z变化"),
 ]
 
 
