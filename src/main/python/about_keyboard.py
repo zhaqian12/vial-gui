@@ -73,15 +73,15 @@ class AboutKeyboard(QDialog):
         text += "Vial键盘ID: {:08X}\n".format(self.keyboard.keyboard_id)
         text += "\n"
 
-        text += "宏功能支持数目: {}\n".format(self.keyboard.macro_count)
+        text += "宏功能数目: {}\n".format(self.keyboard.macro_count)
         text += "宏功能内存: {} bytes\n".format(self.keyboard.macro_memory)
         text += "宏功能延迟: {}\n".format(self.about_macro_delays())
-        text += "宏功能支持扩展键值: {}\n".format(self.about_macro_ext_keycodes())
+        text += "宏功能扩展键值: {}\n".format(self.about_macro_ext_keycodes())
         text += "\n"
 
-        text += "按键复用支持数目: {}\n".format(self.about_tap_dance())
-        text += "组合键支持数目: {}\n".format(self.about_combo())
-        text += "键值覆盖支持数目: {}\n".format(self.about_key_override())
+        text += "按键复用数目: {}\n".format(self.about_tap_dance())
+        text += "组合键数目: {}\n".format(self.about_combo())
+        text += "键值覆盖数目: {}\n".format(self.about_key_override())
         text += "\n"
 
         text += "QMK设置: {}\n".format(self.about_qmk_settings())

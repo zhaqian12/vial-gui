@@ -760,61 +760,61 @@ KEYCODES_LIGHTING = []
 KEYCODES_RGB_MATRIX = []
 
 KEYCODES_RGB_MATRIX_CONTROL_ADV = [
-    K(23975, "UG_RGB_TOG", "底灯\n开关", "切换底灯开关状态", alias=["UNDERGLOW_RGB_TOG"]),
-    K(23976, "K_RGB_TOG", "轴灯\n开关", "切换轴灯开关状态", alias=["KEY_RGB_TOG"]),
+    K(31404, "UG_RGB_TOG", "底灯\n开关", "切换底灯开关状态", alias=["UNDERGLOW_RGB_TOG"]),
+    K(31405, "K_RGB_TOG", "轴灯\n开关", "切换轴灯开关状态", alias=["KEY_RGB_TOG"]),
 ]
 
 KEYCODES_RGB_MATRIX_CONTROL_ADV_LOGO = [
-    K(23977, "L_RGB_TOG", "Logo灯\n开关", "切换Logo灯开关状态", alias=["LOGO_RGB_TOG"]),
+    K(31406, "L_RGB_TOG", "Logo灯\n开关", "切换Logo灯开关状态", alias=["LOGO_RGB_TOG"]),
 ]
 
 KEYCODES_RGB_MATRIX_CONTROL_BASE = [
-    K(23978, "RGB_CT_SW", "灯光\n切换", "切换不同区域灯光开关状态", alias=["RGB_CONTROL_SW"]),
+    K(31407, "RGB_CT_SW", "灯光\n切换", "切换不同区域灯光开关状态", alias=["RGB_CONTROL_SW"]),
 ]
 
 KEYCODES_UG_RGB_MATRIX_BASE = [
-    K(23979, "UG_RGB_MS", "底灯\n同步", "底灯和轴灯灯效同步", alias=["UNDERGLOW_RGB_MODE_SYNC"]),
-    K(23980, "UG_RGB_MF", "底灯\n灯效+", "下一个底灯灯效", alias=["UNDERGLOW_RGB_MODE_FORWARD"]),
-    K(23981, "UG_RGB_MR", "底灯\n灯效-", "上一个底灯灯效", alias=["UNDERGLOW_RGB_MODE_REVERSE"]),
+    K(31408, "UG_RGB_MS", "底灯\n同步", "底灯和轴灯灯效同步", alias=["UNDERGLOW_RGB_MODE_SYNC"]),
+    K(31409, "UG_RGB_MF", "底灯\n灯效+", "下一个底灯灯效", alias=["UNDERGLOW_RGB_MODE_FORWARD"]),
+    K(31410, "UG_RGB_MR", "底灯\n灯效-", "上一个底灯灯效", alias=["UNDERGLOW_RGB_MODE_REVERSE"]),
 ]
 
 KEYCODES_UG_RGB_MATRIX_ADV = [
-    K(23982, "UG_RGB_HI", "底灯\n色相+", "增加底灯色相", alias=["UNDERGLOW_RGB_HUE_INCREASE"]),
-    K(23983, "UG_RGB_HD", "底灯\n色相-", "降低底灯色相", alias=["UNDERGLOW_RGB_HUE_DECREASE"]),
-    K(23984, "UG_RGB_SI", "底灯\n饱和+", "增加底灯饱和度", alias=["UNDERGLOW_RGB_SAT_INCREASE"]),
-    K(23985, "UG_RGB_SD", "底灯\n饱和-", "降低底灯饱和度", alias=["UNDERGLOW_RGB_SAT_DECREASE"]),
-    K(23986, "UG_RGB_VI", "底灯\n亮度+", "增加底灯亮度", alias=["UNDERGLOW_RGB_VAL_INCREASE"]),
-    K(23987, "UG_RGB_VD", "底灯\n亮度-", "降低底灯亮度", alias=["UNDERGLOW_RGB_VAL_DECREASE"]),
-    K(23988, "UG_RGB_SPI", "底灯\n速度+", "增加底灯灯效速度", alias=["UNDERGLOW_RGB_SPEED_INCREASE"]),
-    K(23989, "UG_RGB_SPD", "底灯\n速度-", "降低底灯灯效速度", alias=["UNDERGLOW_RGB_SPEED_DECREASE"]),
+    K(31411, "UG_RGB_HI", "底灯\n色相+", "增加底灯色相", alias=["UNDERGLOW_RGB_HUE_INCREASE"]),
+    K(31412, "UG_RGB_HD", "底灯\n色相-", "降低底灯色相", alias=["UNDERGLOW_RGB_HUE_DECREASE"]),
+    K(31413, "UG_RGB_SI", "底灯\n饱和+", "增加底灯饱和度", alias=["UNDERGLOW_RGB_SAT_INCREASE"]),
+    K(31414, "UG_RGB_SD", "底灯\n饱和-", "降低底灯饱和度", alias=["UNDERGLOW_RGB_SAT_DECREASE"]),
+    K(31415, "UG_RGB_VI", "底灯\n亮度+", "增加底灯亮度", alias=["UNDERGLOW_RGB_VAL_INCREASE"]),
+    K(31416, "UG_RGB_VD", "底灯\n亮度-", "降低底灯亮度", alias=["UNDERGLOW_RGB_VAL_DECREASE"]),
+    K(31417, "UG_RGB_SPI", "底灯\n速度+", "增加底灯灯效速度", alias=["UNDERGLOW_RGB_SPEED_INCREASE"]),
+    K(31418, "UG_RGB_SPD", "底灯\n速度-", "降低底灯灯效速度", alias=["UNDERGLOW_RGB_SPEED_DECREASE"]),
 ]
 
 KEYCODES_RGB_MATRIX_IND = [
-    K(23995, "RGB_INDTOG", "指示灯\n开关", "指示灯开关", alias=["RGB_IND_TOGGLE"]),
-    K(23996, "RGB_INDMF", "指示灯\n灯效+", "下一个指示灯灯效", alias=["RGB_IND_MODE_FORWARD"]),
-    K(23997, "RGB_INDMR", "指示灯\n灯效-", "上一个指示灯灯效", alias=["RGB_IND_MODE_REVERSE"]),
+    K(31424, "RGB_INDTOG", "指示灯\n开关", "指示灯开关", alias=["RGB_IND_TOGGLE"]),
+    K(31425, "RGB_INDMF", "指示灯\n灯效+", "下一个指示灯灯效", alias=["RGB_IND_MODE_FORWARD"]),
+    K(31426, "RGB_INDMR", "指示灯\n灯效-", "上一个指示灯灯效", alias=["RGB_IND_MODE_REVERSE"]),
 ]
 
 KEYCODES_RGB_MATRIX_IND_ADV= [
-    K(23998, "RGB_NUMTOG", "Num\nLock\n开关", "Num Lock指示灯开关", alias=["RGB_IND_NUM_LOCK_TOGGLE"]),
-    K(23999, "RGB_NUMMF", "Num\nLock\n灯效+", "下一个Num Lock指示灯灯效", alias=["RGB_IND_NUM_LOCK_MODE_FORWARD"]),
-    K(24000, "RGB_NUMMR", "Num\nLock\n灯效-", "上一个Num Lock指示灯灯效", alias=["RGB_IND_NUM_LOCK_MODE_REVERSE"]),
-    K(24001, "RGB_CAPSTOG", "Caps\nLock\n开关", "Caps Lock指示灯开关", alias=["RGB_IND_CAPS_LOCK_TOGGLE"]),
-    K(24002, "RGB_CAPSMF", "Caps\nLock\n灯效+", "下一个Caps Lock指示灯灯效", alias=["RGB_IND_CAPS_LOCK_MODE_FORWARD"]),
-    K(24003, "RGB_CAPSMR", "Caps\nLock\n灯效-", "上一个Caps Lock指示灯灯效", alias=["RGB_IND_CAPS_LOCK_MODE_REVERSE"]),
-    K(24004, "RGB_SCROLLTOG", "Scroll\nLock\n开关", "Scroll Lock指示灯开关", alias=["RGB_IND_SCROLL_LOCK_TOGGLE"]),
-    K(24005, "RGB_SCROLLMF", "Scroll\nLock\n灯效+", "下一个Scroll Lock指示灯灯效", alias=["RGB_IND_SCROLL_LOCK_MODE_FORWARD"]),
-    K(24006, "RGB_SCROLLMR", "Scroll\nLock\n灯效-", "上一个Scroll Lock指示灯灯效", alias=["RGB_IND_SCROLL_LOCK_MODE_REVERSE"]),
+    K(31427, "RGB_NUMTOG", "Num\nLock\n开关", "Num Lock指示灯开关", alias=["RGB_IND_NUM_LOCK_TOGGLE"]),
+    K(31428, "RGB_NUMMF", "Num\nLock\n灯效+", "下一个Num Lock指示灯灯效", alias=["RGB_IND_NUM_LOCK_MODE_FORWARD"]),
+    K(31429, "RGB_NUMMR", "Num\nLock\n灯效-", "上一个Num Lock指示灯灯效", alias=["RGB_IND_NUM_LOCK_MODE_REVERSE"]),
+    K(31430, "RGB_CAPSTOG", "Caps\nLock\n开关", "Caps Lock指示灯开关", alias=["RGB_IND_CAPS_LOCK_TOGGLE"]),
+    K(31431, "RGB_CAPSMF", "Caps\nLock\n灯效+", "下一个Caps Lock指示灯灯效", alias=["RGB_IND_CAPS_LOCK_MODE_FORWARD"]),
+    K(31432, "RGB_CAPSMR", "Caps\nLock\n灯效-", "上一个Caps Lock指示灯灯效", alias=["RGB_IND_CAPS_LOCK_MODE_REVERSE"]),
+    K(31433, "RGB_SCROLLTOG", "Scroll\nLock\n开关", "Scroll Lock指示灯开关", alias=["RGB_IND_SCROLL_LOCK_TOGGLE"]),
+    K(31434, "RGB_SCROLLMF", "Scroll\nLock\n灯效+", "下一个Scroll Lock指示灯灯效", alias=["RGB_IND_SCROLL_LOCK_MODE_FORWARD"]),
+    K(31435, "RGB_SCROLLMR", "Scroll\nLock\n灯效-", "上一个Scroll Lock指示灯灯效", alias=["RGB_IND_SCROLL_LOCK_MODE_REVERSE"]),
 ]
 
 KEYCODES_DIAL = []
 
 KEYCODES_DIAL_BASE = [
-    K(23990, "DIAL_BUT", "滚轮\n按钮", "模拟win10滚轮设备按下", alias=["RADIAL_BUTTON"]),
-    K(23991, "DIAL_L", "滚轮\n逆转", "模拟win10滚轮设备逆时针旋转", alias=["RADIAL_LEFT"]),
-    K(23992, "DIAL_R", "滚轮\n顺转", "模拟win10滚轮设备顺时针旋转", alias=["RADIAL_RIGHT"]),
-    K(23993, "DIAL_LC", "滚轮\n持续\n逆转", "模拟win10滚轮设备持续逆时针旋转", alias=["RADIAL_LEFT_CONTINUE"]),
-    K(23994, "DIAL_RC", "滚轮\n持续\n顺转", "模拟win10滚轮设备持续顺时针旋转", alias=["RADIAL_BUTTON_CONTINUE"]),
+    K(31419, "DIAL_BUT", "滚轮\n按钮", "模拟win10滚轮设备按下", alias=["RADIAL_BUTTON"]),
+    K(31420, "DIAL_L", "滚轮\n逆转", "模拟win10滚轮设备逆时针旋转", alias=["RADIAL_LEFT"]),
+    K(31421, "DIAL_R", "滚轮\n顺转", "模拟win10滚轮设备顺时针旋转", alias=["RADIAL_RIGHT"]),
+    K(31422, "DIAL_LC", "滚轮\n持续\n逆转", "模拟win10滚轮设备持续逆时针旋转", alias=["RADIAL_LEFT_CONTINUE"]),
+    K(31423, "DIAL_RC", "滚轮\n持续\n顺转", "模拟win10滚轮设备持续顺时针旋转", alias=["RADIAL_BUTTON_CONTINUE"]),
 ]
 
 KEYCODES_HIDDEN = []
@@ -848,7 +848,7 @@ def create_user_keycodes():
             Keycode(
                 0x5F80 + x,
                 "自定义{:02}".format(x),
-                "自定义{}".format(x),
+                "自定义\n{}".format(x),
                 "自定义键值{}".format(x)
             )
         )

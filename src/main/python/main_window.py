@@ -23,7 +23,7 @@ from keymaps import KEYMAPS
 from editor.layout_editor import LayoutEditor
 from editor.macro_recorder import MacroRecorder
 from editor.qmk_settings import QmkSettings
-from editor.rgb_configurator import RGBConfigurator
+from editor.rgb_configurator import RGBConfigurator, IndicatorConfigurator
 from tabbed_keycodes import TabbedKeycodes
 from editor.tap_dance import TapDance
 from unlocker import Unlocker
@@ -71,9 +71,9 @@ class MainWindow(QMainWindow):
         self.qmk_settings = QmkSettings()
         self.matrix_tester = MatrixTest(self.layout_editor)
         self.rgb_configurator = RGBConfigurator()
-
+        self.indicator_configurator = IndicatorConfigurator()
         self.editors = [(self.keymap_editor, "键位映射"), (self.layout_editor, "键盘布局"), (self.macro_recorder, "宏功能"),
-                        (self.rgb_configurator, "灯光控制"), (self.tap_dance, "按键复用"), (self.combos, "组合键"),
+                        (self.rgb_configurator, "灯光控制"), (self.indicator_configurator, "指示灯"), (self.tap_dance, "按键复用"), (self.combos, "组合键"),
                         (self.key_override, "键值覆盖"), (self.qmk_settings, "QMK设置"),
                         (self.matrix_tester, "矩阵测试"), (self.firmware_flasher, "固件更新")]
 
