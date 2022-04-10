@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
-from PyQt5 import QtCore
+from PyQt5 import QtCore, Qt
 from PyQt5.QtCore import pyqtSignal, QObject
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QSizePolicy, QGridLayout, QLabel, QSlider, \
@@ -35,12 +35,12 @@ QMK_RGBLIGHT_EFFECTS = [
     QmkRgblightEffect(12, "彩虹漩涡 4", False),
     QmkRgblightEffect(13, "彩虹漩涡 5", False),
     QmkRgblightEffect(14, "彩虹漩涡 6", False),
-    QmkRgblightEffect(15, "蛇形灯效 1", True),
-    QmkRgblightEffect(16, "蛇形灯效 2", True),
-    QmkRgblightEffect(17, "蛇形灯效 3", True),
-    QmkRgblightEffect(18, "蛇形灯效 4", True),
-    QmkRgblightEffect(19, "蛇形灯效 5", True),
-    QmkRgblightEffect(20, "蛇形灯效 6", True),
+    QmkRgblightEffect(15, "蜿蜒 1", True),
+    QmkRgblightEffect(16, "蜿蜒 2", True),
+    QmkRgblightEffect(17, "蜿蜒 3", True),
+    QmkRgblightEffect(18, "蜿蜒 4", True),
+    QmkRgblightEffect(19, "蜿蜒 5", True),
+    QmkRgblightEffect(20, "蜿蜒 6", True),
     QmkRgblightEffect(21, "霹雳游侠 1", True),
     QmkRgblightEffect(22, "霹雳游侠 2", True),
     QmkRgblightEffect(23, "霹雳游侠 3", True),
