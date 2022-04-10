@@ -5,7 +5,7 @@ import operator
 
 from keycodes import KEYCODES_SPECIAL, KEYCODES_BASIC, KEYCODES_SHIFTED, KEYCODES_ISO, KEYCODES_BACKLIGHT, \
     KEYCODES_MEDIA, KEYCODES_USER, QK_LCTL, QK_LSFT, QK_LALT, QK_LGUI, QK_RCTL, QK_RSFT, QK_RALT, QK_RGUI, QK_LAYER_TAP, \
-    MOD_MEH, MOD_HYPR
+    MOD_MEH, MOD_HYPR, KEYCODES_LIGHTS ,KEYCODES_DIAL
 
 
 QK_TO = 0x5000
@@ -122,7 +122,7 @@ class AnyKeycode:
 
     def prepare_names(self):
         for kc in KEYCODES_SPECIAL + KEYCODES_BASIC + KEYCODES_SHIFTED + KEYCODES_ISO + KEYCODES_BACKLIGHT + \
-                  KEYCODES_MEDIA + KEYCODES_USER:
+                  KEYCODES_MEDIA + KEYCODES_USER + KEYCODES_LIGHTS + KEYCODES_DIAL:
             for qmk_id in kc.alias:
                 self.names[qmk_id] = kc.code
         self.names.update({
