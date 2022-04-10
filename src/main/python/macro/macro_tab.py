@@ -1,19 +1,17 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
-import sys
 import json
 
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QPushButton, QGridLayout, QHBoxLayout, QToolButton, QVBoxLayout, \
-    QTabWidget, QWidget, QLabel, QMenu, QScrollArea, QFrame, QFileDialog, QDialog
+    QWidget, QMenu, QScrollArea, QFrame
 
-from basic_editor import BasicEditor
 from keycodes import Keycode
-from macro_action import ActionTap
-from macro_action_ui import ActionTextUI, ActionTapUI, ui_action, tag_to_action
-from macro_line import MacroLine
-from macro_optimizer import macro_optimize
-from util import tr
-from vial_device import VialKeyboard
+from macro.macro_action import ActionTap
+from macro.macro_action_ui import ActionTextUI, ActionTapUI, ui_action, tag_to_action
+from macro.macro_line import MacroLine
+from protocol.constants import VIAL_PROTOCOL_EXT_MACROS
+from tabbed_keycodes import keycode_filter_masked
+from util import tr, make_scrollable
 from textbox_window import TextboxWindow
 
 
@@ -33,32 +31,32 @@ class MacroTab(QVBoxLayout):
         self.container = QGridLayout()
 
         menu_record = QMenu()
-        menu_record.addAction(tr("MacroRecorder", "添加到当前设置"))\
+        menu_record.addAction(tr("MacroRecorder", "Append to current"))\
             .triggered.connect(lambda: self.record.emit(self, True))
-        menu_record.addAction(tr("MacroRecorder", "覆盖当前设置"))\
+        menu_record.addAction(tr("MacroRecorder", "Replace everything"))\
             .triggered.connect(lambda: self.record.emit(self, False))
 
-        self.btn_record = QPushButton(tr("MacroRecorder", "录制宏"))
+        self.btn_record = QPushButton(tr("MacroRecorder", "Record macro"))
         self.btn_record.setMenu(menu_record)
         if not enable_recorder:
             self.btn_record.hide()
 
-        self.btn_record_stop = QPushButton(tr("MacroRecorder", "停止录制"))
+        self.btn_record_stop = QPushButton(tr("MacroRecorder", "Stop recording"))
         self.btn_record_stop.clicked.connect(lambda: self.record_stop.emit())
         self.btn_record_stop.hide()
 
         self.btn_add = QToolButton()
-        self.btn_add.setText(tr("MacroRecorder", "添加宏动作"))
+        self.btn_add.setText(tr("MacroRecorder", "Add action"))
         self.btn_add.setToolButtonStyle(Qt.ToolButtonTextOnly)
         self.btn_add.clicked.connect(self.on_add)
 
         self.btn_tap_enter = QToolButton()
-        self.btn_tap_enter.setText(tr("MacroRecorder", "添加回车"))
+        self.btn_tap_enter.setText(tr("MacroRecorder", "Tap Enter"))
         self.btn_tap_enter.setToolButtonStyle(Qt.ToolButtonTextOnly)
         self.btn_tap_enter.clicked.connect(self.on_tap_enter)
 
         self.btn_text_window = QToolButton()
-        self.btn_text_window.setText(tr("MacroRecorder", "打开宏编辑器"))
+        self.btn_text_window.setText(tr("MacroRecorder", "Open Text Editor..."))
         self.btn_text_window.setToolButtonStyle(Qt.ToolButtonTextOnly)
         self.btn_text_window.clicked.connect(self.on_text_window)
 
@@ -74,20 +72,12 @@ class MacroTab(QVBoxLayout):
         vbox.addLayout(self.container)
         vbox.addStretch()
 
-        w = QWidget()
-        w.setLayout(vbox)
-        w.setObjectName("w")
-        scroll = QScrollArea()
-        scroll.setFrameShape(QFrame.NoFrame)
-        scroll.setStyleSheet("QScrollArea { background-color:transparent; }")
-        w.setStyleSheet("#w { background-color:transparent; }")
-        scroll.setWidgetResizable(True)
-        scroll.setWidget(w)
-
-        self.addWidget(scroll)
+        self.addWidget(make_scrollable(vbox))
         self.addLayout(layout_buttons)
 
     def add_action(self, act):
+        if self.parent.keyboard.vial_protocol < VIAL_PROTOCOL_EXT_MACROS:
+            act.set_keycode_filter(keycode_filter_masked)
         line = MacroLine(self, act)
         line.changed.connect(self.on_change)
         self.lines.append(line)

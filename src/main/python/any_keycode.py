@@ -3,11 +3,9 @@ import ast
 import simpleeval
 import operator
 
-from keycodes import KEYCODES_SPECIAL, KEYCODES_BASIC, KEYCODES_MODIFIERS, KEYCODES_SHIFTED, KEYCODES_NUMPAD, KEYCODES_ISO, KEYCODES_BACKLIGHT, \
-    KEYCODES_RGBLIGHT, KEYCODES_RGBLIGHT_MODE, KEYCODES_RGB_MATRIX_CONTROL_ADV, KEYCODES_RGB_MATRIX_CONTROL_ADV_LOGO, KEYCODES_MOUSE, \
+from keycodes import KEYCODES_SPECIAL, KEYCODES_BASIC, KEYCODES_SHIFTED, KEYCODES_ISO, KEYCODES_BACKLIGHT, \
     KEYCODES_MEDIA, KEYCODES_USER, QK_LCTL, QK_LSFT, QK_LALT, QK_LGUI, QK_RCTL, QK_RSFT, QK_RALT, QK_RGUI, QK_LAYER_TAP, \
-    KEYCODES_RGB_MATRIX_CONTROL_BASE, KEYCODES_UG_RGB_MATRIX_BASE, KEYCODES_UG_RGB_MATRIX_ADV, KEYCODES_RGB_MATRIX_IND, MOD_MEH, MOD_HYPR, \
-    KEYCODES_RGB_MATRIX_IND_ADV, KEYCODES_DIAL_BASE
+    MOD_MEH, MOD_HYPR
 
 
 QK_TO = 0x5000
@@ -49,6 +47,8 @@ def LCA(kc): return (QK_LCTL | QK_LALT | (kc))
 def LSA(kc): return (QK_LSFT | QK_LALT | (kc))
 def RSA(kc): return (QK_RSFT | QK_RALT | (kc))
 def RCS(kc): return (QK_RCTL | QK_RSFT | (kc))
+def LCG(kc): return (QK_LCTL | QK_LGUI | (kc))
+def RCG(kc): return (QK_RCTL | QK_RGUI | (kc))
 
 
 def LT(layer, kc): return (QK_LAYER_TAP | (((layer)&0xF) << 8) | ((kc)&0xFF))
@@ -82,6 +82,8 @@ def LCA_T(kc): return MT(MOD_LCTL | MOD_LALT, kc)
 def LSA_T(kc): return MT(MOD_LSFT | MOD_LALT, kc)
 def RSA_T(kc): return MT(MOD_RSFT | MOD_RALT, kc)
 def RCS_T(kc): return MT(MOD_RCTL | MOD_RSFT, kc)
+def LCG_T(kc): return MT(MOD_LCTL | MOD_LGUI, kc)
+def RCG_T(kc): return MT(MOD_RCTL | MOD_RGUI, kc)
 
 
 functions = {
@@ -102,6 +104,7 @@ functions = {
     "LSG_T": SGUI_T,
     "LCA_T": LCA_T, "LSA_T": LSA_T, "RSA_T": RSA_T, "RCS_T": RCS_T, "SAGR_T": RSA_T, "ALL_T": HYPR_T,
     "TD": TD,
+    "LCG": LCG, "RCG": RCG, "LCG_T": LCG_T, "RCG_T": RCG_T,
 }
 
 
@@ -118,10 +121,8 @@ class AnyKeycode:
         self.prepare_names()
 
     def prepare_names(self):
-        for kc in KEYCODES_SPECIAL + KEYCODES_BASIC + KEYCODES_MODIFIERS +  KEYCODES_NUMPAD +  KEYCODES_SHIFTED + KEYCODES_ISO + KEYCODES_MOUSE +  \
-                 KEYCODES_MEDIA + KEYCODES_USER + KEYCODES_BACKLIGHT + KEYCODES_RGBLIGHT + KEYCODES_RGBLIGHT_MODE + KEYCODES_RGB_MATRIX_CONTROL_ADV + \
-                 KEYCODES_RGB_MATRIX_CONTROL_ADV_LOGO + KEYCODES_RGB_MATRIX_CONTROL_BASE + KEYCODES_UG_RGB_MATRIX_BASE + KEYCODES_UG_RGB_MATRIX_ADV + KEYCODES_RGB_MATRIX_IND + \
-                 KEYCODES_RGB_MATRIX_IND_ADV + KEYCODES_DIAL_BASE :
+        for kc in KEYCODES_SPECIAL + KEYCODES_BASIC + KEYCODES_SHIFTED + KEYCODES_ISO + KEYCODES_BACKLIGHT + \
+                  KEYCODES_MEDIA + KEYCODES_USER:
             for qmk_id in kc.alias:
                 self.names[qmk_id] = kc.code
         self.names.update({

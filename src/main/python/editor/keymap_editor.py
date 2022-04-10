@@ -5,12 +5,11 @@ from PyQt5.QtWidgets import QHBoxLayout, QLabel, QVBoxLayout, QMessageBox
 from PyQt5.QtCore import Qt
 
 from any_keycode_dialog import AnyKeycodeDialog
-from basic_editor import BasicEditor
-from keyboard_widget import KeyboardWidget, EncoderWidget
-from keycodes import recreate_keyboard_keycodes, Keycode
-from keymaps import KEYMAPS
-from square_button import SquareButton
-from tabbed_keycodes import TabbedKeycodes
+from editor.basic_editor import BasicEditor
+from widgets.keyboard_widget import KeyboardWidget, EncoderWidget
+from keycodes import recreate_keyboard_keycodes
+from widgets.square_button import SquareButton
+from tabbed_keycodes import TabbedKeycodes, keycode_filter_masked
 from util import tr, KeycodeDisplay
 from vial_device import VialKeyboard
 
@@ -24,7 +23,7 @@ class KeymapEditor(BasicEditor):
 
         self.layout_layers = QHBoxLayout()
         self.layout_size = QVBoxLayout()
-        layer_label = QLabel(tr("KeymapEditor", "层"))
+        layer_label = QLabel(tr("KeymapEditor", "Layer"))
 
         layout_labels_container = QHBoxLayout()
         layout_labels_container.addWidget(layer_label)
@@ -35,6 +34,7 @@ class KeymapEditor(BasicEditor):
         # contains the actual keyboard
         self.container = KeyboardWidget(layout_editor)
         self.container.clicked.connect(self.on_key_clicked)
+        self.container.deselected.connect(self.on_key_deselected)
 
         layout = QVBoxLayout()
         layout.addLayout(layout_labels_container)
@@ -126,8 +126,8 @@ class KeymapEditor(BasicEditor):
     def restore_layout(self, data):
         if json.loads(data.decode("utf-8")).get("uid") != self.keyboard.keyboard_id:
             ret = QMessageBox.question(self.widget(), "",
-                                       tr("KeymapEditor", "保存的键位属于其他键盘,"
-                                                          " 确定要继续吗?"),
+                                       tr("KeymapEditor", "Saved keymap belongs to a different keyboard,"
+                                                          " are you sure you want to continue?"),
                                        QMessageBox.Yes | QMessageBox.No)
             if ret != QMessageBox.Yes:
                 return
@@ -213,6 +213,13 @@ class KeymapEditor(BasicEditor):
     def on_key_clicked(self):
         """ Called when a key on the keyboard widget is clicked """
         self.refresh_layer_display()
+        if self.container.active_mask:
+            self.tabbed_keycodes.set_keycode_filter(keycode_filter_masked)
+        else:
+            self.tabbed_keycodes.set_keycode_filter(None)
+
+    def on_key_deselected(self):
+        self.tabbed_keycodes.set_keycode_filter(None)
 
     def on_layout_changed(self):
         if self.keyboard is None:

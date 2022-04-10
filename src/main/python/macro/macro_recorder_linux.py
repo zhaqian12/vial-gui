@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QApplication
 from fbs_runtime.application_context import is_frozen
 
 from keycodes import Keycode
-from macro_key import KeyUp, KeyDown
+from macro.macro_key import KeyUp, KeyDown
 from util import tr
 
 
@@ -26,7 +26,7 @@ class LinuxRecorder(QWidget):
         self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint | QtCore.Qt.X11BypassWindowManagerHint)
 
         layout = QVBoxLayout()
-        btn = QPushButton(tr("MacroRecorder", "停止录制"))
+        btn = QPushButton(tr("MacroRecorder", "Stop recording"))
         btn.clicked.connect(self.on_stop)
         layout.addWidget(btn)
 

@@ -4,8 +4,9 @@ from PyQt5.QtCore import Qt, QTimer
 
 import math
 
-from basic_editor import BasicEditor
-from keyboard_widget import KeyboardWidget
+from editor.basic_editor import BasicEditor
+from protocol.constants import VIAL_PROTOCOL_MATRIX_TESTER
+from widgets.keyboard_widget import KeyboardWidget
 from util import tr
 from vial_device import VialKeyboard
 from unlocker import Unlocker
@@ -21,8 +22,8 @@ class MatrixTest(BasicEditor):
         self.keyboardWidget = KeyboardWidget(layout_editor)
         self.keyboardWidget.set_enabled(False)
 
-        self.unlock_btn = QPushButton("解锁")
-        self.reset_btn = QPushButton("重置")
+        self.unlock_btn = QPushButton("Unlock")
+        self.reset_btn = QPushButton("Reset")
 
         layout = QVBoxLayout()
         layout.addWidget(self.keyboardWidget)
@@ -32,7 +33,7 @@ class MatrixTest(BasicEditor):
 
         btn_layout = QHBoxLayout()
         btn_layout.addStretch()
-        self.unlock_lbl = QLabel(tr("MatrixTest", "请在测试前解锁键盘:"))
+        self.unlock_lbl = QLabel(tr("MatrixTest", "Unlock the keyboard before testing:"))
         btn_layout.addWidget(self.unlock_lbl)
         btn_layout.addWidget(self.unlock_btn)
         btn_layout.addWidget(self.reset_btn)
@@ -61,7 +62,7 @@ class MatrixTest(BasicEditor):
     def valid(self):
         # Check if vial protocol is v3 or later
         return isinstance(self.device, VialKeyboard) and \
-               (self.device.keyboard and self.device.keyboard.vial_protocol >= 3)
+               (self.device.keyboard and self.device.keyboard.vial_protocol >= VIAL_PROTOCOL_MATRIX_TESTER)
 
     def reset_keyboard_widget(self):
         # reset keyboard widget

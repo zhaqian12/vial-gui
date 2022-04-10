@@ -7,7 +7,8 @@ from PyQt5.QtCore import pyqtSignal, QObject
 from PyQt5.QtWidgets import QVBoxLayout, QCheckBox, QGridLayout, QLabel, QWidget, QSizePolicy, QTabWidget, QSpinBox, \
     QHBoxLayout, QPushButton, QMessageBox
 
-from basic_editor import BasicEditor
+from editor.basic_editor import BasicEditor
+from protocol.constants import VIAL_PROTOCOL_QMK_SETTINGS
 from util import tr
 from vial_device import VialKeyboard
 
@@ -103,13 +104,13 @@ class QmkSettings(BasicEditor):
         self.addWidget(self.tabs_widget)
         buttons = QHBoxLayout()
         buttons.addStretch()
-        self.btn_save = QPushButton(tr("QmkSettings", "保存"))
+        self.btn_save = QPushButton(tr("QmkSettings", "Save"))
         self.btn_save.clicked.connect(self.save_settings)
         buttons.addWidget(self.btn_save)
-        self.btn_undo = QPushButton(tr("QmkSettings", "撤销"))
+        self.btn_undo = QPushButton(tr("QmkSettings", "Undo"))
         self.btn_undo.clicked.connect(self.reload_settings)
         buttons.addWidget(self.btn_undo)
-        btn_reset = QPushButton(tr("QmkSettings", "重置"))
+        btn_reset = QPushButton(tr("QmkSettings", "Reset"))
         btn_reset.clicked.connect(self.reset_settings)
         buttons.addWidget(btn_reset)
         self.addLayout(buttons)
@@ -221,20 +222,20 @@ class QmkSettings(BasicEditor):
 
     def reset_settings(self):
         if QMessageBox.question(self.widget(), "",
-                                tr("QmkSettings", "是否重置全部设置恢复到默认设置?"),
+                                tr("QmkSettings", "Reset all settings to default values?"),
                                 QMessageBox.Yes | QMessageBox.No) == QMessageBox.Yes:
             self.keyboard.qmk_settings_reset()
             self.reload_settings()
 
     def valid(self):
         return isinstance(self.device, VialKeyboard) and \
-               (self.device.keyboard and self.device.keyboard.vial_protocol >= 4
+               (self.device.keyboard and self.device.keyboard.vial_protocol >= VIAL_PROTOCOL_QMK_SETTINGS
                 and len(self.device.keyboard.supported_settings))
 
     @classmethod
     def initialize(cls, appctx):
         cls.qsid_fields = defaultdict(list)
-        with open(appctx.get_resource("qmk_settings.json"), "r", encoding='utf-8') as inf:
+        with open(appctx.get_resource("qmk_settings.json"), "r") as inf:
             cls.settings_defs = json.load(inf)
         for tab in cls.settings_defs["tabs"]:
             for field in tab["fields"]:

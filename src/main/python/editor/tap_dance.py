@@ -1,14 +1,16 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 from PyQt5 import QtCore
 from PyQt5.QtCore import pyqtSignal, QObject
-from PyQt5.QtWidgets import QTabWidget, QWidget, QSizePolicy, QGridLayout, QVBoxLayout, QLabel, QLineEdit, QHBoxLayout, \
+from PyQt5.QtWidgets import QTabWidget, QWidget, QSizePolicy, QGridLayout, QVBoxLayout, QLabel, QHBoxLayout, \
     QPushButton, QSpinBox
 
-from key_widget import KeyWidget
+from protocol.constants import VIAL_PROTOCOL_DYNAMIC
+from widgets.key_widget import KeyWidget
 from tabbed_keycodes import TabbedKeycodes
 from util import tr
 from vial_device import VialKeyboard
-from basic_editor import BasicEditor
+from editor.basic_editor import BasicEditor
+from widgets.tab_widget_keycodes import TabWidgetWithKeycodes
 
 
 class TapDanceEntryUI(QObject):
@@ -32,7 +34,7 @@ class TapDanceEntryUI(QObject):
         l.addWidget(w)
         l.setAlignment(w, QtCore.Qt.AlignHCenter)
         l.addSpacing(10)
-        lbl = QLabel("使用键值 <code>TD({})</code> 在键位映射中设置此操作.".format(self.idx))
+        lbl = QLabel("Use <code>TD({})</code> to set up this action in the keymap.".format(self.idx))
         l.addWidget(lbl)
         l.setAlignment(lbl, QtCore.Qt.AlignHCenter)
         l.addStretch()
@@ -40,23 +42,23 @@ class TapDanceEntryUI(QObject):
         self.w2.setLayout(l)
 
     def populate_container(self):
-        self.container.addWidget(QLabel("单击"), 0, 0)
+        self.container.addWidget(QLabel("On tap"), 0, 0)
         self.kc_on_tap = KeyWidget()
         self.kc_on_tap.changed.connect(self.on_key_changed)
         self.container.addWidget(self.kc_on_tap, 0, 1)
-        self.container.addWidget(QLabel("长按"), 1, 0)
+        self.container.addWidget(QLabel("On hold"), 1, 0)
         self.kc_on_hold = KeyWidget()
         self.kc_on_hold.changed.connect(self.on_key_changed)
         self.container.addWidget(self.kc_on_hold, 1, 1)
-        self.container.addWidget(QLabel("双击"), 2, 0)
+        self.container.addWidget(QLabel("On double tap"), 2, 0)
         self.kc_on_double_tap = KeyWidget()
         self.kc_on_double_tap.changed.connect(self.on_key_changed)
         self.container.addWidget(self.kc_on_double_tap, 2, 1)
-        self.container.addWidget(QLabel("双击并长按"), 3, 0)
+        self.container.addWidget(QLabel("On tap + hold"), 3, 0)
         self.kc_on_tap_hold = KeyWidget()
         self.kc_on_tap_hold.changed.connect(self.on_key_changed)
         self.container.addWidget(self.kc_on_tap_hold, 3, 1)
-        self.container.addWidget(QLabel("单击判定时间(毫秒)"), 4, 0)
+        self.container.addWidget(QLabel("Tapping term (ms)"), 4, 0)
         self.txt_tapping_term = QSpinBox()
         self.txt_tapping_term.valueChanged.connect(self.on_timing_changed)
         self.txt_tapping_term.setMinimum(0)
@@ -96,12 +98,6 @@ class TapDanceEntryUI(QObject):
         self.timing_changed.emit()
 
 
-class CustomTabWidget(QTabWidget):
-
-    def mouseReleaseEvent(self, ev):
-        TabbedKeycodes.close_tray()
-
-
 class TapDance(BasicEditor):
 
     def __init__(self):
@@ -110,7 +106,7 @@ class TapDance(BasicEditor):
 
         self.tap_dance_entries = []
         self.tap_dance_entries_available = []
-        self.tabs = CustomTabWidget()
+        self.tabs = TabWidgetWithKeycodes()
         for x in range(128):
             entry = TapDanceEntryUI(x)
             entry.key_changed.connect(self.on_key_changed)
@@ -120,9 +116,9 @@ class TapDance(BasicEditor):
         self.addWidget(self.tabs)
         buttons = QHBoxLayout()
         buttons.addStretch()
-        self.btn_save = QPushButton(tr("TapDance", "保存"))
+        self.btn_save = QPushButton(tr("TapDance", "Save"))
         self.btn_save.clicked.connect(self.on_save)
-        btn_revert = QPushButton(tr("TapDance", "恢复"))
+        btn_revert = QPushButton(tr("TapDance", "Revert"))
         btn_revert.clicked.connect(self.on_revert)
         buttons.addWidget(self.btn_save)
         buttons.addWidget(btn_revert)
@@ -158,7 +154,7 @@ class TapDance(BasicEditor):
 
     def valid(self):
         return isinstance(self.device, VialKeyboard) and \
-               (self.device.keyboard and self.device.keyboard.vial_protocol >= 4
+               (self.device.keyboard and self.device.keyboard.vial_protocol >= VIAL_PROTOCOL_DYNAMIC
                 and self.device.keyboard.tap_dance_count > 0)
 
     def on_key_changed(self):

@@ -6,7 +6,7 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QApplication
 
 from keycodes import Keycode
-from macro_key import KeyUp, KeyDown
+from macro.macro_key import KeyUp, KeyDown
 from util import tr
 
 
@@ -25,7 +25,7 @@ class WindowsRecorder(QWidget):
         self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint | QtCore.Qt.FramelessWindowHint)
 
         layout = QVBoxLayout()
-        btn = QPushButton(tr("MacroRecorder", "停止录制"))
+        btn = QPushButton(tr("MacroRecorder", "Stop recording"))
         btn.clicked.connect(self.on_stop)
         layout.addWidget(btn)
 
