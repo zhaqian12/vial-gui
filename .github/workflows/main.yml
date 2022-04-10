@@ -81,4 +81,4 @@ jobs:
     - uses: actions/upload-artifact@v1
       with:
         name: vial-win-installer
-        path: target\Vial-CN-Setup.exe
+        path: target\Vial-CNSetup.exe
