@@ -93,7 +93,7 @@ themes = [
         QPalette.ToolTipText: "#d9d9d9",
         QPalette.Text: "#d9d9d9",
         QPalette.Button: "#181818",
-        QPalette.ButtonText: "#fabcad",
+        QPalette.ButtonText: "#d9d9d9",
         QPalette.BrightText: "#fabcad",
         QPalette.Link: "#fabcad",
         QPalette.Highlight: "#fabcad",
