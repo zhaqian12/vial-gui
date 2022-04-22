@@ -126,6 +126,7 @@ class MatrixTest(BasicEditor):
                     # write to matrix array
                     matrix[row][col] = (row_data[col_byte] >> col_mod) & 1
         except (RuntimeError, IndexError):
+            self.timer.stop()
             return
             
 
