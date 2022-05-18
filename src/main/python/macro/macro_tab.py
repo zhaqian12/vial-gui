@@ -1,19 +1,17 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
-import sys
 import json
 
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QPushButton, QGridLayout, QHBoxLayout, QToolButton, QVBoxLayout, \
-    QTabWidget, QWidget, QLabel, QMenu, QScrollArea, QFrame, QFileDialog, QDialog
+    QWidget, QMenu, QScrollArea, QFrame
 
-from basic_editor import BasicEditor
 from keycodes import Keycode
-from macro_action import ActionTap
-from macro_action_ui import ActionTextUI, ActionTapUI, ui_action, tag_to_action
-from macro_line import MacroLine
-from macro_optimizer import macro_optimize
-from util import tr
-from vial_device import VialKeyboard
+from macro.macro_action import ActionTap
+from macro.macro_action_ui import ActionTextUI, ActionTapUI, ui_action, tag_to_action
+from macro.macro_line import MacroLine
+from protocol.constants import VIAL_PROTOCOL_EXT_MACROS
+from tabbed_keycodes import keycode_filter_masked
+from util import tr, make_scrollable
 from textbox_window import TextboxWindow
 
 
@@ -74,20 +72,12 @@ class MacroTab(QVBoxLayout):
         vbox.addLayout(self.container)
         vbox.addStretch()
 
-        w = QWidget()
-        w.setLayout(vbox)
-        w.setObjectName("w")
-        scroll = QScrollArea()
-        scroll.setFrameShape(QFrame.NoFrame)
-        scroll.setStyleSheet("QScrollArea { background-color:transparent; }")
-        w.setStyleSheet("#w { background-color:transparent; }")
-        scroll.setWidgetResizable(True)
-        scroll.setWidget(w)
-
-        self.addWidget(scroll)
+        self.addWidget(make_scrollable(vbox))
         self.addLayout(layout_buttons)
 
     def add_action(self, act):
+        if self.parent.keyboard.vial_protocol < VIAL_PROTOCOL_EXT_MACROS:
+            act.set_keycode_filter(keycode_filter_masked)
         line = MacroLine(self, act)
         line.changed.connect(self.on_change)
         self.lines.append(line)
@@ -134,10 +124,14 @@ class MacroTab(QVBoxLayout):
         macro_text.append([act.save() for act in self.actions()])
         macro_text = json.dumps(macro_text[0])
 
-        textbox = TextboxWindow(macro_text, "vim", "Vial macro")
+        self.dlg_textbox = TextboxWindow(macro_text, "vim", "Vial macro")
+        self.dlg_textbox.setModal(True)
+        self.dlg_textbox.finished.connect(self.on_dlg_finished)
+        self.dlg_textbox.show()
 
-        if textbox.exec():
-            macro_text = textbox.getText()
+    def on_dlg_finished(self, res):
+        if res > 0:
+            macro_text = self.dlg_textbox.getText()
             if len(macro_text) < 6:
                 macro_text = "[]"
             macro_load = json.loads(macro_text)
@@ -161,7 +155,7 @@ class MacroTab(QVBoxLayout):
         self.changed.emit()
 
     def on_tap_enter(self):
-        self.add_action(ActionTapUI(self.container, ActionTap([Keycode.find_by_qmk_id("KC_ENTER")])))
+        self.add_action(ActionTapUI(self.container, ActionTap([Keycode.find_by_qmk_id("KC_ENTER").code])))
 
     def pre_record(self):
         self.btn_record.hide()
