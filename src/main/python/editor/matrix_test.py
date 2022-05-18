@@ -68,7 +68,7 @@ class MatrixTest(BasicEditor):
         # reset keyboard widget
         for w in self.keyboardWidget.widgets:
             w.setPressed(False)
-            w.setOn(False)
+            w.setActive(False)
 
         self.keyboardWidget.update_layout()
         self.keyboardWidget.update()
@@ -138,7 +138,7 @@ class MatrixTest(BasicEditor):
                 if row < len(matrix) and col < len(matrix[row]):
                     w.setPressed(matrix[row][col])
                     if matrix[row][col]:
-                        w.setOn(True)
+                        w.setActive(True)
 
         self.keyboardWidget.update_layout()
         self.keyboardWidget.update()

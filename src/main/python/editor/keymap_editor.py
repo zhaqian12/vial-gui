@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 import json
 
-from PyQt5.QtWidgets import QHBoxLayout, QLabel, QVBoxLayout, QMessageBox, QWidget
-from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtWidgets import QHBoxLayout, QLabel, QVBoxLayout, QMessageBox
+from PyQt5.QtCore import Qt
 
 from any_keycode_dialog import AnyKeycodeDialog
 from editor.basic_editor import BasicEditor
@@ -12,15 +12,6 @@ from widgets.square_button import SquareButton
 from tabbed_keycodes import TabbedKeycodes, keycode_filter_masked
 from util import tr, KeycodeDisplay
 from vial_device import VialKeyboard
-
-
-class ClickableWidget(QWidget):
-
-    clicked = pyqtSignal()
-
-    def mousePressEvent(self, evt):
-        super().mousePressEvent(evt)
-        self.clicked.emit()
 
 
 class KeymapEditor(BasicEditor):
@@ -49,9 +40,6 @@ class KeymapEditor(BasicEditor):
         layout.addLayout(layout_labels_container)
         layout.addWidget(self.container)
         layout.setAlignment(self.container, Qt.AlignHCenter)
-        w = ClickableWidget()
-        w.setLayout(layout)
-        w.clicked.connect(self.on_empty_space_clicked)
 
         self.layer_buttons = []
         self.keyboard = None
@@ -65,13 +53,14 @@ class KeymapEditor(BasicEditor):
         self.tabbed_keycodes.keycode_changed.connect(self.on_keycode_changed)
         self.tabbed_keycodes.anykey.connect(self.on_any_keycode)
 
-        self.addWidget(w)
+        self.addLayout(layout)
         self.addWidget(self.tabbed_keycodes)
 
         self.device = None
         KeycodeDisplay.notify_keymap_override(self)
 
-    def on_empty_space_clicked(self):
+    def on_container_clicked(self):
+        """ Called when a mouse click event is bubbled up to the editor's container """
         self.container.deselect()
         self.container.update()
 
@@ -151,15 +140,9 @@ class KeymapEditor(BasicEditor):
         current_code = self.code_for_widget(self.container.active_key)
         if self.container.active_mask:
             current_code &= 0xFF
-
-        self.dlg = AnyKeycodeDialog(current_code)
-        self.dlg.finished.connect(self.on_dlg_finished)
-        self.dlg.setModal(True)
-        self.dlg.show()
-
-    def on_dlg_finished(self, res):
-        if res > 0:
-            self.on_keycode_changed(self.dlg.value)
+        dlg = AnyKeycodeDialog(current_code)
+        if dlg.exec_() and dlg.value >= 0:
+            self.on_keycode_changed(dlg.value)
 
     def code_for_widget(self, widget):
         if widget.desc.row is not None:
