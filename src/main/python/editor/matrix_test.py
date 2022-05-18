@@ -22,8 +22,8 @@ class MatrixTest(BasicEditor):
         self.keyboardWidget = KeyboardWidget(layout_editor)
         self.keyboardWidget.set_enabled(False)
 
-        self.unlock_btn = QPushButton("解锁")
-        self.reset_btn = QPushButton("重置")
+        self.unlock_btn = QPushButton("Unlock")
+        self.reset_btn = QPushButton("Reset")
 
         layout = QVBoxLayout()
         layout.addWidget(self.keyboardWidget)
@@ -33,7 +33,7 @@ class MatrixTest(BasicEditor):
 
         btn_layout = QHBoxLayout()
         btn_layout.addStretch()
-        self.unlock_lbl = QLabel(tr("MatrixTest", "请在测试前解锁键盘:"))
+        self.unlock_lbl = QLabel(tr("MatrixTest", "Unlock the keyboard before testing:"))
         btn_layout.addWidget(self.unlock_lbl)
         btn_layout.addWidget(self.unlock_btn)
         btn_layout.addWidget(self.reset_btn)
@@ -106,12 +106,11 @@ class MatrixTest(BasicEditor):
         except (RuntimeError, ValueError):
             self.timer.stop()
             return
-          
-        try:
-            # Calculate the amount of bytes belong to 1 row, each bit is 1 key, so per 8 keys in a row,
-            # a byte is needed for the row.
-            row_size = math.ceil(cols / 8)
 
+        # Calculate the amount of bytes belong to 1 row, each bit is 1 key, so per 8 keys in a row,
+        # a byte is needed for the row.
+        row_size = math.ceil(cols / 8)
+        try:
             for row in range(rows):
                 # Make slice of bytes for the row (skip first 2 bytes, they're for VIAL)
                 row_data_start = 2 + (row * row_size)
