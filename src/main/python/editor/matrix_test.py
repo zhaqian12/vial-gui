@@ -68,7 +68,7 @@ class MatrixTest(BasicEditor):
         # reset keyboard widget
         for w in self.keyboardWidget.widgets:
             w.setPressed(False)
-            w.setActive(False)
+            w.setOn(False)
 
         self.keyboardWidget.update_layout()
         self.keyboardWidget.update()
@@ -106,6 +106,7 @@ class MatrixTest(BasicEditor):
         except (RuntimeError, ValueError):
             self.timer.stop()
             return
+          
         try:
             # Calculate the amount of bytes belong to 1 row, each bit is 1 key, so per 8 keys in a row,
             # a byte is needed for the row.
@@ -128,7 +129,6 @@ class MatrixTest(BasicEditor):
         except (RuntimeError, IndexError):
             self.timer.stop()
             return
-            
 
         # write matrix state to keyboard widget
         for w in self.keyboardWidget.widgets:
@@ -139,7 +139,7 @@ class MatrixTest(BasicEditor):
                 if row < len(matrix) and col < len(matrix[row]):
                     w.setPressed(matrix[row][col])
                     if matrix[row][col]:
-                        w.setActive(True)
+                        w.setOn(True)
 
         self.keyboardWidget.update_layout()
         self.keyboardWidget.update()
