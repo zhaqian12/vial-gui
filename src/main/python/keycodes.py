@@ -395,6 +395,7 @@ KEYCODES_QUANTUM = [
     K(QK_LCTL|QK_LGUI, "LCG(kc)", "LCG\n(kc)", "LCTL + LGUI", masked=True),
     K(QK_RCTL|QK_RGUI, "RCG(kc)", "RCG\n(kc)", "RCTL + RGUI", masked=True),
 
+    K(0x5C16, "KC_GESC", "~\nEsc", "单独按下时为Esc, 在按下Shift键或Gui键后为~"),
     K(0x5CD7, "KC_LSPO", "LS\n(", "长按触发左Shift键,单击触发'('键"),
     K(0x5CD8, "KC_RSPC", "RS\n)", "长按触发右Shift键,单击触发')'键"),
     K(0x5CD9, "KC_SFTENT", "RS\nEnter", "长按触发右Shift键,单击触发回车键"),
