@@ -384,7 +384,9 @@ KEYCODES_MODIFIERS = [
       masked=True),
     K(MT(MOD_LGUI|MOD_LSFT), "SGUI_T(kc)", "SGUI_T\n(kc)", "长按触发左Gui键和左Shift键,单击触发(KC)键", masked=True),
     K(MT(MOD_LCTL|MOD_LALT), "LCA_T(kc)", "LCA_T\n(kc)", "长按触发左Ctrl键和左Alt键,单击触发(KC)键", masked=True),
-    K(MT(MOD_LSFT|MOD_LALT), "LSA_T(kc)", "LSA_T\n(kc)", "长按触发左Shift键和左Alt,单击触发(KC)键", masked=True),
+    K(MT(MOD_LSFT|MOD_LALT), "LSA_T(kc)", "LSA_T\n(kc)", "长按触发左Shift键和左Alt键,单击触发(KC)键", masked=True),
+    K(MT(MOD_LCTL|MOD_LGUI), "LCG_T(kc)", "LCG_T\n(kc)", "长按触发左Ctrl键和左Gui键,单击触发(KC)键", masked=True),
+    K(MT(MOD_RCTL|MOD_RGUI), "RCG_T(kc)", "RCG_T\n(kc)", "长按触发右Ctrl键和右Gui键,单击触发(KC)键", masked=True),
 
     K(QK_LCTL|QK_LSFT|QK_LALT|QK_LGUI, "HYPR(kc)", "Hyper\n(kc)", "LCTL + LSFT + LALT + LGUI", masked=True),
     K(QK_LCTL|QK_LSFT|QK_LALT, "MEH(kc)", "Meh\n(kc)", "LCTL + LSFT + LALT", masked=True),
