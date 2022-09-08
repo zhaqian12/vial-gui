@@ -171,17 +171,6 @@ class MainWindow(QMainWindow):
             file_menu.addSeparator()
             file_menu.addAction(exit_act)
 
-        keyboard_unlock_act = QAction(tr("MenuSecurity", "Unlock"), self)
-
-        keyboard_unlock_act.triggered.connect(self.unlock_keyboard)
-
-        keyboard_lock_act = QAction(tr("MenuSecurity", "Lock"), self)
-
-        keyboard_lock_act.triggered.connect(self.lock_keyboard)
-
-        keyboard_reset_act = QAction(tr("MenuSecurity", "Reboot to bootloader"), self)
-
-
         keyboard_unlock_act = QAction(tr("MenuSecurity", "解锁"), self)
         keyboard_unlock_act.setShortcut("Ctrl+U")
         keyboard_unlock_act.triggered.connect(self.unlock_keyboard)
