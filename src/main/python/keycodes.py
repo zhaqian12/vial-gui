@@ -319,11 +319,12 @@ def LT(layer):
 RESET_KEYCODE = 0x5C00
 
 
-KEYCODES_QUANTUM = [
+
+KEYCODES_BOOT = [
     K(RESET_KEYCODE, "RESET", "复位", "复位至引导加载程序"),
-    K(23561, "MAGIC_HOST_NKRO", "全键\n无冲\n开启", "启用全键无冲", alias=["NK_ON"]),
-    K(23570, "MAGIC_UNHOST_NKRO", "全键\n无冲\n关闭", "关闭全键无冲", alias=["NK_OFF"]),
-    K(23572, "MAGIC_TOGGLE_NKRO", "切换\n全键\n无冲", "切换全键无冲", alias=["NK_TOGG"]),
+]
+
+KEYCODES_MODIFIERS = [
     K(QK_ONE_SHOT_MOD | MOD_LSFT, "OSM(MOD_LSFT)", "OSM\nLSft", "按下激活左Shift键"),
     K(QK_ONE_SHOT_MOD | MOD_LCTL, "OSM(MOD_LCTL)", "OSM\nLCtl", "按下激活左Ctrl键"),
     K(QK_ONE_SHOT_MOD | MOD_LALT, "OSM(MOD_LALT)", "OSM\nLAlt", "按下激活左Alt键"),
@@ -331,7 +332,7 @@ KEYCODES_QUANTUM = [
     K(QK_ONE_SHOT_MOD | MOD_RSFT, "OSM(MOD_RSFT)", "OSM\nRSft", "按下激活右Shift键"),
     K(QK_ONE_SHOT_MOD | MOD_RCTL, "OSM(MOD_RCTL)", "OSM\nRCtl", "按下激活右Ctrl键"),
     K(QK_ONE_SHOT_MOD | MOD_RALT, "OSM(MOD_RALT)", "OSM\nRAlt", "按下激活右Alt键"),
-    K(QK_ONE_SHOT_MOD | MOD_RGUI, "OSM(MOD_RGUI)", "OSM\nRGUI", "按下激活右Alt键"),
+    K(QK_ONE_SHOT_MOD | MOD_RGUI, "OSM(MOD_RGUI)", "OSM\nRGUI", "按下激活右Gui键"),
     K(QK_ONE_SHOT_MOD | MOD_LCTL | MOD_LSFT, "OSM(MOD_LCTL|MOD_LSFT)", "OSM\nCS",
       "按下激活左Ctrl和左Shift键"),
     K(QK_ONE_SHOT_MOD | MOD_LCTL | MOD_LALT, "OSM(MOD_LCTL|MOD_LALT)", "OSM\nCA",
@@ -394,7 +395,7 @@ KEYCODES_QUANTUM = [
     K(QK_LCTL|QK_LSFT, "C_S(kc)", "C_S\n(kc)", "LCTL + LSFT", masked=True),
     K(QK_LCTL|QK_LGUI, "LCG(kc)", "LCG\n(kc)", "LCTL + LGUI", masked=True),
     K(QK_RCTL|QK_RGUI, "RCG(kc)", "RCG\n(kc)", "RCTL + RGUI", masked=True),
-
+    
     K(0x5C16, "KC_GESC", "~\nEsc", "单独按下时为Esc, 在按下Shift键或Gui键后为~"),
     K(0x5CD7, "KC_LSPO", "LS\n(", "长按触发左Shift键,单击触发'('键"),
     K(0x5CD8, "KC_RSPC", "RS\n)", "长按触发右Shift键,单击触发')'键"),
@@ -403,6 +404,12 @@ KEYCODES_QUANTUM = [
     K(0x5CF4, "KC_RCPC", "RC\n)", "长按触发右Ctrl键,单击触发')'键"),
     K(0x5CF5, "KC_LAPO", "LA\n(", "长按触发左Alt键,单击触发'('键"),
     K(0x5CF6, "KC_RAPC", "RA\n)", "长按触发右Alt键,单击触发')'键"),
+]
+   
+KEYCODES_QUANTUM = [
+    K(23561, "MAGIC_HOST_NKRO", "全键\n无冲\n开启", "启用全键无冲", alias=["NK_ON"]),
+    K(23570, "MAGIC_UNHOST_NKRO", "全键\n无冲\n关闭", "关闭全键无冲", alias=["NK_OFF"]),
+    K(23572, "MAGIC_TOGGLE_NKRO", "切换\n全键\n无冲", "切换全键无冲", alias=["NK_TOGG"]),
     
     K(23554, "MAGIC_SWAP_CONTROL_CAPSLOCK", "交换\nCtrl\nCaps", "交换Caps Lock键和左Ctrl键", alias=["CL_SWAP"]),
     K(23563, "MAGIC_UNSWAP_CONTROL_CAPSLOCK", "恢复\nCtrl\nCaps", "取消交换Caps Lock键和左Ctrl键",
@@ -842,8 +849,9 @@ def recreate_keycodes():
 
     KEYCODES.clear()
     KEYCODES.extend(KEYCODES_SPECIAL + KEYCODES_BASIC + KEYCODES_SHIFTED + KEYCODES_ISO + KEYCODES_LAYERS +
-                    KEYCODES_QUANTUM + KEYCODES_BACKLIGHT + KEYCODES_MEDIA + KEYCODES_TAP_DANCE + KEYCODES_MACRO +
-                    KEYCODES_USER + KEYCODES_HIDDEN + KEYCODES_MIDI + KEYCODES_LIGHTS + KEYCODES_QUANTUM + KEYCODES_DIAL)
+                    KEYCODES_BOOT + KEYCODES_MODIFIERS + KEYCODES_QUANTUM + KEYCODES_BACKLIGHT + KEYCODES_MEDIA + 
+                    KEYCODES_TAP_DANCE + KEYCODES_MACRO + KEYCODES_USER + KEYCODES_HIDDEN + KEYCODES_MIDI + 
+                    KEYCODES_LIGHTS + KEYCODES_QUANTUM + KEYCODES_DIAL)
     KEYCODES_MAP.clear()
     for keycode in KEYCODES:
         KEYCODES_MAP[keycode.code] = keycode
