@@ -27,7 +27,7 @@ from editor.rgb_configurator import RGBConfigurator, IndicatorConfigurator
 from tabbed_keycodes import TabbedKeycodes
 from editor.tap_dance import TapDance
 from unlocker import Unlocker
-from util import tr, EXAMPLE_KEYBOARDS, KeycodeDisplay
+from util import tr, EXAMPLE_KEYBOARDS, KeycodeDisplay, EXAMPLE_KEYBOARD_PREFIX
 from vial_device import VialKeyboard
 from editor.matrix_test import MatrixTest
 
@@ -281,10 +281,12 @@ class MainWindow(QMainWindow):
             QMessageBox.warning(self, "", "不支持的Vial接口版本!\n"
                                           "请从官网下载最新版本 https://get.vial.today/")
 
-        if isinstance(self.autorefresh.current_device, VialKeyboard) \
-                and self.autorefresh.current_device.keyboard.keyboard_id in EXAMPLE_KEYBOARDS:
-            QMessageBox.warning(self, "", "示例的测试键盘已连接.\n"
-                                          "在发布之前,请将键盘UID更改为唯一的!")
+        if isinstance(self.autorefresh.current_device, VialKeyboard):
+            keyboard_id = self.autorefresh.current_device.keyboard.keyboard_id
+            if (keyboard_id in EXAMPLE_KEYBOARDS) or ((keyboard_id & 0xFFFFFFFFFFFFFF) == EXAMPLE_KEYBOARD_PREFIX):
+              QMessageBox.warning(self, "", "示例的测试键盘已连接.\n"
+                                            "在发布之前,请将键盘UID更改为唯一的!")
+
 
         self.rebuild()
         self.refresh_tabs()
