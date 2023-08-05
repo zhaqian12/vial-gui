@@ -3,7 +3,7 @@ import logging
 import platform
 from json import JSONDecodeError
 
-from PyQt5.QtCore import Qt, QSettings, QStandardPaths, QTimer, QT_VERSION_STR
+from PyQt5.QtCore import Qt, QSettings, QStandardPaths, QTimer, QRect, QT_VERSION_STR
 from PyQt5.QtWidgets import QWidget, QComboBox, QToolButton, QHBoxLayout, QVBoxLayout, QMainWindow, QAction, qApp, \
     QFileDialog, QDialog, QTabWidget, QActionGroup, QMessageBox, QLabel
 
@@ -27,7 +27,7 @@ from editor.rgb_configurator import RGBConfigurator
 from tabbed_keycodes import TabbedKeycodes
 from editor.tap_dance import TapDance
 from unlocker import Unlocker
-from util import tr, EXAMPLE_KEYBOARDS, KeycodeDisplay
+from util import tr, EXAMPLE_KEYBOARDS, KeycodeDisplay, EXAMPLE_KEYBOARD_PREFIX
 from vial_device import VialKeyboard
 from editor.matrix_test import MatrixTest
 
@@ -43,11 +43,17 @@ class MainWindow(QMainWindow):
         self.ui_lock_count = 0
 
         self.settings = QSettings("Vial", "Vial")
-        if self.settings.value("size", None) and self.settings.value("pos", None):
+        if self.settings.value("size", None):
             self.resize(self.settings.value("size"))
-            self.move(self.settings.value("pos"))
         else:
             self.resize(WINDOW_WIDTH, WINDOW_HEIGHT)
+
+        _pos = self.settings.value("pos", None)
+        # NOTE: QDesktopWidget is obsolete, but QApplication.screenAt only usable in Qt 5.10+
+        if _pos and qApp.desktop().geometry().contains(QRect(_pos, self.size())):
+        #if _pos and qApp.screenAt(_pos) and qApp.screenAt(_pos + (self.rect().bottomRight())):
+            self.move(self.settings.value("pos"))
+
         themes.Theme.set_theme(self.get_theme())
 
         self.combobox_devices = QComboBox()
@@ -158,7 +164,7 @@ class MainWindow(QMainWindow):
 
         exit_act = QAction(tr("MenuFile", "Exit"), self)
         exit_act.setShortcut("Ctrl+Q")
-        exit_act.triggered.connect(qApp.exit)
+        exit_act.triggered.connect(self.close)
 
         if sys.platform != "emscripten":
             file_menu = self.menuBar().addMenu(tr("Menu", "File"))
@@ -172,12 +178,15 @@ class MainWindow(QMainWindow):
             file_menu.addAction(exit_act)
 
         keyboard_unlock_act = QAction(tr("MenuSecurity", "Unlock"), self)
+        keyboard_unlock_act.setShortcut("Ctrl+U")
         keyboard_unlock_act.triggered.connect(self.unlock_keyboard)
 
         keyboard_lock_act = QAction(tr("MenuSecurity", "Lock"), self)
+        keyboard_lock_act.setShortcut("Ctrl+L")
         keyboard_lock_act.triggered.connect(self.lock_keyboard)
 
         keyboard_reset_act = QAction(tr("MenuSecurity", "Reboot to bootloader"), self)
+        keyboard_reset_act.setShortcut("Ctrl+B")
         keyboard_reset_act.triggered.connect(self.reboot_to_bootloader)
 
         keyboard_layout_menu = self.menuBar().addMenu(tr("Menu", "Keyboard layout"))
@@ -276,10 +285,11 @@ class MainWindow(QMainWindow):
             QMessageBox.warning(self, "", "Unsupported protocol version!\n"
                                           "Please download latest Vial from https://get.vial.today/")
 
-        if isinstance(self.autorefresh.current_device, VialKeyboard) \
-                and self.autorefresh.current_device.keyboard.keyboard_id in EXAMPLE_KEYBOARDS:
-            QMessageBox.warning(self, "", "An example keyboard UID was detected.\n"
-                                          "Please change your keyboard UID to be unique before you ship!")
+        if isinstance(self.autorefresh.current_device, VialKeyboard):
+            keyboard_id = self.autorefresh.current_device.keyboard.keyboard_id
+            if (keyboard_id in EXAMPLE_KEYBOARDS) or ((keyboard_id & 0xFFFFFFFFFFFFFF) == EXAMPLE_KEYBOARD_PREFIX):
+                QMessageBox.warning(self, "", "An example keyboard UID was detected.\n"
+                                              "Please change your keyboard UID to be unique before you ship!")
 
         self.rebuild()
         self.refresh_tabs()
@@ -404,7 +414,7 @@ class MainWindow(QMainWindow):
         text = 'Vial {}<br><br>Python {}<br>Qt {}<br><br>' \
                'Licensed under the terms of the<br>GNU General Public License (version 2 or later)<br><br>' \
                '<a href="https://get.vial.today/">https://get.vial.today/</a>' \
-               .format(self.appctx.build_settings["version"],
+               .format(qApp.applicationVersion(),
                        platform.python_version(), QT_VERSION_STR)
 
         if sys.platform == "emscripten":

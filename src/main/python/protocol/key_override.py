@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 import struct
 
-from keycodes import Keycode
+from keycodes.keycodes import Keycode, RESET_KEYCODE
 from protocol.base_protocol import BaseProtocol
 from protocol.constants import DYNAMIC_VIAL_KEY_OVERRIDE_GET, CMD_VIA_VIAL_PREFIX, CMD_VIAL_DYNAMIC_ENTRY_OP, \
     DYNAMIC_VIAL_KEY_OVERRIDE_SET
+from unlocker import Unlocker
 
 
 class KeyOverrideOptions:
@@ -42,8 +43,9 @@ class KeyOverrideEntry:
 
     def serialize(self):
         """ Serializes into a vial_key_override_entry_t object """
-        return struct.pack("<HHHBBBB", self.trigger, self.replacement, self.layers, self.trigger_mods,
-                           self.negative_mod_mask, self.suppressed_mods, self.options.serialize())
+        return struct.pack("<HHHBBBB", Keycode.deserialize(self.trigger), Keycode.deserialize(self.replacement),
+                           self.layers, self.trigger_mods, self.negative_mod_mask, self.suppressed_mods,
+                           self.options.serialize())
 
     def __repr__(self):
         return "KeyOverride<trigger={} replacement={} layers={} trigger_mods={} negative_mod_mask={} " \
@@ -57,8 +59,8 @@ class KeyOverrideEntry:
         """ Serializes into Vial layout file """
 
         return {
-            "trigger": Keycode.serialize(self.trigger),
-            "replacement": Keycode.serialize(self.replacement),
+            "trigger": self.trigger,
+            "replacement": self.replacement,
             "layers": self.layers,
             "trigger_mods": self.trigger_mods,
             "negative_mod_mask": self.negative_mod_mask,
@@ -69,8 +71,8 @@ class KeyOverrideEntry:
     def restore(self, data):
         """ Restores from a Vial layout file """
 
-        self.trigger = Keycode.deserialize(data["trigger"])
-        self.replacement = Keycode.deserialize(data["replacement"])
+        self.trigger = data["trigger"]
+        self.replacement = data["replacement"]
         self.layers = data["layers"]
         self.trigger_mods = data["trigger_mods"]
         self.negative_mod_mask = data["negative_mod_mask"]
@@ -83,13 +85,19 @@ class ProtocolKeyOverride(BaseProtocol):
     def reload_key_override(self):
         entries = self._retrieve_dynamic_entries(DYNAMIC_VIAL_KEY_OVERRIDE_GET,
                                                  self.key_override_count, "<HHHBBBB")
-        self.key_override_entries = [KeyOverrideEntry(e) for e in entries]
+        self.key_override_entries = []
+        for e in entries:
+            e = (Keycode.serialize(e[0]), Keycode.serialize(e[1]), e[2], e[3], e[4], e[5], e[6])
+            self.key_override_entries.append(KeyOverrideEntry(e))
 
     def key_override_get(self, idx):
         return self.key_override_entries[idx]
 
     def key_override_set(self, idx, entry):
         if entry != self.key_override_entries[idx]:
+            if entry.replacement == RESET_KEYCODE:
+                Unlocker.unlock(self)
+
             self.key_override_entries[idx] = entry
             self.usb_send(self.dev, struct.pack("BBBB", CMD_VIA_VIAL_PREFIX, CMD_VIAL_DYNAMIC_ENTRY_OP,
                                                 DYNAMIC_VIAL_KEY_OVERRIDE_SET, idx) + entry.serialize())
